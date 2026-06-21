@@ -10,3 +10,9 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .btn-st:hover{background:var(--st-blue-dark);color:#fff;transform:translateY(-2px)}
 .section{padding:5rem 0}
 .text-st{color:var(--st-blue)}
+
+/* Navbar */
+.st-navbar{background:transparent;transition:.3s}
+.st-navbar.scrolled{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
+.st-navbar .nav-link{font-weight:500;color:#1c2434}
+.st-navbar .nav-link:hover{color:var(--st-blue)}

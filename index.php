@@ -3,7 +3,7 @@
 <html lang="id">
 <?php include __DIR__ . '/partials/head.php'; ?>
 <body>
-    <!-- navbar  -> Task 2 -->
+    <?php include __DIR__ . '/partials/navbar.php'; ?>
     <!-- hero     -> Task 3 -->
     <!-- benefits -> Task 4 -->
     <!-- package  -> Task 5 -->
