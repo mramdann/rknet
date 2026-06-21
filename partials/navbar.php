@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
         <li class="nav-item"><a class="nav-link" href="#paket">Paket</a></li>
-        <li class="nav-item"><a class="nav-link" href="#coverage">Cek Jangkauan</a></li>
+        <li class="nav-item"><a class="nav-link" href="cek-jangkauan.php">Cek Jangkauan</a></li>
         <li class="nav-item"><a class="nav-link" href="portal/login.php"><i class="bi bi-person-circle"></i> Login</a></li>
         <li class="nav-item"><button class="btn btn-st" type="button" data-bs-toggle="modal" data-bs-target="#modalLangganan">Berlangganan Sekarang <i class="bi bi-arrow-right"></i></button></li>
       </ul>
