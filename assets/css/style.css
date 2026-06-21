@@ -55,6 +55,7 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .dropdown-alamat .opsi-info{padding:.7rem 1rem;color:#8a93a6;text-align:center}
 .section-area{background:var(--st-blue-soft)}
 .area-item{background:#fff;border:1px solid #eef0f6;border-radius:.6rem;padding:.6rem .9rem;font-size:.92rem}
+.hasil-ikon{font-size:4rem;line-height:1}
 
 /* Halaman legal */
 .legal-hero{background:linear-gradient(120deg,var(--st-blue),var(--st-blue-dark))}

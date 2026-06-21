@@ -79,12 +79,26 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
 
   <?php include __DIR__ . '/partials/footer.php'; ?>
 
+  <!-- Modal hasil cek ketersediaan (isi diatur oleh JS) -->
+  <div class="modal fade" id="modalHasil" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 rounded-4 overflow-hidden text-center">
+        <div class="modal-body p-4 p-md-5">
+          <div id="hasilIkon" class="hasil-ikon mb-3"></div>
+          <h4 id="hasilJudul" class="fw-700 mb-2"></h4>
+          <p id="hasilPesan" class="text-muted mb-4"></p>
+          <button type="button" class="btn btn-st btn-lg w-100" id="btnIsiData">Isi Data</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Data untuk JS -->
   <script>
     window.KEYWORD_TERJANGKAU = <?= json_encode($keywordTerjangkau) ?>;
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="assets/js/cek-jangkauan.js?v=1"></script>
+  <script src="assets/js/cek-jangkauan.js?v=2"></script>
 </body>
 </html>
