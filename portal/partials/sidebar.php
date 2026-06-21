@@ -7,7 +7,7 @@ $menuPortal = [
     'transaksi' => ['Riwayat Transaksi', 'bi-clock-history',   'transaksi.php'],
     'invoice'   => ['Invoice',           'bi-receipt',         'invoice.php'],
     'paket'     => ['Pilih Paket',       'bi-wifi',            'paket.php'],
-    'profil'    => ['Profil',            'bi-person',          '#'],
+    'profil'    => ['Profil',            'bi-person',          'profil.php'],
 ];
 ?>
 <aside class="portal-sidebar" id="portalSidebar">

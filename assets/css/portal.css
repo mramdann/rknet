@@ -75,6 +75,10 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
 .transaksi-kartu:hover{box-shadow:0 12px 32px rgba(6,37,110,.1)}
 .trx-ico{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
 
+/* Profil */
+.profil-header{background:linear-gradient(120deg,#fff,var(--st-blue-soft))}
+.profil-ava{width:64px;height:64px;border-radius:50%;background:var(--st-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;flex-shrink:0}
+
 /* Pilih paket */
 .paket-pilih{cursor:pointer;border:2px solid #eef0f6;transition:.18s}
 .paket-pilih:hover{border-color:var(--st-blue);transform:translateY(-3px)}
