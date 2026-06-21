@@ -2,6 +2,8 @@
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
       <img src="assets/img/logo-starlite.webp" alt="Starlite" height="34">
+      <span class="brand-divider"></span>
+      <img src="assets/img/logo-weave.webp" alt="Weave" height="28">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>

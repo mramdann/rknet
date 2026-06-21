@@ -15,6 +15,7 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .st-navbar{background:transparent;transition:.3s}
 .st-navbar.scrolled{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
 .st-navbar .nav-link{font-weight:500;color:#1c2434}
+.brand-divider{display:inline-block;width:1px;height:26px;background:rgba(6,37,110,.25)}
 .st-navbar .nav-link:hover{color:var(--st-blue)}
 
 /* Hero */
