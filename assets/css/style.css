@@ -42,6 +42,9 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .package-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(11,94,215,.15)}
 .package-card.featured{border-color:var(--st-blue);transform:scale(1.03)}
 
+/* Halaman legal */
+.legal-hero{background:linear-gradient(120deg,var(--st-blue),var(--st-blue-dark))}
+
 /* Cek Jangkauan & form */
 .kartu-form{background:#fff;border-radius:1.25rem;box-shadow:0 12px 40px rgba(6,37,110,.08)}
 

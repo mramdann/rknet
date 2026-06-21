@@ -24,9 +24,9 @@
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
       <small class="text-white-50">Copyright © 2025 <?= htmlspecialchars($site['name']) ?> Indonesia.</small>
       <div class="d-flex gap-3">
-        <a href="#" class="text-white-50 text-decoration-none small">Terms &amp; Conditions</a>
-        <a href="#" class="text-white-50 text-decoration-none small">Privacy Policy</a>
-        <a href="#" class="text-white-50 text-decoration-none small">Refund Policy</a>
+        <a href="legal.php?dok=terms" class="text-white-50 text-decoration-none small">Terms &amp; Conditions</a>
+        <a href="legal.php?dok=privacy" class="text-white-50 text-decoration-none small">Privacy Policy</a>
+        <a href="legal.php?dok=refund" class="text-white-50 text-decoration-none small">Refund Policy</a>
       </div>
     </div>
   </div>

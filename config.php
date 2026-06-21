@@ -49,8 +49,8 @@ $site = [
     ],
 
     'socials' => [
-        ['icon' => 'bi-instagram', 'url' => '#'],
-        ['icon' => 'bi-facebook',  'url' => '#'],
+        ['icon' => 'bi-instagram', 'url' => 'https://www.instagram.com/starliteindonesia'],
+        ['icon' => 'bi-facebook',  'url' => 'https://www.facebook.com/starliteindonesia'],
         ['icon' => 'bi-whatsapp',  'url' => 'https://wa.me/62811789111'],
     ],
 ];
