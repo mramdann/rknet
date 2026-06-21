@@ -1,0 +1,62 @@
+/* portal.css — layout shell portal pelanggan (sidebar + topbar + konten) */
+
+body.portal{background:#f4f6fb;font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
+
+/* Layout dasar: sidebar tetap di kiri, konten di kanan */
+.portal-wrap{display:flex;min-height:100vh}
+
+/* Sidebar */
+.portal-sidebar{
+  width:260px;flex-shrink:0;background:#fff;border-right:1px solid #eaecf3;
+  display:flex;flex-direction:column;padding:1.25rem 0;
+  position:sticky;top:0;height:100vh
+}
+.portal-brand{padding:0 1.5rem 1.25rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #f0f2f7}
+.portal-brand img{height:30px}
+.portal-brand .brand-divider{display:inline-block;width:1px;height:24px;background:rgba(6,37,110,.2)}
+.portal-nav{list-style:none;margin:1rem 0 0;padding:0 .75rem;flex:1}
+.portal-nav a{
+  display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;margin-bottom:.25rem;
+  border-radius:.75rem;color:#5b6478;text-decoration:none;font-weight:500;transition:.18s
+}
+.portal-nav a i{font-size:1.15rem}
+.portal-nav a:hover{background:var(--st-blue-soft);color:var(--st-blue)}
+.portal-nav a.aktif{background:var(--st-blue);color:#fff}
+.portal-sidebar-foot{padding:1rem 1.5rem 0;border-top:1px solid #f0f2f7}
+
+/* Area kanan: topbar + konten */
+.portal-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.portal-topbar{
+  background:#fff;border-bottom:1px solid #eaecf3;padding:.85rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1020
+}
+.portal-topbar .kiri{display:flex;align-items:center;gap:.75rem}
+.portal-topbar .kanan{display:flex;align-items:center;gap:.5rem}
+.topbar-ico{
+  width:42px;height:42px;border-radius:50%;border:1px solid #eaecf3;background:#fff;
+  display:flex;align-items:center;justify-content:center;color:#5b6478;font-size:1.15rem;transition:.18s;position:relative
+}
+.topbar-ico:hover{background:var(--st-blue-soft);color:var(--st-blue)}
+.topbar-ico .titik{position:absolute;top:9px;right:11px;width:8px;height:8px;border-radius:50%;background:#e0245e;border:2px solid #fff}
+.topbar-user{display:flex;align-items:center;gap:.6rem;padding:.25rem .35rem .25rem .85rem}
+.topbar-user .ava{width:38px;height:38px;border-radius:50%;background:var(--st-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+.portal-content{padding:1.75rem 1.5rem;flex:1}
+
+/* Kartu umum portal */
+.kartu{background:#fff;border:1px solid #eef0f6;border-radius:1rem;box-shadow:0 6px 24px rgba(6,37,110,.05)}
+.kartu-pad{padding:1.5rem}
+
+/* Tombol toggle sidebar (mobile) disembunyikan di desktop */
+.btn-sidebar{display:none}
+
+/* Responsif: sidebar jadi offcanvas di layar kecil */
+@media(max-width:991px){
+  .portal-sidebar{
+    position:fixed;left:0;top:0;z-index:1045;transform:translateX(-100%);transition:transform .25s;
+    box-shadow:0 0 40px rgba(0,0,0,.15)
+  }
+  .portal-sidebar.tampil{transform:translateX(0)}
+  .btn-sidebar{display:inline-flex}
+  .sidebar-overlay{position:fixed;inset:0;background:rgba(6,37,110,.4);z-index:1040;display:none}
+  .sidebar-overlay.tampil{display:block}
+}
