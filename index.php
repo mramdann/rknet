@@ -8,7 +8,7 @@
     <?php include __DIR__ . '/partials/benefits.php'; ?>
     <?php include __DIR__ . '/partials/package.php'; ?>
     <?php include __DIR__ . '/partials/redeem.php'; ?>
-    <!-- features -> Task 7 -->
+    <?php include __DIR__ . '/partials/features.php'; ?>
     <!-- footer   -> Task 8 -->
     <main class="container py-5"><h1>Starlite — scaffold OK</h1></main>
 
