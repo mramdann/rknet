@@ -172,4 +172,58 @@
     document.getElementById('formIsiData').classList.add('d-none');
     document.getElementById('suksesIsiData').classList.remove('d-none');
   });
+
+  // ====== Peta Leaflet (penanda titik lokasi pemasangan) ======
+  let peta = null, marker = null;
+  // Ikon marker eksplisit dari CDN agar gambar tidak 404
+  const ikonMarker = L.icon({
+    iconUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon.png',
+    iconRetinaUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+    shadowUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+
+  function setKoordinat(lat, lon) {
+    document.getElementById('koordinatTerpilih').textContent =
+      `Koordinat: ${lat.toFixed(6)}, ${lon.toFixed(6)}`;
+    window.koordinatPemasangan = { lat, lon };
+  }
+
+  function initPeta() {
+    const pusat = lokasiTerpilih ? [lokasiTerpilih.lat, lokasiTerpilih.lon] : [-6.2, 106.816];
+    peta = L.map('petaPemasangan').setView(pusat, 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, attribution: '© OpenStreetMap'
+    }).addTo(peta);
+    marker = L.marker(pusat, { draggable: true, icon: ikonMarker }).addTo(peta);
+    // Geser pin -> perbarui koordinat
+    marker.on('dragend', () => {
+      const p = marker.getLatLng();
+      setKoordinat(p.lat, p.lng);
+    });
+    setKoordinat(pusat[0], pusat[1]);
+  }
+
+  function pindahPeta(lat, lon) {
+    peta.setView([lat, lon], 16);
+    marker.setLatLng([lat, lon]);
+    setKoordinat(lat, lon);
+  }
+
+  // Saat modal tampil: inisialisasi peta lalu sesuaikan ukurannya (modal sebelumnya tersembunyi)
+  document.getElementById('modalIsiData').addEventListener('shown.bs.modal', () => {
+    if (!peta) initPeta();
+    else if (lokasiTerpilih) pindahPeta(lokasiTerpilih.lat, lokasiTerpilih.lon);
+    setTimeout(() => peta.invalidateSize(), 200);
+  });
+
+  // Tombol "Cari" pada peta: geocode lalu pindahkan pin
+  document.getElementById('btnCariPeta').addEventListener('click', async () => {
+    const kueri = document.getElementById('inputCariPeta').value.trim();
+    if (kueri.length < 3) return;
+    try {
+      const hasil = await cariAlamat(kueri);
+      if (hasil.length) pindahPeta(+hasil[0].lat, +hasil[0].lon);
+    } catch (e) { /* abaikan */ }
+  });
 })();
