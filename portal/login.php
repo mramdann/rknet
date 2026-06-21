@@ -45,8 +45,11 @@ $judulHalaman = 'Login';
         <button type="submit" class="btn btn-st w-100 btn-lg">Login</button>
       </form>
 
-      <p class="text-center small text-muted mt-4 mb-0">
+      <p class="text-center small text-muted mt-4 mb-1">
         Belum punya akun? <a href="../index.php#paket" class="text-st text-decoration-none fw-500">Berlangganan</a>
+      </p>
+      <p class="text-center small mb-0">
+        <a href="../admin/login.php" class="text-muted text-decoration-none"><i class="bi bi-shield-lock me-1"></i>Masuk sebagai Admin</a>
       </p>
     </div>
 
