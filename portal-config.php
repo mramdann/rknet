@@ -1,5 +1,6 @@
 <?php
-// portal-config.php — data dummy & fungsi bantu untuk portal pelanggan (UI only)
+// portal-config.php — data dummy untuk portal pelanggan (UI only)
+require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
 
 // Data pelanggan yang sedang login (contoh)
 $pelanggan = [
@@ -42,23 +43,3 @@ $paketTersedia = [
     ['nama' => 'Paket 500 Mbps Starlite', 'kecepatan' => '500 Mbps', 'harga' => 250000, 'fitur' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Prioritas jaringan'], 'dipilih' => false],
 ];
 
-/**
- * Ubah angka menjadi format rupiah, contoh: 100000 -> "Rp100.000".
- */
-function formatRupiah(int $angka): string
-{
-    return 'Rp' . number_format($angka, 0, ',', '.');
-}
-
-/**
- * Kembalikan kelas warna & label badge berdasarkan status transaksi.
- */
-function badgeStatus(string $status): array
-{
-    return match ($status) {
-        'lunas'    => ['kelas' => 'bg-success-subtle text-success', 'label' => 'Telah Dibayar'],
-        'menunggu' => ['kelas' => 'bg-warning-subtle text-warning', 'label' => 'Menunggu Pembayaran'],
-        'aktif'    => ['kelas' => 'bg-success-subtle text-success', 'label' => 'Aktif'],
-        default    => ['kelas' => 'bg-secondary-subtle text-secondary', 'label' => ucfirst($status)],
-    };
-}
