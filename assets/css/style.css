@@ -46,3 +46,9 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .feature-ico i{font-size:2.2rem;color:var(--st-blue)}
 .feature-item:hover .feature-ico{background:var(--st-blue);transform:translateY(-5px)}
 .feature-item:hover .feature-ico i{color:#fff}
+
+/* Footer */
+.st-footer{background:var(--st-blue-dark)}
+.footer-logo{filter:brightness(0) invert(1)}
+.social-ico{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;transition:.2s}
+.social-ico:hover{background:var(--st-blue);color:#fff}
