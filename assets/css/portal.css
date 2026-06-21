@@ -50,6 +50,12 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
 .topbar-user .ava{width:38px;height:38px;border-radius:50%;background:var(--st-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
 .portal-content{padding:1.75rem 1.5rem;flex:1}
 
+/* Panel notifikasi */
+.notif-ico{width:38px;height:38px;border-radius:50%;background:var(--st-blue-soft);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.notif-item:last-child{border-bottom:0 !important}
+#panelNotif .nav-tabs .nav-link{font-size:.85rem;font-weight:500;color:#5b6478;border:0}
+#panelNotif .nav-tabs .nav-link.active{color:var(--st-blue);border-bottom:2px solid var(--st-blue)}
+
 /* Kartu umum portal */
 .kartu{background:#fff;border:1px solid #eef0f6;border-radius:1rem;box-shadow:0 6px 24px rgba(6,37,110,.05)}
 .kartu-pad{padding:1.5rem}
