@@ -75,6 +75,13 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
 .transaksi-kartu:hover{box-shadow:0 12px 32px rgba(6,37,110,.1)}
 .trx-ico{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
 
+/* Pilih paket */
+.paket-pilih{cursor:pointer;border:2px solid #eef0f6;transition:.18s}
+.paket-pilih:hover{border-color:var(--st-blue);transform:translateY(-3px)}
+.paket-pilih .paket-cek{color:#dfe3ec;font-size:1.3rem;transition:.18s}
+.paket-pilih.terpilih{border-color:var(--st-blue);box-shadow:0 12px 32px rgba(11,94,215,.15)}
+.paket-pilih.terpilih .paket-cek{color:var(--st-blue)}
+
 /* Invoice / kuitansi */
 .invoice-sheet{max-width:760px}
 
