@@ -97,6 +97,15 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
   .invoice-sheet{box-shadow:none;border:0;max-width:100%}
 }
 
+/* Kartu statistik admin */
+.stat-kartu{display:flex;align-items:center;gap:1rem}
+.stat-ikon{width:54px;height:54px;border-radius:.9rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.stat-nilai{font-size:1.5rem;line-height:1.1}
+.stat-biru{background:#e8f0fe;color:#0b5ed7}
+.stat-hijau{background:#e6f6ec;color:#1a9e54}
+.stat-ungu{background:#efeafc;color:#6f42c1}
+.stat-oranye{background:#fff1e6;color:#fd7e14}
+
 /* Tombol toggle sidebar (mobile) disembunyikan di desktop */
 .btn-sidebar{display:none}
 
