@@ -75,6 +75,17 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
 .transaksi-kartu:hover{box-shadow:0 12px 32px rgba(6,37,110,.1)}
 .trx-ico{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
 
+/* Invoice / kuitansi */
+.invoice-sheet{max-width:760px}
+
+/* Saat mencetak: sembunyikan shell & tombol, tampilkan kuitansi saja */
+@media print{
+  .portal-sidebar,.portal-topbar,.sidebar-overlay,.no-print,#panelNotif{display:none !important}
+  body.portal{background:#fff}
+  .portal-content{padding:0}
+  .invoice-sheet{box-shadow:none;border:0;max-width:100%}
+}
+
 /* Tombol toggle sidebar (mobile) disembunyikan di desktop */
 .btn-sidebar{display:none}
 
