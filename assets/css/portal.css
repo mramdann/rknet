@@ -97,6 +97,11 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
   .invoice-sheet{box-shadow:none;border:0;max-width:100%}
 }
 
+/* Cari pelanggan */
+.cari-pelanggan{max-width:320px}
+.cari-pelanggan .input-group-text{border-right:0}
+.cari-pelanggan .form-control{border-left:0}
+
 /* Kartu statistik admin */
 .stat-kartu{display:flex;align-items:center;gap:1rem}
 .stat-ikon{width:54px;height:54px;border-radius:.9rem;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
