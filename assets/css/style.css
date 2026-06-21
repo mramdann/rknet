@@ -27,3 +27,11 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .benefit-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(11,94,215,.12)}
 .benefit-card i{font-size:2rem;color:var(--st-blue)}
 .fw-500{font-weight:500}
+
+/* Package */
+.st-section-soft{background:linear-gradient(180deg,#fff,var(--st-blue-soft))}
+.st-badge{background:var(--st-blue);color:#fff;border-radius:50rem;padding:.4rem 1rem;letter-spacing:1px}
+.fw-700{font-weight:700}.fw-800{font-weight:800}
+.package-card{background:#fff;border-radius:1.25rem;padding:2rem;box-shadow:0 8px 30px rgba(6,37,110,.06);transition:.25s;border:2px solid transparent}
+.package-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(11,94,215,.15)}
+.package-card.featured{border-color:var(--st-blue);transform:scale(1.03)}
