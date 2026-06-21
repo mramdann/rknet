@@ -56,6 +56,9 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .section-area{background:var(--st-blue-soft)}
 .area-item{background:#fff;border:1px solid #eef0f6;border-radius:.6rem;padding:.6rem .9rem;font-size:.92rem}
 .hasil-ikon{font-size:4rem;line-height:1}
+.otp-kotak{width:42px;height:46px;font-weight:700;padding:.25rem}
+.peta-pemasangan{height:320px;border-radius:.75rem;border:1px solid #eef0f6;z-index:1}
+.peta-pemasangan .leaflet-pane,.peta-pemasangan .leaflet-control{z-index:auto}
 
 /* Halaman legal */
 .legal-hero{background:linear-gradient(120deg,var(--st-blue),var(--st-blue-dark))}

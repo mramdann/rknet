@@ -89,4 +89,87 @@
     if (!lokasiTerpilih) return;
     tampilkanHasil(apakahTerjangkau(lokasiTerpilih.nama));
   });
+
+  // ====== Form Isi Data: buka modal dari tombol hasil ======
+  document.getElementById('btnIsiData').addEventListener('click', () => {
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('modalHasil')).hide();
+    const modalIsi = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalIsiData'));
+    modalIsi.show();
+    // Prefill kotak pencarian peta dengan alamat yang sudah dipilih
+    if (lokasiTerpilih) document.getElementById('inputCariPeta').value = lokasiTerpilih.nama;
+    muatProvinsi();
+    document.dispatchEvent(new CustomEvent('isiDataDibuka'));   // dipakai modul peta (Leaflet)
+  });
+
+  // ====== Wilayah bertingkat via API emsifa ======
+  const BASE_WILAYAH = 'https://www.emsifa.com/api-wilayah-indonesia/api';
+  let provinsiSudahDimuat = false;
+
+  async function ambilWilayah(path) {
+    const res = await fetch(`${BASE_WILAYAH}/${path}.json`);
+    return res.ok ? res.json() : [];
+  }
+
+  function isiSelect(sel, daftar, placeholder) {
+    sel.innerHTML = `<option value="">${placeholder}</option>`
+      + daftar.map(d => `<option value="${d.id}">${d.name}</option>`).join('');
+    sel.disabled = daftar.length === 0;
+  }
+
+  async function muatProvinsi() {
+    if (provinsiSudahDimuat) return;
+    const sel = document.getElementById('selProvinsi');
+    try {
+      isiSelect(sel, await ambilWilayah('provinces'), 'Pilih Provinsi Pemasangan');
+      provinsiSudahDimuat = true;
+    } catch (e) {
+      sel.innerHTML = '<option value="">Gagal memuat provinsi</option>';
+    }
+  }
+
+  const selProvinsi  = document.getElementById('selProvinsi');
+  const selKota      = document.getElementById('selKota');
+  const selKecamatan = document.getElementById('selKecamatan');
+  const selKelurahan = document.getElementById('selKelurahan');
+
+  selProvinsi.addEventListener('change', async () => {
+    isiSelect(selKota, [], 'Memuat...'); selKota.disabled = true;
+    isiSelect(selKecamatan, [], 'Pilih Kecamatan Pemasangan'); selKecamatan.disabled = true;
+    isiSelect(selKelurahan, [], 'Pilih Desa / Kelurahan'); selKelurahan.disabled = true;
+    if (!selProvinsi.value) return;
+    isiSelect(selKota, await ambilWilayah(`regencies/${selProvinsi.value}`), 'Pilih Kota Pemasangan');
+  });
+
+  selKota.addEventListener('change', async () => {
+    isiSelect(selKecamatan, [], 'Memuat...'); selKecamatan.disabled = true;
+    isiSelect(selKelurahan, [], 'Pilih Desa / Kelurahan'); selKelurahan.disabled = true;
+    if (!selKota.value) return;
+    isiSelect(selKecamatan, await ambilWilayah(`districts/${selKota.value}`), 'Pilih Kecamatan Pemasangan');
+  });
+
+  selKecamatan.addEventListener('change', async () => {
+    isiSelect(selKelurahan, [], 'Memuat...'); selKelurahan.disabled = true;
+    if (!selKecamatan.value) return;
+    isiSelect(selKelurahan, await ambilWilayah(`villages/${selKecamatan.value}`), 'Pilih Desa / Kelurahan');
+  });
+
+  // ====== OTP mock (tidak benar-benar mengirim) ======
+  document.getElementById('btnKirimOtp').addEventListener('click', () => {
+    const telepon = document.getElementById('inputTelepon').value.trim();
+    const info = document.getElementById('infoOtp');
+    if (!telepon) { info.textContent = 'Isi nomor telepon dulu.'; return; }
+    document.querySelectorAll('#grupOtp .otp-kotak').forEach(k => k.disabled = false);
+    info.textContent = 'Kode OTP telah dikirim (demo). Masukkan 6 digit.';
+    const kotak = document.querySelectorAll('#grupOtp .otp-kotak');
+    kotak[0].focus();
+    // Pindah fokus otomatis antar kotak OTP
+    kotak.forEach((k, i) => k.addEventListener('input', () => { if (k.value && i < 5) kotak[i + 1].focus(); }));
+  });
+
+  // ====== Submit (UI only) ======
+  document.getElementById('formIsiData').addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('formIsiData').classList.add('d-none');
+    document.getElementById('suksesIsiData').classList.remove('d-none');
+  });
 })();

@@ -19,7 +19,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="assets/css/style.css?v=4" rel="stylesheet">
+  <link href="assets/css/style.css?v=5" rel="stylesheet">
 </head>
 <body>
   <!-- Header sederhana -->
@@ -93,12 +93,118 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
     </div>
   </div>
 
+  <!-- Modal Isi Data: form pendaftaran + peta penanda lokasi -->
+  <div class="modal fade" id="modalIsiData" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+      <div class="modal-content border-0 rounded-4 overflow-hidden">
+        <div class="modal-header st-modal-head text-white border-0">
+          <div>
+            <h5 class="modal-title fw-700 mb-0">Silahkan Isi Data Anda</h5>
+            <small class="opacity-75">Tim kami akan menghubungi Anda untuk pemasangan.</small>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="formIsiData" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Nama Lengkap</label>
+              <input type="text" class="form-control" placeholder="Nama Lengkap Kamu" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Email <span class="text-muted">(Opsional)</span></label>
+              <input type="email" class="form-control" placeholder="emailkamu@domain.com">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Nomor Telepon</label>
+              <div class="input-group">
+                <input type="tel" class="form-control" id="inputTelepon" placeholder="08xxxxxxxxxx" required>
+                <button class="btn btn-outline-primary" type="button" id="btnKirimOtp">Kirim</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Kode OTP (WhatsApp/SMS)</label>
+              <div class="otp-grup d-flex gap-2" id="grupOtp">
+                <?php for ($i = 0; $i < 6; $i++): ?>
+                <input type="text" maxlength="1" class="form-control text-center otp-kotak" inputmode="numeric" disabled>
+                <?php endfor; ?>
+              </div>
+              <small class="text-muted" id="infoOtp">Klik "Kirim" untuk menerima kode.</small>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Jadwal Tanggal Pemasangan <span class="text-muted">(Opsional)</span></label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Jadwal Jam Pemasangan <span class="text-muted">(Opsional)</span></label>
+              <select class="form-select">
+                <option value="" selected>Pilih Jam Pemasangan</option>
+                <option>08:00 - 10:00</option>
+                <option>10:00 - 12:00</option>
+                <option>13:00 - 15:00</option>
+                <option>15:00 - 17:00</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Provinsi</label>
+              <select class="form-select" id="selProvinsi"><option value="">Memuat...</option></select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Kota / Kabupaten</label>
+              <select class="form-select" id="selKota" disabled><option value="">Pilih Kota Pemasangan</option></select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Kecamatan</label>
+              <select class="form-select" id="selKecamatan" disabled><option value="">Pilih Kecamatan Pemasangan</option></select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Desa / Kelurahan</label>
+              <select class="form-select" id="selKelurahan" disabled><option value="">Pilih Desa / Kelurahan</option></select>
+            </div>
+
+            <div class="col-md-4">
+              <label class="form-label fw-500 small">Kode Pos</label>
+              <input type="text" class="form-control" inputmode="numeric" placeholder="Kode Pos">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-500 small">RW <span class="text-muted">(Opsional)</span></label>
+              <input type="text" class="form-control" inputmode="numeric" placeholder="001">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-500 small">RT <span class="text-muted">(Opsional)</span></label>
+              <input type="text" class="form-control" inputmode="numeric" placeholder="001">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label fw-500 small">Arahkan Pin Lokasi ke Titik Alamat Pemasangan Anda</label>
+              <div class="input-group mb-2">
+                <input type="text" class="form-control" id="inputCariPeta" placeholder="Cari alamat pemasangan">
+                <button class="btn btn-st" type="button" id="btnCariPeta"><i class="bi bi-search me-1"></i>Cari</button>
+              </div>
+              <div id="petaPemasangan" class="peta-pemasangan"></div>
+              <small class="text-muted" id="koordinatTerpilih">Koordinat: -</small>
+            </div>
+
+            <div class="col-12 d-grid mt-2">
+              <button type="submit" class="btn btn-st btn-lg">Kirim Pendaftaran</button>
+            </div>
+          </form>
+          <div id="suksesIsiData" class="alert alert-success text-center mb-0 mt-3 d-none">
+            <i class="bi bi-check-circle-fill me-1"></i> Terima kasih! Data Anda telah kami terima. Tim Starlite akan segera menghubungi Anda.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Data untuk JS -->
   <script>
     window.KEYWORD_TERJANGKAU = <?= json_encode($keywordTerjangkau) ?>;
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="assets/js/cek-jangkauan.js?v=2"></script>
+  <script src="assets/js/cek-jangkauan.js?v=3"></script>
 </body>
 </html>
