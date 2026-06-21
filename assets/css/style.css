@@ -52,3 +52,10 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .footer-logo{filter:brightness(0) invert(1)}
 .social-ico{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;transition:.2s}
 .social-ico:hover{background:var(--st-blue);color:#fff}
+
+/* Polish / responsive */
+.st-navbar.scrolled .nav-link{color:#1c2434}
+@media(max-width:991px){
+  .st-navbar{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
+  .navbar-collapse{padding-top:.5rem}
+}
