@@ -2,6 +2,14 @@
 
 body.portal{background:#f4f6fb;font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 
+/* Halaman login (auth) */
+body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)}
+.auth-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
+.auth-kartu{width:100%;max-width:420px;padding:2.5rem 2rem}
+.auth-divider{display:inline-block;width:1px;height:26px;background:rgba(6,37,110,.2)}
+.auth-form .input-group-text{border-right:0;color:var(--st-blue)}
+.auth-form .form-control{border-left:0}
+
 /* Layout dasar: sidebar tetap di kiri, konten di kanan */
 .portal-wrap{display:flex;min-height:100vh}
 
