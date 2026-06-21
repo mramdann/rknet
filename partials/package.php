@@ -17,7 +17,7 @@
             <li class="mb-2"><i class="bi bi-check-circle-fill text-st me-2"></i><?= htmlspecialchars($f) ?></li>
             <?php endforeach; ?>
           </ul>
-          <a href="#" class="btn btn-st w-100">Berlangganan Sekarang</a>
+          <button type="button" class="btn btn-st w-100" data-bs-toggle="modal" data-bs-target="#modalLangganan" data-paket="<?= htmlspecialchars($p['name']) ?>">Berlangganan Sekarang</button>
         </div>
       </div>
       <?php endforeach; ?>

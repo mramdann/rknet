@@ -42,6 +42,12 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .package-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(11,94,215,.15)}
 .package-card.featured{border-color:var(--st-blue);transform:scale(1.03)}
 
+/* Cek Jangkauan & form */
+.kartu-form{background:#fff;border-radius:1.25rem;box-shadow:0 12px 40px rgba(6,37,110,.08)}
+
+/* Header modal (berlangganan & redeem) */
+.st-modal-head{background:linear-gradient(120deg,var(--st-blue),var(--st-blue-dark))}
+
 /* Redeem */
 .redeem-banner{background:linear-gradient(120deg,var(--st-blue),var(--st-blue-dark));border-radius:1.5rem;padding:3rem 2.5rem;box-shadow:0 20px 50px rgba(6,37,110,.25)}
 .btn-redeem{border-radius:50rem;padding:.7rem 1.6rem;color:var(--st-blue)}
