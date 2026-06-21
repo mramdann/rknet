@@ -16,3 +16,8 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .st-navbar.scrolled{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
 .st-navbar .nav-link{font-weight:500;color:#1c2434}
 .st-navbar .nav-link:hover{color:var(--st-blue)}
+
+/* Hero */
+.st-hero{margin-top:0}
+.st-hero-img{height:auto;max-height:640px;object-fit:cover}
+@media(max-width:768px){.st-hero-img{max-height:360px}}
