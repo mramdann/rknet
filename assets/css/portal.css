@@ -60,6 +60,16 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
 .kartu{background:#fff;border:1px solid #eef0f6;border-radius:1rem;box-shadow:0 6px 24px rgba(6,37,110,.05)}
 .kartu-pad{padding:1.5rem}
 
+/* Dashboard */
+.dashboard-banner{background:linear-gradient(120deg,var(--st-blue),var(--st-blue-dark));border:0;color:#fff}
+.info-akun li{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px dashed #eef0f6}
+.info-akun li:last-child{border-bottom:0}
+.info-akun li span{color:#8a93a6;font-size:.85rem}
+.info-akun li strong{font-weight:600;font-size:.9rem;max-width:60%}
+.paket-aktif-box{background:var(--st-blue-soft);border-radius:.9rem;padding:1.25rem}
+.tabel-portal thead th{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:#8a93a6;font-weight:600;border-bottom:1px solid #eef0f6}
+.tabel-portal td{border-bottom:1px solid #f4f6fb;font-size:.9rem}
+
 /* Tombol toggle sidebar (mobile) disembunyikan di desktop */
 .btn-sidebar{display:none}
 
