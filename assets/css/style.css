@@ -1,0 +1,12 @@
+:root{
+  --st-blue:#0B5ED7;
+  --st-blue-dark:#06256E;
+  --st-blue-soft:#E8F0FE;
+  --st-cyan:#36C5F0;
+}
+*{scroll-behavior:smooth}
+body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
+.btn-st{background:var(--st-blue);color:#fff;border-radius:50rem;padding:.6rem 1.5rem;font-weight:600;border:0;transition:.2s}
+.btn-st:hover{background:var(--st-blue-dark);color:#fff;transform:translateY(-2px)}
+.section{padding:5rem 0}
+.text-st{color:var(--st-blue)}
