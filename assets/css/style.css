@@ -21,3 +21,9 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .st-hero{margin-top:0}
 .st-hero-img{height:auto;max-height:640px;object-fit:cover}
 @media(max-width:768px){.st-hero-img{max-height:360px}}
+
+/* Benefits */
+.benefit-card{background:var(--st-blue-soft);border-radius:1rem;padding:1.5rem 1rem;transition:.2s}
+.benefit-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(11,94,215,.12)}
+.benefit-card i{font-size:2rem;color:var(--st-blue)}
+.fw-500{font-weight:500}

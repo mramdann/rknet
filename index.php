@@ -5,7 +5,7 @@
 <body>
     <?php include __DIR__ . '/partials/navbar.php'; ?>
     <?php include __DIR__ . '/partials/hero.php'; ?>
-    <!-- benefits -> Task 4 -->
+    <?php include __DIR__ . '/partials/benefits.php'; ?>
     <!-- package  -> Task 5 -->
     <!-- redeem   -> Task 6 -->
     <!-- features -> Task 7 -->
