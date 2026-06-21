@@ -14,9 +14,14 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 /* Navbar */
 .st-navbar{background:transparent;transition:.3s}
 .st-navbar.scrolled{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
-.st-navbar .nav-link{font-weight:500;color:#1c2434}
-.brand-divider{display:inline-block;width:1px;height:26px;background:rgba(6,37,110,.25)}
-.st-navbar .nav-link:hover{color:var(--st-blue)}
+/* default = transparan di atas hero: teks putih + shadow biar kebaca */
+.st-navbar .nav-link{font-weight:500;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
+.st-navbar .nav-link:hover{color:#cfe2ff}
+.brand-divider{display:inline-block;width:1px;height:26px;background:rgba(255,255,255,.5)}
+/* scrolled = background putih: balik ke teks gelap */
+.st-navbar.scrolled .nav-link{color:#1c2434;text-shadow:none}
+.st-navbar.scrolled .nav-link:hover{color:var(--st-blue)}
+.st-navbar.scrolled .brand-divider{background:rgba(6,37,110,.25)}
 
 /* Hero */
 .st-hero{margin-top:0}
@@ -55,8 +60,11 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .social-ico:hover{background:var(--st-blue);color:#fff}
 
 /* Polish / responsive */
-.st-navbar.scrolled .nav-link{color:#1c2434}
 @media(max-width:991px){
   .st-navbar{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
   .navbar-collapse{padding-top:.5rem}
+  /* navbar selalu putih di mobile -> teks gelap */
+  .st-navbar .nav-link{color:#1c2434;text-shadow:none}
+  .st-navbar .nav-link:hover{color:var(--st-blue)}
+  .st-navbar .brand-divider{background:rgba(6,37,110,.25)}
 }
