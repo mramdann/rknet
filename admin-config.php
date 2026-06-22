@@ -52,3 +52,13 @@ $daftarLead = [
     ['id' => 'LEAD-0455', 'nama' => 'Bayu Saputra',   'hp' => '0821-5656-7878', 'area' => 'Sleman, Yogyakarta',   'tanggal' => '17 Jun 2026', 'status' => 'batal'],
     ['id' => 'LEAD-0456', 'nama' => 'Citra Anggun',   'hp' => '0813-9090-1212', 'area' => 'Bogor, Jawa Barat',    'tanggal' => '17 Jun 2026', 'status' => 'baru'],
 ];
+
+// Daftar area cakupan layanan (UI only)
+$daftarArea = [
+    ['nama' => 'Cibinong',    'kota' => 'Bogor',      'status' => 'tercakup', 'jumlahPelanggan' => 312],
+    ['nama' => 'Depok Kota',  'kota' => 'Depok',      'status' => 'tercakup', 'jumlahPelanggan' => 458],
+    ['nama' => 'Bekasi Barat','kota' => 'Bekasi',     'status' => 'tercakup', 'jumlahPelanggan' => 274],
+    ['nama' => 'Sleman',      'kota' => 'Yogyakarta', 'status' => 'segera',   'jumlahPelanggan' => 0],
+    ['nama' => 'Serpong',     'kota' => 'Tangerang',  'status' => 'tercakup', 'jumlahPelanggan' => 196],
+    ['nama' => 'Cimahi',      'kota' => 'Bandung',    'status' => 'segera',   'jumlahPelanggan' => 0],
+];
