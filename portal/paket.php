@@ -20,6 +20,7 @@ $menuAktif = 'paket';
     <div class="col-md-4">
       <!-- Kartu paket dapat dipilih; data dipakai oleh JS untuk ringkasan -->
       <div class="kartu kartu-pad paket-pilih h-100 <?= $p['dipilih'] ? 'terpilih' : '' ?>"
+           data-id="<?= $p['id'] ?>"
            data-nama="<?= htmlspecialchars($p['nama']) ?>"
            data-harga="<?= formatRupiah($p['harga']) ?>"
            data-kecepatan="<?= htmlspecialchars($p['kecepatan']) ?>"
@@ -41,7 +42,10 @@ $menuAktif = 'paket';
   </div>
 
   <!-- Ringkasan & konfirmasi -->
-  <div class="kartu kartu-pad mt-4">
+  <form method="post" action="aksi-paket.php" class="kartu kartu-pad mt-4">
+    <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+    <input type="hidden" name="aksi" value="pilih">
+    <input type="hidden" name="paket_id" id="paketIdPilih" value="">
     <div class="row align-items-center g-3">
       <div class="col-md-8">
         <div class="text-muted text-uppercase fw-600 mb-1" style="font-size:.72rem">Paket Dipilih</div>
@@ -54,10 +58,10 @@ $menuAktif = 'paket';
         </div>
       </div>
       <div class="col-md-4 text-md-end">
-        <a href="dashboard.php" class="btn btn-st btn-lg w-100 w-md-auto px-4">Konfirmasi</a>
+        <button type="submit" class="btn btn-st btn-lg w-100 w-md-auto px-4">Konfirmasi</button>
       </div>
     </div>
-  </div>
+  </form>
 
   <script>
     // Pilih paket: klik kartu -> tandai terpilih & perbarui ringkasan
@@ -65,9 +69,11 @@ $menuAktif = 'paket';
       const kartuPaket = document.querySelectorAll('.paket-pilih');
       const namaEl  = document.getElementById('ringkasNama');
       const hargaEl = document.getElementById('ringkasHarga');
+      const idEl    = document.getElementById('paketIdPilih');
       function perbaruiRingkasan(kartu) {
         namaEl.textContent  = kartu.dataset.nama;
         hargaEl.textContent = kartu.dataset.harga;
+        idEl.value          = kartu.dataset.id;
       }
       function pilih(kartu) {
         kartuPaket.forEach(k => k.classList.remove('terpilih'));
