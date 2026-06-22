@@ -36,6 +36,7 @@ CREATE TABLE pelanggan (
     paket_id      INT          NULL,
     status        VARCHAR(20)  NOT NULL DEFAULT 'aktif',
     tgl_bergabung VARCHAR(20)  NOT NULL,
+    kata_sandi    VARCHAR(255) NOT NULL,
     CONSTRAINT fk_pelanggan_paket FOREIGN KEY (paket_id) REFERENCES paket(id)
 );
 

@@ -6,13 +6,13 @@ INSERT INTO paket (id, nama, kecepatan, harga, status) VALUES
 (2, 'Paket 200 Mbps Starlite', '200 Mbps', 100000, 'aktif'),
 (3, 'Paket 500 Mbps Starlite', '500 Mbps', 250000, 'aktif');
 
-INSERT INTO pelanggan (id, nama, email, hp, alamat, paket_id, status, tgl_bergabung) VALUES
-('STL-2024-008812', 'Dwi Anjasmoro', 'dwi.anjasmoro@gmail.com', '0811-7891-2233', 'Jl. Mawar No.12, Roa Malaka, Tambora, Jakarta Barat', 2, 'aktif', '12 Jan 2024'),
-('STL-2024-008813', 'Siti Rahmawati', 'siti.rahma@gmail.com', '0812-3344-5566', NULL, 1, 'aktif', '03 Feb 2024'),
-('STL-2024-008814', 'Budi Hartono', 'budi.hartono@gmail.com', '0813-7788-9900', NULL, 3, 'aktif', '21 Mar 2024'),
-('STL-2024-008815', 'Maya Kusuma', 'maya.kusuma@gmail.com', '0814-1122-3344', NULL, 1, 'nonaktif', '09 Apr 2024'),
-('STL-2024-008816', 'Agus Pratama', 'agus.pratama@gmail.com', '0815-5566-7788', NULL, 2, 'aktif', '17 Mei 2024'),
-('STL-2024-008817', 'Indah Permata', 'indah.permata@gmail.com', '0816-9988-7766', NULL, 3, 'aktif', '28 Mei 2024');
+INSERT INTO pelanggan (id, nama, email, hp, alamat, paket_id, status, tgl_bergabung, kata_sandi) VALUES
+('STL-2024-008812', 'Dwi Anjasmoro', 'dwi.anjasmoro@gmail.com', '0811-7891-2233', 'Jl. Mawar No.12, Roa Malaka, Tambora, Jakarta Barat', 2, 'aktif', '12 Jan 2024', '$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.'),
+('STL-2024-008813', 'Siti Rahmawati', 'siti.rahma@gmail.com', '0812-3344-5566', NULL, 1, 'aktif', '03 Feb 2024', '$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.'),
+('STL-2024-008814', 'Budi Hartono', 'budi.hartono@gmail.com', '0813-7788-9900', NULL, 3, 'aktif', '21 Mar 2024', '$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.'),
+('STL-2024-008815', 'Maya Kusuma', 'maya.kusuma@gmail.com', '0814-1122-3344', NULL, 1, 'nonaktif', '09 Apr 2024', '$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.'),
+('STL-2024-008816', 'Agus Pratama', 'agus.pratama@gmail.com', '0815-5566-7788', NULL, 2, 'aktif', '17 Mei 2024', '$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.'),
+('STL-2024-008817', 'Indah Permata', 'indah.permata@gmail.com', '0816-9988-7766', NULL, 3, 'aktif', '28 Mei 2024', '$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.');
 
 -- Tagihan: 5 invoice (satu per pelanggan) + 3 riwayat milik 008812 (Apr/Mei/Jul)
 INSERT INTO tagihan (id, no_invoice, pelanggan_id, paket_id, harga, tanggal, status) VALUES
