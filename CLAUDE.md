@@ -14,6 +14,8 @@ Data is read **read-only from the MySQL database `dbstarlite`** (port 3382) via 
 
 The only remaining mock-style content is the static landing marketing copy in `config.php` and the portal notification feed; everything data-backed reads/writes the DB.
 
+**Pagination is server-side** (`pagination.php`): `ambilPaginasi($pdo, $sqlBase, $sqlCount, $params)` runs COUNT + `LIMIT/OFFSET` (page size `PER_HALAMAN` = 5) and returns `['baris','hal','totalHal','total']`; `tampilPaginasi()` renders the Bootstrap nav (hidden when ≤1 page). The four admin list tables (pelanggan/transaksi/lead/notifikasi) and portal riwayat transaksi paginate via `?hal=N`; their search/filter is server-side via GET (`?cari=`, `?status=`) — the old client-side filter JS was removed. Lead & notifikasi list queries moved out of `admin-config.php` into their pages; cards (paket/area) and the dashboards are not paginated.
+
 ## Running & checking
 
 - **Serve:** XAMPP Apache, **port 8282**. Open `http://localhost:8282/starlite/`. (The port is non-default — it's set in `apache/conf/httpd.conf` as `Listen 8282`.)
