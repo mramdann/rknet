@@ -33,12 +33,20 @@ $menuAktif = 'paket';
         </div>
         <button type="button" class="btn btn-outline-primary w-100 btn-edit-paket"
           data-mode="edit"
+          data-id="<?= $p['id'] ?>"
           data-nama="<?= htmlspecialchars($p['nama']) ?>"
           data-kecepatan="<?= htmlspecialchars($p['kecepatan']) ?>"
           data-harga="<?= $p['harga'] ?>"
+          data-status="<?= htmlspecialchars($p['status']) ?>"
           data-bs-toggle="modal" data-bs-target="#modalEditPaket">
           <i class="bi bi-pencil me-1"></i>Edit Paket
         </button>
+        <form method="post" action="aksi-paket.php" class="mt-2" onsubmit="return confirm('Hapus paket ini?')">
+          <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+          <input type="hidden" name="aksi" value="hapus">
+          <input type="hidden" name="id" value="<?= $p['id'] ?>">
+          <button type="submit" class="btn btn-outline-danger btn-sm w-100"><i class="bi bi-trash me-1"></i>Hapus</button>
+        </form>
       </div>
     </div>
     <?php endforeach; ?>
@@ -53,30 +61,30 @@ $menuAktif = 'paket';
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
-          <form id="formPaket" class="row g-3">
+          <form id="formPaket" method="post" action="aksi-paket.php" class="row g-3">
+            <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+            <input type="hidden" name="aksi" id="paketAksi" value="tambah">
+            <input type="hidden" name="id" id="paketId" value="">
             <div class="col-12">
               <label class="form-label fw-500 small">Nama Paket</label>
-              <input type="text" class="form-control" id="paketNama" placeholder="Paket ... Mbps Starlite" required>
+              <input type="text" name="nama" class="form-control" id="paketNama" placeholder="Paket ... Mbps Starlite" required>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-500 small">Kecepatan</label>
-              <input type="text" class="form-control" id="paketKecepatan" placeholder="100 Mbps" required>
+              <input type="text" name="kecepatan" class="form-control" id="paketKecepatan" placeholder="100 Mbps" required>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-500 small">Harga / bulan (Rp)</label>
-              <input type="number" class="form-control" id="paketHarga" placeholder="199000" required>
+              <input type="number" name="harga" class="form-control" id="paketHarga" placeholder="199000" required>
             </div>
             <div class="col-12">
               <label class="form-label fw-500 small">Status</label>
-              <select class="form-select"><option>Aktif</option><option>Nonaktif</option></select>
+              <select name="status" class="form-select" id="paketStatus"><option value="aktif">Aktif</option><option value="nonaktif">Nonaktif</option></select>
             </div>
             <div class="col-12 d-grid mt-2">
               <button type="submit" class="btn btn-st btn-lg">Simpan Paket</button>
             </div>
           </form>
-          <div id="suksesPaket" class="alert alert-success text-center mb-0 mt-3 d-none">
-            <i class="bi bi-check-circle-fill me-1"></i> Paket berhasil disimpan.
-          </div>
         </div>
       </div>
     </div>
@@ -88,19 +96,12 @@ $menuAktif = 'paket';
       const d = e.relatedTarget.dataset;
       const edit = d.mode === 'edit';
       document.getElementById('judulModalPaket').textContent = edit ? 'Edit Paket' : 'Tambah Paket';
+      document.getElementById('paketAksi').value = edit ? 'edit' : 'tambah';
+      document.getElementById('paketId').value = edit ? d.id : '';
       document.getElementById('paketNama').value = edit ? d.nama : '';
       document.getElementById('paketKecepatan').value = edit ? d.kecepatan : '';
       document.getElementById('paketHarga').value = edit ? d.harga : '';
-      // Reset tampilan sukses
-      document.getElementById('formPaket').classList.remove('d-none');
-      document.getElementById('suksesPaket').classList.add('d-none');
-    });
-
-    // Simpan (UI only)
-    document.getElementById('formPaket').addEventListener('submit', (e) => {
-      e.preventDefault();
-      document.getElementById('formPaket').classList.add('d-none');
-      document.getElementById('suksesPaket').classList.remove('d-none');
+      document.getElementById('paketStatus').value = edit ? d.status : 'aktif';
     });
   </script>
 
