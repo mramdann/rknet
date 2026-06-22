@@ -49,6 +49,7 @@ $menuAktif = 'pelanggan';
                 data-paket="<?= htmlspecialchars($p['paket']) ?>"
                 data-bergabung="<?= htmlspecialchars($p['bergabung']) ?>"
                 data-status="<?= htmlspecialchars($b['label']) ?>"
+                data-alamat="<?= htmlspecialchars($p['alamat'] ?? '') ?>"
                 data-bs-toggle="modal" data-bs-target="#modalDetailPelanggan">
                 <i class="bi bi-eye"></i> Detail
               </button>
@@ -70,11 +71,40 @@ $menuAktif = 'pelanggan';
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
-          <ul class="list-unstyled mb-4 info-akun" id="isiDetailPelanggan"></ul>
-          <div class="d-flex gap-2">
-            <button type="button" class="btn btn-outline-primary flex-fill"><i class="bi bi-pencil me-1"></i>Edit</button>
-            <button type="button" class="btn btn-outline-danger flex-fill"><i class="bi bi-slash-circle me-1"></i>Nonaktifkan</button>
-          </div>
+          <form method="post" action="aksi-pelanggan.php" class="row g-3">
+            <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+            <input type="hidden" name="aksi" value="edit">
+            <input type="hidden" name="id" id="plId">
+            <div class="col-12">
+              <label class="form-label fw-500 small">ID Pelanggan</label>
+              <input type="text" class="form-control" id="plIdTampil" readonly>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-500 small">Nama</label>
+              <input type="text" name="nama" class="form-control" id="plNama" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">Email</label>
+              <input type="email" name="email" class="form-control" id="plEmail" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-500 small">No. HP</label>
+              <input type="text" name="hp" class="form-control" id="plHp" required>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-500 small">Alamat</label>
+              <input type="text" name="alamat" class="form-control" id="plAlamat">
+            </div>
+            <div class="col-12 d-grid">
+              <button type="submit" class="btn btn-st"><i class="bi bi-check2 me-1"></i>Simpan Perubahan</button>
+            </div>
+          </form>
+          <form method="post" action="aksi-pelanggan.php" class="mt-2">
+            <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+            <input type="hidden" name="aksi" value="toggle">
+            <input type="hidden" name="id" id="plIdToggle">
+            <button type="submit" class="btn btn-outline-danger w-100"><i class="bi bi-toggle-on me-1"></i>Ubah Status Aktif/Nonaktif</button>
+          </form>
         </div>
       </div>
     </div>
@@ -94,15 +124,16 @@ $menuAktif = 'pelanggan';
       document.getElementById('kosongPelanggan').classList.toggle('d-none', terlihat > 0);
     });
 
-    // Isi modal detail dari atribut tombol yang diklik
+    // Isi form edit dari atribut tombol yang diklik
     document.getElementById('modalDetailPelanggan').addEventListener('show.bs.modal', (e) => {
       const d = e.relatedTarget.dataset;
-      const baris = {
-        'ID Pelanggan': d.id, 'Nama': d.nama, 'Email': d.email,
-        'No. HP': d.hp, 'Paket': d.paket, 'Bergabung': d.bergabung, 'Status': d.status,
-      };
-      document.getElementById('isiDetailPelanggan').innerHTML =
-        Object.entries(baris).map(([k, v]) => `<li><span>${k}</span><strong>${v}</strong></li>`).join('');
+      document.getElementById('plId').value = d.id;
+      document.getElementById('plIdTampil').value = d.id;
+      document.getElementById('plNama').value = d.nama;
+      document.getElementById('plEmail').value = d.email;
+      document.getElementById('plHp').value = d.hp;
+      document.getElementById('plAlamat').value = d.alamat || '';
+      document.getElementById('plIdToggle').value = d.id;
     });
   </script>
 
