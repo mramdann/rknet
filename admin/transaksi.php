@@ -3,9 +3,6 @@
 require __DIR__ . '/../admin-config.php';
 $judulHalaman = 'Transaksi';
 $menuAktif = 'transaksi';
-
-// Kelas & label badge lunas dipakai JS saat "Tandai Lunas"
-$badgeLunas = badgeStatus('lunas');
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -42,7 +39,12 @@ $badgeLunas = badgeStatus('lunas');
             <td class="kolom-status"><span class="badge <?= $b['kelas'] ?>"><?= $b['label'] ?></span></td>
             <td class="text-end kolom-aksi">
               <?php if ($t['status'] === 'menunggu'): ?>
-                <button type="button" class="btn btn-sm btn-st btn-tandai-lunas"><i class="bi bi-check2 me-1"></i>Tandai Lunas</button>
+                <form method="post" action="aksi-transaksi.php">
+                  <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+                  <input type="hidden" name="aksi" value="lunas">
+                  <input type="hidden" name="id" value="<?= $t['idTagihan'] ?>">
+                  <button type="submit" class="btn btn-sm btn-st"><i class="bi bi-check2 me-1"></i>Tandai Lunas</button>
+                </form>
               <?php else: ?>
                 <span class="text-muted small">—</span>
               <?php endif; ?>
@@ -56,8 +58,6 @@ $badgeLunas = badgeStatus('lunas');
   </div>
 
   <script>
-    const badgeLunas = <?= json_encode($badgeLunas) ?>;
-
     // Filter berdasarkan status
     const tombolFilter = document.querySelectorAll('#filterStatus button');
     tombolFilter.forEach(btn => btn.addEventListener('click', () => {
@@ -72,16 +72,6 @@ $badgeLunas = badgeStatus('lunas');
       });
       document.getElementById('kosongTagihan').classList.toggle('d-none', terlihat > 0);
     }));
-
-    // Tandai lunas (UI only): ubah badge & hilangkan tombol
-    document.getElementById('tabelTagihan').addEventListener('click', (e) => {
-      const btn = e.target.closest('.btn-tandai-lunas');
-      if (!btn) return;
-      const tr = btn.closest('tr');
-      tr.dataset.status = 'lunas';
-      tr.querySelector('.kolom-status').innerHTML = `<span class="badge ${badgeLunas.kelas}">${badgeLunas.label}</span>`;
-      tr.querySelector('.kolom-aksi').innerHTML = '<span class="text-muted small">—</span>';
-    });
   </script>
 
 <?php include __DIR__ . '/partials/shell-close.php'; ?>
