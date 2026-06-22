@@ -4,6 +4,7 @@ require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
 require_once __DIR__ . '/db.php';        // db(): PDO
 require_once __DIR__ . '/auth.php';      // sesi & guard
 require_once __DIR__ . '/aksi.php';      // CSRF & flash
+require_once __DIR__ . '/pagination.php';  // paginasi
 
 wajibLoginAdmin();                       // halaman admin wajib login
 
