@@ -3,6 +3,7 @@
 require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
 require_once __DIR__ . '/db.php';        // db(): PDO
 require_once __DIR__ . '/auth.php';      // sesi & guard
+require_once __DIR__ . '/aksi.php';      // CSRF & flash
 
 wajibLoginAdmin();                       // halaman admin wajib login
 
@@ -15,21 +16,21 @@ $admin = $stmt->fetch();
 
 // Daftar paket + jumlah pelanggan aktif (subquery)
 $daftarPaket = $pdo->query(
-    "SELECT nama, kecepatan, harga, status,
+    "SELECT id, nama, kecepatan, harga, status,
             (SELECT COUNT(*) FROM pelanggan WHERE pelanggan.paket_id = paket.id) AS jumlahPelanggan
      FROM paket ORDER BY id"
 )->fetchAll();
 
 // Daftar pelanggan (paket = kecepatan paketnya)
 $daftarPelanggan = $pdo->query(
-    "SELECT pl.id, pl.nama, pl.email, pl.hp, pk.kecepatan AS paket, pl.status, pl.tgl_bergabung AS bergabung
+    "SELECT pl.id, pl.nama, pl.email, pl.hp, pl.alamat, pk.kecepatan AS paket, pl.status, pl.tgl_bergabung AS bergabung
      FROM pelanggan pl LEFT JOIN paket pk ON pk.id = pl.paket_id
      ORDER BY pl.id"
 )->fetchAll();
 
 // Daftar tagihan (gabung nama pelanggan & kecepatan paket)
 $daftarTagihan = $pdo->query(
-    "SELECT t.no_invoice AS noInvoice, pl.nama AS pelanggan, pk.kecepatan AS paket,
+    "SELECT t.id AS idTagihan, t.no_invoice AS noInvoice, pl.nama AS pelanggan, pk.kecepatan AS paket,
             t.harga, t.tanggal, t.status
      FROM tagihan t
      JOIN pelanggan pl ON pl.id = t.pelanggan_id
@@ -44,12 +45,12 @@ $daftarLead = $pdo->query(
 
 // Daftar area cakupan
 $daftarArea = $pdo->query(
-    "SELECT nama, kota, status, jumlah_pelanggan AS jumlahPelanggan FROM area ORDER BY id"
+    "SELECT id, nama, kota, status, jumlah_pelanggan AS jumlahPelanggan FROM area ORDER BY id"
 )->fetchAll();
 
 // Daftar notifikasi broadcast (urut sesuai seed)
 $daftarNotifikasi = $pdo->query(
-    "SELECT judul, isi, target, tanggal, status FROM notifikasi ORDER BY id"
+    "SELECT id, judul, isi, target, tanggal, status FROM notifikasi ORDER BY id"
 )->fetchAll();
 
 // Pengaturan situs
