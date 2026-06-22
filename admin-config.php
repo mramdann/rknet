@@ -42,3 +42,13 @@ $daftarTagihan = [
     ['noInvoice' => 'INV/2026/06/008816', 'pelanggan' => 'Agus Pratama',   'paket' => '200 Mbps', 'harga' => 100000, 'tanggal' => '16 Jun 2026', 'status' => 'menunggu'],
     ['noInvoice' => 'INV/2026/06/008817', 'pelanggan' => 'Indah Permata',  'paket' => '500 Mbps', 'harga' => 250000, 'tanggal' => '16 Jun 2026', 'status' => 'lunas'],
 ];
+
+// Daftar lead dari form cek jangkauan (UI only)
+$daftarLead = [
+    ['id' => 'LEAD-0451', 'nama' => 'Rizki Maulana',  'hp' => '0812-1111-2233', 'area' => 'Cibinong, Bogor',      'tanggal' => '20 Jun 2026', 'status' => 'baru'],
+    ['id' => 'LEAD-0452', 'nama' => 'Putri Lestari',  'hp' => '0813-4455-6677', 'area' => 'Depok, Jawa Barat',    'tanggal' => '20 Jun 2026', 'status' => 'dihubungi'],
+    ['id' => 'LEAD-0453', 'nama' => 'Hendra Wijaya',  'hp' => '0856-7788-9900', 'area' => 'Bekasi, Jawa Barat',   'tanggal' => '19 Jun 2026', 'status' => 'terjadwal'],
+    ['id' => 'LEAD-0454', 'nama' => 'Nadia Safira',   'hp' => '0878-1212-3434', 'area' => 'Tangerang, Banten',    'tanggal' => '18 Jun 2026', 'status' => 'selesai'],
+    ['id' => 'LEAD-0455', 'nama' => 'Bayu Saputra',   'hp' => '0821-5656-7878', 'area' => 'Sleman, Yogyakarta',   'tanggal' => '17 Jun 2026', 'status' => 'batal'],
+    ['id' => 'LEAD-0456', 'nama' => 'Citra Anggun',   'hp' => '0813-9090-1212', 'area' => 'Bogor, Jawa Barat',    'tanggal' => '17 Jun 2026', 'status' => 'baru'],
+];
