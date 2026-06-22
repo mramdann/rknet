@@ -26,7 +26,7 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
       <ul class="dropdown-menu dropdown-menu-end shadow-sm">
         <li><span class="dropdown-item-text small text-muted"><?= htmlspecialchars($admin['email']) ?></span></li>
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="login.php"><i class="bi bi-box-arrow-right me-2"></i>Keluar</a></li>
+        <li><a class="dropdown-item text-danger" href="logout.php"><i class="bi bi-box-arrow-right me-2"></i>Keluar</a></li>
       </ul>
     </div>
   </div>

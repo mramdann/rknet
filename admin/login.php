@@ -1,5 +1,22 @@
 <?php
-// login.php (admin) — halaman login admin (UI only, langsung ke dashboard).
+// login.php (admin) — login nyata: verifikasi email + password ke DB.
+require __DIR__ . '/../db.php';
+require __DIR__ . '/../auth.php';
+
+$pesanError = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $sandi = $_POST['kata_sandi'] ?? '';
+    $stmt = db()->prepare("SELECT id, kata_sandi FROM admin WHERE email = ?");
+    $stmt->execute([$email]);
+    $row = $stmt->fetch();
+    if ($row && password_verify($sandi, $row['kata_sandi'])) {
+        loginAdmin((int) $row['id']);
+        header('Location: dashboard.php');
+        exit;
+    }
+    $pesanError = 'Email atau kata sandi salah.';
+}
 $judulHalaman = 'Login Admin';
 ?>
 <!DOCTYPE html>
@@ -17,25 +34,30 @@ $judulHalaman = 'Login Admin';
         <p class="text-muted small mb-0">Masuk untuk mengelola layanan</p>
       </div>
 
-      <form action="dashboard.php" method="get" class="auth-form">
+      <?php if ($pesanError !== ''): ?>
+        <div class="alert alert-danger py-2 small"><?= htmlspecialchars($pesanError) ?></div>
+      <?php endif; ?>
+
+      <form action="login.php" method="post" class="auth-form">
         <div class="mb-3">
-          <label class="form-label fw-500">Username</label>
+          <label class="form-label fw-500">Email</label>
           <div class="input-group input-group-lg">
-            <span class="input-group-text bg-white"><i class="bi bi-person"></i></span>
-            <input type="text" class="form-control" placeholder="Username admin" value="admin">
+            <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+            <input type="email" name="email" class="form-control" placeholder="admin@starlite.id" required>
           </div>
         </div>
         <div class="mb-4">
           <label class="form-label fw-500">Password</label>
           <div class="input-group input-group-lg">
             <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
-            <input type="password" class="form-control" placeholder="Masukkan password" value="admin123">
+            <input type="password" name="kata_sandi" class="form-control" placeholder="Masukkan password" required>
           </div>
         </div>
         <button type="submit" class="btn btn-st w-100 btn-lg">Masuk</button>
       </form>
 
-      <p class="text-center small text-muted mt-4 mb-0">
+      <p class="text-center small text-muted mt-3 mb-0">Demo: <code>admin@starlite.id</code> / <code>admin123</code></p>
+      <p class="text-center small text-muted mt-2 mb-0">
         <a href="../portal/login.php" class="text-st text-decoration-none">&larr; Login Pelanggan</a>
       </p>
     </div>

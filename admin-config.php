@@ -2,11 +2,16 @@
 // admin-config.php — data portal admin, dibaca read-only dari database dbstarlite.
 require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
 require_once __DIR__ . '/db.php';        // db(): PDO
+require_once __DIR__ . '/auth.php';      // sesi & guard
+
+wajibLoginAdmin();                       // halaman admin wajib login
 
 $pdo = db();
 
-// Admin yang sedang login
-$admin = $pdo->query("SELECT nama, email, peran FROM admin LIMIT 1")->fetch();
+// Admin yang sedang login (berdasarkan sesi)
+$stmt = $pdo->prepare("SELECT nama, email, peran FROM admin WHERE id = ?");
+$stmt->execute([idAdminSaatIni()]);
+$admin = $stmt->fetch();
 
 // Daftar paket + jumlah pelanggan aktif (subquery)
 $daftarPaket = $pdo->query(

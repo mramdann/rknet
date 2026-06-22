@@ -36,7 +36,7 @@ $menuAdmin = [
     <?php endforeach; ?>
   </ul>
   <div class="portal-sidebar-foot">
-    <a href="login.php" class="d-flex align-items-center gap-2 text-decoration-none text-danger fw-500">
+    <a href="logout.php" class="d-flex align-items-center gap-2 text-decoration-none text-danger fw-500">
       <i class="bi bi-box-arrow-right"></i> Keluar
     </a>
   </div>
