@@ -1,8 +1,21 @@
 <?php
-// notifikasi.php (admin) — daftar notifikasi + filter terkirim/draft + tulis baru (UI only).
+// notifikasi.php (admin) — daftar (paginasi + filter status sisi-server) + tulis/hapus.
 require __DIR__ . '/../admin-config.php';
 $judulHalaman = 'Notifikasi';
 $menuAktif = 'notifikasi';
+
+// Filter status (server-side)
+$status = $_GET['status'] ?? '';
+$where = '';
+$params = [];
+if ($status === 'terkirim' || $status === 'draft') {
+    $where = "WHERE status = ?";
+    $params = [$status];
+}
+$sqlBase  = "SELECT id, judul, isi, target, tanggal, status FROM notifikasi $where ORDER BY id";
+$sqlCount = "SELECT COUNT(*) FROM notifikasi $where";
+$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, $params);
+$paramFilter = $status !== '' ? ['status' => $status] : [];
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -15,10 +28,10 @@ $menuAktif = 'notifikasi';
       <p class="text-muted small mb-0">Kelola pengumuman & broadcast ke pelanggan.</p>
     </div>
     <div class="d-flex flex-wrap gap-2">
-      <div class="btn-group" role="group" id="filterNotif">
-        <button type="button" class="btn btn-sm btn-st" data-filter="semua">Semua</button>
-        <button type="button" class="btn btn-sm btn-outline-primary" data-filter="terkirim">Terkirim</button>
-        <button type="button" class="btn btn-sm btn-outline-primary" data-filter="draft">Draft</button>
+      <div class="btn-group" role="group">
+        <a href="?status=" class="btn btn-sm <?= $status === '' ? 'btn-st' : 'btn-outline-primary' ?>">Semua</a>
+        <a href="?status=terkirim" class="btn btn-sm <?= $status === 'terkirim' ? 'btn-st' : 'btn-outline-primary' ?>">Terkirim</a>
+        <a href="?status=draft" class="btn btn-sm <?= $status === 'draft' ? 'btn-st' : 'btn-outline-primary' ?>">Draft</a>
       </div>
       <button class="btn btn-st" type="button" data-bs-toggle="modal" data-bs-target="#modalTulisNotif">
         <i class="bi bi-plus-lg me-1"></i>Tulis Notifikasi</button>
@@ -31,9 +44,9 @@ $menuAktif = 'notifikasi';
         <thead>
           <tr><th>Judul</th><th>Target</th><th>Tanggal</th><th>Status</th><th class="text-end">Aksi</th></tr>
         </thead>
-        <tbody id="tabelNotif">
-          <?php foreach ($daftarNotifikasi as $n): $b = badgeStatus($n['status']); ?>
-          <tr data-status="<?= htmlspecialchars($n['status']) ?>">
+        <tbody>
+          <?php foreach ($hasil['baris'] as $n): $b = badgeStatus($n['status']); ?>
+          <tr>
             <td>
               <div class="fw-600"><?= htmlspecialchars($n['judul']) ?></div>
               <div class="text-muted" style="font-size:.78rem"><?= htmlspecialchars($n['isi']) ?></div>
@@ -51,13 +64,16 @@ $menuAktif = 'notifikasi';
             </td>
           </tr>
           <?php endforeach; ?>
+          <?php if ($hasil['total'] === 0): ?>
+          <tr><td colspan="5" class="text-muted small text-center py-3">Tidak ada notifikasi pada filter ini.</td></tr>
+          <?php endif; ?>
         </tbody>
       </table>
-      <p class="text-muted small text-center mt-3 mb-0 d-none" id="kosongNotif">Tidak ada notifikasi pada filter ini.</p>
+      <?php tampilPaginasi($hasil['hal'], $hasil['totalHal'], $paramFilter); ?>
     </div>
   </div>
 
-  <!-- Modal tulis notifikasi (UI only) -->
+  <!-- Modal tulis notifikasi -->
   <div class="modal fade" id="modalTulisNotif" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
@@ -93,22 +109,5 @@ $menuAktif = 'notifikasi';
       </div>
     </div>
   </div>
-
-  <script>
-    // Filter berdasarkan status
-    const tombolFilter = document.querySelectorAll('#filterNotif button');
-    tombolFilter.forEach(btn => btn.addEventListener('click', () => {
-      tombolFilter.forEach(b => { b.classList.remove('btn-st'); b.classList.add('btn-outline-primary'); });
-      btn.classList.add('btn-st'); btn.classList.remove('btn-outline-primary');
-      const filter = btn.dataset.filter;
-      let terlihat = 0;
-      document.querySelectorAll('#tabelNotif tr').forEach(tr => {
-        const cocok = filter === 'semua' || tr.dataset.status === filter;
-        tr.classList.toggle('d-none', !cocok);
-        if (cocok) terlihat++;
-      });
-      document.getElementById('kosongNotif').classList.toggle('d-none', terlihat > 0);
-    }));
-  </script>
 
 <?php include __DIR__ . '/partials/shell-close.php'; ?>

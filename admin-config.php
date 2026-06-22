@@ -44,11 +44,6 @@ $daftarArea = $pdo->query(
     "SELECT id, nama, kota, status, jumlah_pelanggan AS jumlahPelanggan FROM area ORDER BY id"
 )->fetchAll();
 
-// Daftar notifikasi broadcast (urut sesuai seed)
-$daftarNotifikasi = $pdo->query(
-    "SELECT id, judul, isi, target, tanggal, status FROM notifikasi ORDER BY id"
-)->fetchAll();
-
 // Pengaturan situs
 $pengaturan = $pdo->query(
     "SELECT nama_situs AS namaSitus, email, telepon, alamat FROM pengaturan LIMIT 1"
