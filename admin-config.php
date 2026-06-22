@@ -62,3 +62,12 @@ $daftarArea = [
     ['nama' => 'Serpong',     'kota' => 'Tangerang',  'status' => 'tercakup', 'jumlahPelanggan' => 196],
     ['nama' => 'Cimahi',      'kota' => 'Bandung',    'status' => 'segera',   'jumlahPelanggan' => 0],
 ];
+
+// Daftar notifikasi / broadcast ke pelanggan (UI only)
+$daftarNotifikasi = [
+    ['judul' => 'Pemeliharaan jaringan area Depok', 'isi' => 'Akan ada pemeliharaan 23 Jun 2026 pukul 01.00-03.00 WIB.', 'target' => 'Pelanggan Depok', 'tanggal' => '20 Jun 2026', 'status' => 'terkirim'],
+    ['judul' => 'Promo upgrade 500 Mbps',           'isi' => 'Upgrade paket bulan ini diskon 30% untuk 3 bulan pertama.', 'target' => 'Semua pelanggan',  'tanggal' => '18 Jun 2026', 'status' => 'terkirim'],
+    ['judul' => 'Pengingat jatuh tempo tagihan',    'isi' => 'Tagihan Juni jatuh tempo 15 Jun. Mohon segera lakukan pembayaran.', 'target' => 'Pelanggan aktif', 'tanggal' => '14 Jun 2026', 'status' => 'terkirim'],
+    ['judul' => 'Selamat datang pelanggan baru',    'isi' => 'Draf sambutan untuk pelanggan yang baru bergabung.', 'target' => 'Pelanggan baru',   'tanggal' => '12 Jun 2026', 'status' => 'draft'],
+    ['judul' => 'Survei kepuasan layanan Q2',       'isi' => 'Draf undangan mengisi survei kepuasan kuartal 2.', 'target' => 'Semua pelanggan',  'tanggal' => '10 Jun 2026', 'status' => 'draft'],
+];
