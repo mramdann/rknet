@@ -29,7 +29,7 @@ $menuAktif = 'notifikasi';
     <div class="table-responsive">
       <table class="table align-middle mb-0 tabel-portal">
         <thead>
-          <tr><th>Judul</th><th>Target</th><th>Tanggal</th><th>Status</th></tr>
+          <tr><th>Judul</th><th>Target</th><th>Tanggal</th><th>Status</th><th class="text-end">Aksi</th></tr>
         </thead>
         <tbody id="tabelNotif">
           <?php foreach ($daftarNotifikasi as $n): $b = badgeStatus($n['status']); ?>
@@ -41,6 +41,14 @@ $menuAktif = 'notifikasi';
             <td><?= htmlspecialchars($n['target']) ?></td>
             <td class="text-muted small"><?= htmlspecialchars($n['tanggal']) ?></td>
             <td><span class="badge <?= $b['kelas'] ?>"><?= $b['label'] ?></span></td>
+            <td class="text-end">
+              <form method="post" action="aksi-notifikasi.php" onsubmit="return confirm('Hapus notifikasi ini?')">
+                <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+                <input type="hidden" name="aksi" value="hapus">
+                <input type="hidden" name="id" value="<?= $n['id'] ?>">
+                <button type="submit" class="btn btn-sm btn-light text-danger"><i class="bi bi-trash"></i></button>
+              </form>
+            </td>
           </tr>
           <?php endforeach; ?>
         </tbody>
@@ -58,14 +66,16 @@ $menuAktif = 'notifikasi';
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
         <div class="modal-body p-4">
-          <form id="formNotif" class="row g-3">
+          <form id="formNotif" method="post" action="aksi-notifikasi.php" class="row g-3">
+            <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+            <input type="hidden" name="aksi" value="tambah">
             <div class="col-12">
               <label class="form-label fw-500 small">Judul</label>
-              <input type="text" class="form-control" placeholder="Judul notifikasi" required>
+              <input type="text" name="judul" class="form-control" placeholder="Judul notifikasi" required>
             </div>
             <div class="col-12">
               <label class="form-label fw-500 small">Target</label>
-              <select class="form-select">
+              <select name="target" class="form-select">
                 <option>Semua pelanggan</option>
                 <option>Pelanggan aktif</option>
                 <option>Pelanggan baru</option>
@@ -73,15 +83,12 @@ $menuAktif = 'notifikasi';
             </div>
             <div class="col-12">
               <label class="form-label fw-500 small">Isi Pesan</label>
-              <textarea class="form-control" rows="3" placeholder="Tulis isi notifikasi..." required></textarea>
+              <textarea name="isi" class="form-control" rows="3" placeholder="Tulis isi notifikasi..." required></textarea>
             </div>
             <div class="col-12 d-grid mt-2">
               <button type="submit" class="btn btn-st btn-lg">Kirim Notifikasi</button>
             </div>
           </form>
-          <div id="suksesNotif" class="alert alert-success text-center mb-0 mt-3 d-none">
-            <i class="bi bi-check-circle-fill me-1"></i> Notifikasi berhasil dikirim.
-          </div>
         </div>
       </div>
     </div>
@@ -102,13 +109,6 @@ $menuAktif = 'notifikasi';
       });
       document.getElementById('kosongNotif').classList.toggle('d-none', terlihat > 0);
     }));
-
-    // Tulis notifikasi (UI only)
-    document.getElementById('formNotif').addEventListener('submit', (e) => {
-      e.preventDefault();
-      document.getElementById('formNotif').classList.add('d-none');
-      document.getElementById('suksesNotif').classList.remove('d-none');
-    });
   </script>
 
 <?php include __DIR__ . '/partials/shell-close.php'; ?>
