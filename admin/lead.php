@@ -3,9 +3,6 @@
 require __DIR__ . '/../admin-config.php';
 $judulHalaman = 'Lead';
 $menuAktif = 'lead';
-
-// Kelas & label badge "dihubungi" dipakai JS saat tombol "Tandai Dihubungi"
-$badgeDihubungi = badgeStatus('dihubungi');
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -63,7 +60,12 @@ $badgeDihubungi = badgeStatus('dihubungi');
                 <i class="bi bi-eye"></i> Detail
               </button>
               <?php if ($l['status'] === 'baru'): ?>
-                <button type="button" class="btn btn-sm btn-st btn-tandai-dihubungi"><i class="bi bi-telephone me-1"></i>Tandai Dihubungi</button>
+                <form method="post" action="aksi-lead.php" class="d-inline">
+                  <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+                  <input type="hidden" name="aksi" value="dihubungi">
+                  <input type="hidden" name="id" value="<?= htmlspecialchars($l['id']) ?>">
+                  <button type="submit" class="btn btn-sm btn-st"><i class="bi bi-telephone me-1"></i>Tandai Dihubungi</button>
+                </form>
               <?php endif; ?>
             </td>
           </tr>
@@ -94,8 +96,6 @@ $badgeDihubungi = badgeStatus('dihubungi');
   </div>
 
   <script>
-    const badgeDihubungi = <?= json_encode($badgeDihubungi) ?>;
-
     // Cari + filter status digabung
     const cariLead = document.getElementById('cariLead');
     const filterLead = document.getElementById('filterLead');
@@ -119,16 +119,6 @@ $badgeDihubungi = badgeStatus('dihubungi');
       const baris = { 'ID Lead': d.id, 'Nama': d.nama, 'No. HP': d.hp, 'Area': d.area, 'Tanggal': d.tanggal, 'Status': d.status };
       document.getElementById('isiDetailLead').innerHTML =
         Object.entries(baris).map(([k, v]) => `<li><span>${k}</span><strong>${v}</strong></li>`).join('');
-    });
-
-    // Tandai dihubungi (UI only): ubah badge & hilangkan tombol
-    document.getElementById('tabelLead').addEventListener('click', (e) => {
-      const btn = e.target.closest('.btn-tandai-dihubungi');
-      if (!btn) return;
-      const tr = btn.closest('tr');
-      tr.dataset.status = 'dihubungi';
-      tr.querySelector('.kolom-status').innerHTML = `<span class="badge ${badgeDihubungi.kelas}">${badgeDihubungi.label}</span>`;
-      btn.remove();
     });
   </script>
 
