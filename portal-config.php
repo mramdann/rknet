@@ -1,45 +1,54 @@
 <?php
-// portal-config.php — data dummy untuk portal pelanggan (UI only)
+// portal-config.php — data portal pelanggan, dibaca read-only dari database dbstarlite.
 require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
+require_once __DIR__ . '/db.php';        // db(): PDO
 
-// Data pelanggan yang sedang login (contoh)
-$pelanggan = [
-    'id'     => 'STL-2024-008812',
-    'nama'   => 'Dwi Anjasmoro',
-    'email'  => 'dwi.anjasmoro@gmail.com',
-    'hp'     => '0811-7891-2233',
-    'alamat' => 'Jl. Mawar No.12, Roa Malaka, Tambora, Jakarta Barat',
+$pdo = db();
+$idPelanggan = 'STL-2024-008812';        // pelanggan yang "sedang login" (mock)
+
+// Data pelanggan yang sedang login
+$stmt = $pdo->prepare("SELECT id, nama, email, hp, alamat FROM pelanggan WHERE id = ?");
+$stmt->execute([$idPelanggan]);
+$pelanggan = $stmt->fetch();
+
+// Paket internet yang sedang aktif (+ masa aktif presentasional)
+$stmt = $pdo->prepare(
+    "SELECT pk.nama, pk.kecepatan, pk.harga, pk.status
+     FROM pelanggan pl JOIN paket pk ON pk.id = pl.paket_id
+     WHERE pl.id = ?"
+);
+$stmt->execute([$idPelanggan]);
+$paketAktif = $stmt->fetch();
+$paketAktif['masaAktif'] = '15 Juli 2026';
+
+// Riwayat transaksi pelanggan (urut sesuai seed: Jun, Mei, Apr, Jul)
+$stmt = $pdo->prepare(
+    "SELECT t.no_invoice AS noInvoice, pk.nama AS paket, pk.kecepatan AS kecepatan,
+            t.harga, t.tanggal, t.status
+     FROM tagihan t JOIN paket pk ON pk.id = t.paket_id
+     WHERE t.pelanggan_id = ?
+     ORDER BY t.id"
+);
+$stmt->execute([$idPelanggan]);
+$daftarTransaksi = $stmt->fetchAll();
+
+// Pilihan paket pada halaman "Pilih Paket" — harga dari DB, fitur & flag presentasional
+$fiturPaket = [
+    '100 Mbps' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi'],
+    '200 Mbps' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Harga promo'],
+    '500 Mbps' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Prioritas jaringan'],
 ];
+$paketTersedia = [];
+foreach ($pdo->query("SELECT nama, kecepatan, harga FROM paket ORDER BY id") as $row) {
+    $row['fitur']   = $fiturPaket[$row['kecepatan']] ?? [];
+    $row['dipilih'] = ($row['kecepatan'] === '200 Mbps');
+    $paketTersedia[] = $row;
+}
 
-// Paket internet yang sedang aktif
-$paketAktif = [
-    'nama'      => 'Paket 200 Mbps Starlite',
-    'kecepatan' => '200 Mbps',
-    'harga'     => 100000,
-    'masaAktif' => '15 Juli 2026',
-    'status'    => 'aktif',
-];
-
-// Riwayat transaksi pelanggan (terbaru di atas)
-$daftarTransaksi = [
-    ['noInvoice' => 'INV/2026/06/008812', 'paket' => 'Paket 200 Mbps Starlite', 'kecepatan' => '200 Mbps', 'harga' => 100000, 'tanggal' => '15 Jun 2026', 'status' => 'lunas'],
-    ['noInvoice' => 'INV/2026/05/008812', 'paket' => 'Paket 200 Mbps Starlite', 'kecepatan' => '200 Mbps', 'harga' => 100000, 'tanggal' => '15 Mei 2026', 'status' => 'lunas'],
-    ['noInvoice' => 'INV/2026/04/008812', 'paket' => 'Paket 200 Mbps Starlite', 'kecepatan' => '200 Mbps', 'harga' => 100000, 'tanggal' => '15 Apr 2026', 'status' => 'lunas'],
-    ['noInvoice' => 'INV/2026/07/008812', 'paket' => 'Paket 200 Mbps Starlite', 'kecepatan' => '200 Mbps', 'harga' => 100000, 'tanggal' => '15 Jul 2026', 'status' => 'menunggu'],
-];
-
-// Daftar notifikasi & informasi untuk panel offcanvas
+// Feed notifikasi & informasi untuk panel offcanvas — presentasional (tetap statis)
 $daftarNotifikasi = [
     ['tipe' => 'notifikasi', 'judul' => 'Pembayaran Berhasil', 'isi' => 'Tagihan INV/2026/06/008812 sebesar Rp100.000 telah dibayar.', 'waktu' => '15 Jun 2026, 09:14'],
     ['tipe' => 'informasi',  'judul' => 'Internet Aktif',       'isi' => 'Paket 200 Mbps Starlite aktif hingga 15 Juli 2026.', 'waktu' => '15 Jun 2026, 09:15'],
     ['tipe' => 'informasi',  'judul' => 'Promo Upgrade 500 Mbps', 'isi' => 'Nikmati internet 500 Mbps hanya Rp250.000/bulan. Unlimited!', 'waktu' => '10 Jun 2026, 12:00'],
     ['tipe' => 'notifikasi', 'judul' => 'Pemeliharaan Sistem',  'isi' => 'Pemeliharaan terjadwal 20 Jun 2026, 01:00-03:00 WIB.', 'waktu' => '08 Jun 2026, 17:30'],
 ];
-
-// Pilihan paket pada halaman "Pilih Paket"
-$paketTersedia = [
-    ['nama' => 'Paket 100 Mbps Starlite', 'kecepatan' => '100 Mbps', 'harga' => 199000, 'fitur' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi'], 'dipilih' => false],
-    ['nama' => 'Paket 200 Mbps Starlite', 'kecepatan' => '200 Mbps', 'harga' => 100000, 'fitur' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Harga promo'], 'dipilih' => true],
-    ['nama' => 'Paket 500 Mbps Starlite', 'kecepatan' => '500 Mbps', 'harga' => 250000, 'fitur' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Prioritas jaringan'], 'dipilih' => false],
-];
-
