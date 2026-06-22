@@ -10,3 +10,4 @@
   <div class="portal-main">
     <?php include __DIR__ . '/topbar.php'; ?>
     <div class="portal-content">
+      <?php tampilFlash(); ?>

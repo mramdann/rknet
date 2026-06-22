@@ -3,6 +3,7 @@
 require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
 require_once __DIR__ . '/db.php';        // db(): PDO
 require_once __DIR__ . '/auth.php';      // sesi & guard
+require_once __DIR__ . '/aksi.php';      // CSRF & flash
 
 wajibLoginPelanggan();                   // halaman portal wajib login
 
@@ -10,7 +11,7 @@ $pdo = db();
 $idPelanggan = idPelangganSaatIni();     // pelanggan dari sesi
 
 // Data pelanggan yang sedang login
-$stmt = $pdo->prepare("SELECT id, nama, email, hp, alamat FROM pelanggan WHERE id = ?");
+$stmt = $pdo->prepare("SELECT id, nama, email, hp, alamat, paket_id FROM pelanggan WHERE id = ?");
 $stmt->execute([$idPelanggan]);
 $pelanggan = $stmt->fetch();
 
@@ -42,9 +43,9 @@ $fiturPaket = [
     '500 Mbps' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Prioritas jaringan'],
 ];
 $paketTersedia = [];
-foreach ($pdo->query("SELECT nama, kecepatan, harga FROM paket ORDER BY id") as $row) {
+foreach ($pdo->query("SELECT id, nama, kecepatan, harga FROM paket ORDER BY id") as $row) {
     $row['fitur']   = $fiturPaket[$row['kecepatan']] ?? [];
-    $row['dipilih'] = ($row['kecepatan'] === '200 Mbps');
+    $row['dipilih'] = ((int) $row['id'] === (int) ($pelanggan['paket_id'] ?? 0));
     $paketTersedia[] = $row;
 }
 
