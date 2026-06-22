@@ -30,6 +30,11 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
 .portal-nav a i{font-size:1.15rem}
 .portal-nav a:hover{background:var(--st-blue-soft);color:var(--st-blue)}
 .portal-nav a.aktif{background:var(--st-blue);color:#fff}
+.portal-nav-label{
+  list-style:none;padding:.5rem 1rem .25rem;margin-top:.5rem;
+  font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#aab1c2
+}
+.portal-nav-label:first-child{margin-top:0}
 .portal-sidebar-foot{padding:1rem 1.5rem 0;border-top:1px solid #f0f2f7}
 
 /* Area kanan: topbar + konten */
