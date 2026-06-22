@@ -39,11 +39,6 @@ $daftarTagihan = $pdo->query(
      ORDER BY t.id"
 )->fetchAll();
 
-// Daftar lead / prospek cek jangkauan
-$daftarLead = $pdo->query(
-    "SELECT id, nama, hp, area, tanggal, status FROM prospek ORDER BY id"
-)->fetchAll();
-
 // Daftar area cakupan
 $daftarArea = $pdo->query(
     "SELECT id, nama, kota, status, jumlah_pelanggan AS jumlahPelanggan FROM area ORDER BY id"

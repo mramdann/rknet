@@ -1,8 +1,34 @@
 <?php
-// lead.php (admin) — daftar lead cek jangkauan: cari, filter status, detail, tandai dihubungi (UI only).
+// lead.php (admin) — daftar prospek (paginasi + cari + filter status sisi-server) + tandai dihubungi.
 require __DIR__ . '/../admin-config.php';
 $judulHalaman = 'Lead';
 $menuAktif = 'lead';
+
+// Filter cari + status (server-side)
+$cari   = trim($_GET['cari'] ?? '');
+$status = $_GET['status'] ?? '';
+$statusValid = ['baru', 'dihubungi', 'terjadwal', 'selesai', 'batal'];
+$klausa = [];
+$params = [];
+if ($cari !== '') {
+    $klausa[] = "(LOWER(nama) LIKE ? OR LOWER(area) LIKE ?)";
+    $kunci = '%' . mb_strtolower($cari) . '%';
+    $params[] = $kunci;
+    $params[] = $kunci;
+}
+if (in_array($status, $statusValid, true)) {
+    $klausa[] = "status = ?";
+    $params[] = $status;
+}
+$where = $klausa ? ('WHERE ' . implode(' AND ', $klausa)) : '';
+$sqlBase  = "SELECT id, nama, hp, area, tanggal, status FROM prospek $where ORDER BY id";
+$sqlCount = "SELECT COUNT(*) FROM prospek $where";
+$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, $params);
+
+// Param difilter untuk dipertahankan di link halaman
+$paramFilter = [];
+if ($cari !== '') $paramFilter['cari'] = $cari;
+if (in_array($status, $statusValid, true)) $paramFilter['status'] = $status;
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -12,22 +38,21 @@ $menuAktif = 'lead';
   <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-4">
     <div>
       <h5 class="fw-700 mb-1">Lead Cek Jangkauan</h5>
-      <p class="text-muted small mb-0"><?= count($daftarLead) ?> calon pelanggan dari form cek jangkauan.</p>
+      <p class="text-muted small mb-0"><?= $hasil['total'] ?> calon pelanggan dari form cek jangkauan.</p>
     </div>
-    <div class="d-flex flex-wrap gap-2">
+    <form method="get" class="d-flex flex-wrap gap-2">
       <div class="input-group cari-pelanggan">
         <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-        <input type="text" class="form-control" id="cariLead" placeholder="Cari nama / area...">
+        <input type="text" name="cari" class="form-control" placeholder="Cari nama / area..." value="<?= htmlspecialchars($cari) ?>">
       </div>
-      <select class="form-select" id="filterLead" style="max-width:180px">
-        <option value="semua">Semua status</option>
-        <option value="baru">Baru</option>
-        <option value="dihubungi">Dihubungi</option>
-        <option value="terjadwal">Terjadwal</option>
-        <option value="selesai">Selesai</option>
-        <option value="batal">Batal</option>
+      <select name="status" class="form-select" style="max-width:180px" onchange="this.form.submit()">
+        <option value="">Semua status</option>
+        <?php foreach ($statusValid as $sv): ?>
+        <option value="<?= $sv ?>" <?= $status === $sv ? 'selected' : '' ?>><?= ucfirst($sv) ?></option>
+        <?php endforeach; ?>
       </select>
-    </div>
+      <button type="submit" class="btn btn-st">Cari</button>
+    </form>
   </div>
 
   <div class="kartu kartu-pad">
@@ -36,10 +61,9 @@ $menuAktif = 'lead';
         <thead>
           <tr><th>Lead</th><th>No. HP</th><th>Area</th><th>Tanggal</th><th>Status</th><th class="text-end">Aksi</th></tr>
         </thead>
-        <tbody id="tabelLead">
-          <?php foreach ($daftarLead as $l): $b = badgeStatus($l['status']); ?>
-          <tr data-status="<?= htmlspecialchars($l['status']) ?>"
-              data-cari="<?= htmlspecialchars(mb_strtolower($l['nama'] . ' ' . $l['area'])) ?>">
+        <tbody>
+          <?php foreach ($hasil['baris'] as $l): $b = badgeStatus($l['status']); ?>
+          <tr>
             <td>
               <div class="fw-600"><?= htmlspecialchars($l['nama']) ?></div>
               <div class="text-muted" style="font-size:.78rem"><?= htmlspecialchars($l['id']) ?></div>
@@ -47,8 +71,8 @@ $menuAktif = 'lead';
             <td><?= htmlspecialchars($l['hp']) ?></td>
             <td><?= htmlspecialchars($l['area']) ?></td>
             <td class="text-muted small"><?= htmlspecialchars($l['tanggal']) ?></td>
-            <td class="kolom-status"><span class="badge <?= $b['kelas'] ?>"><?= $b['label'] ?></span></td>
-            <td class="text-end kolom-aksi">
+            <td><span class="badge <?= $b['kelas'] ?>"><?= $b['label'] ?></span></td>
+            <td class="text-end">
               <button type="button" class="btn btn-sm btn-light btn-detail-lead"
                 data-id="<?= htmlspecialchars($l['id']) ?>"
                 data-nama="<?= htmlspecialchars($l['nama']) ?>"
@@ -70,9 +94,12 @@ $menuAktif = 'lead';
             </td>
           </tr>
           <?php endforeach; ?>
+          <?php if ($hasil['total'] === 0): ?>
+          <tr><td colspan="6" class="text-muted small text-center py-3">Tidak ada lead yang cocok.</td></tr>
+          <?php endif; ?>
         </tbody>
       </table>
-      <p class="text-muted small text-center mt-3 mb-0 d-none" id="kosongLead">Tidak ada lead yang cocok.</p>
+      <?php tampilPaginasi($hasil['hal'], $hasil['totalHal'], $paramFilter); ?>
     </div>
   </div>
 
@@ -96,23 +123,6 @@ $menuAktif = 'lead';
   </div>
 
   <script>
-    // Cari + filter status digabung
-    const cariLead = document.getElementById('cariLead');
-    const filterLead = document.getElementById('filterLead');
-    function saringLead() {
-      const kunci = cariLead.value.trim().toLowerCase();
-      const status = filterLead.value;
-      let terlihat = 0;
-      document.querySelectorAll('#tabelLead tr').forEach(tr => {
-        const cocok = tr.dataset.cari.includes(kunci) && (status === 'semua' || tr.dataset.status === status);
-        tr.classList.toggle('d-none', !cocok);
-        if (cocok) terlihat++;
-      });
-      document.getElementById('kosongLead').classList.toggle('d-none', terlihat > 0);
-    }
-    cariLead.addEventListener('input', saringLead);
-    filterLead.addEventListener('change', saringLead);
-
     // Isi modal detail dari atribut tombol
     document.getElementById('modalDetailLead').addEventListener('show.bs.modal', (e) => {
       const d = e.relatedTarget.dataset;
