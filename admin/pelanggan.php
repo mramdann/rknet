@@ -1,8 +1,22 @@
 <?php
-// pelanggan.php (admin) — daftar & detail pelanggan (UI only).
+// pelanggan.php (admin) — daftar (paginasi + cari sisi-server), edit & toggle status.
 require __DIR__ . '/../admin-config.php';
 $judulHalaman = 'Pelanggan';
 $menuAktif = 'pelanggan';
+
+// Filter cari (server-side)
+$cari = trim($_GET['cari'] ?? '');
+$where = '';
+$params = [];
+if ($cari !== '') {
+    $where = "WHERE LOWER(pl.nama) LIKE ? OR LOWER(pl.id) LIKE ?";
+    $kunci = '%' . mb_strtolower($cari) . '%';
+    $params = [$kunci, $kunci];
+}
+$sqlBase = "SELECT pl.id, pl.nama, pl.email, pl.hp, pl.alamat, pk.kecepatan AS paket, pl.status, pl.tgl_bergabung AS bergabung
+            FROM pelanggan pl LEFT JOIN paket pk ON pk.id = pl.paket_id $where ORDER BY pl.id";
+$sqlCount = "SELECT COUNT(*) FROM pelanggan pl $where";
+$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, $params);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -12,12 +26,13 @@ $menuAktif = 'pelanggan';
   <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-4">
     <div>
       <h5 class="fw-700 mb-1">Manajemen Pelanggan</h5>
-      <p class="text-muted small mb-0">Total <?= count($daftarPelanggan) ?> pelanggan terdaftar.</p>
+      <p class="text-muted small mb-0">Total <?= $hasil['total'] ?> pelanggan<?= $cari !== '' ? ' cocok' : ' terdaftar' ?>.</p>
     </div>
-    <div class="input-group cari-pelanggan">
+    <form method="get" class="input-group cari-pelanggan">
       <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-      <input type="text" class="form-control" id="cariPelanggan" placeholder="Cari nama / ID pelanggan...">
-    </div>
+      <input type="text" name="cari" class="form-control" placeholder="Cari nama / ID pelanggan..." value="<?= htmlspecialchars($cari) ?>">
+      <button class="btn btn-st" type="submit">Cari</button>
+    </form>
   </div>
 
   <div class="kartu kartu-pad">
@@ -26,9 +41,9 @@ $menuAktif = 'pelanggan';
         <thead>
           <tr><th>Pelanggan</th><th>Kontak</th><th>Paket</th><th>Bergabung</th><th>Status</th><th class="text-end">Aksi</th></tr>
         </thead>
-        <tbody id="tabelPelanggan">
-          <?php foreach ($daftarPelanggan as $p): $b = badgeStatus($p['status']); ?>
-          <tr data-cari="<?= htmlspecialchars(mb_strtolower($p['nama'] . ' ' . $p['id'])) ?>">
+        <tbody>
+          <?php foreach ($hasil['baris'] as $p): $b = badgeStatus($p['status']); ?>
+          <tr>
             <td>
               <div class="fw-600"><?= htmlspecialchars($p['nama']) ?></div>
               <div class="text-muted" style="font-size:.78rem"><?= htmlspecialchars($p['id']) ?></div>
@@ -46,9 +61,6 @@ $menuAktif = 'pelanggan';
                 data-id="<?= htmlspecialchars($p['id']) ?>"
                 data-email="<?= htmlspecialchars($p['email']) ?>"
                 data-hp="<?= htmlspecialchars($p['hp']) ?>"
-                data-paket="<?= htmlspecialchars($p['paket']) ?>"
-                data-bergabung="<?= htmlspecialchars($p['bergabung']) ?>"
-                data-status="<?= htmlspecialchars($b['label']) ?>"
                 data-alamat="<?= htmlspecialchars($p['alamat'] ?? '') ?>"
                 data-bs-toggle="modal" data-bs-target="#modalDetailPelanggan">
                 <i class="bi bi-eye"></i> Detail
@@ -56,13 +68,16 @@ $menuAktif = 'pelanggan';
             </td>
           </tr>
           <?php endforeach; ?>
+          <?php if ($hasil['total'] === 0): ?>
+          <tr><td colspan="6" class="text-muted small text-center py-3">Tidak ada pelanggan yang cocok.</td></tr>
+          <?php endif; ?>
         </tbody>
       </table>
-      <p class="text-muted small text-center mt-3 mb-0 d-none" id="kosongPelanggan">Tidak ada pelanggan yang cocok.</p>
+      <?php tampilPaginasi($hasil['hal'], $hasil['totalHal'], $cari !== '' ? ['cari' => $cari] : []); ?>
     </div>
   </div>
 
-  <!-- Modal detail pelanggan (diisi oleh JS) -->
+  <!-- Modal detail/edit pelanggan -->
   <div class="modal fade" id="modalDetailPelanggan" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
@@ -111,19 +126,6 @@ $menuAktif = 'pelanggan';
   </div>
 
   <script>
-    // Pencarian pelanggan (filter baris tabel)
-    const inputCari = document.getElementById('cariPelanggan');
-    inputCari.addEventListener('input', () => {
-      const kunci = inputCari.value.trim().toLowerCase();
-      let terlihat = 0;
-      document.querySelectorAll('#tabelPelanggan tr').forEach(tr => {
-        const cocok = tr.dataset.cari.includes(kunci);
-        tr.classList.toggle('d-none', !cocok);
-        if (cocok) terlihat++;
-      });
-      document.getElementById('kosongPelanggan').classList.toggle('d-none', terlihat > 0);
-    });
-
     // Isi form edit dari atribut tombol yang diklik
     document.getElementById('modalDetailPelanggan').addEventListener('show.bs.modal', (e) => {
       const d = e.relatedTarget.dataset;
