@@ -1,9 +1,15 @@
 <?php
-// transaksi.php — daftar riwayat transaksi pelanggan dalam bentuk kartu.
+// transaksi.php — riwayat transaksi pelanggan (kartu, paginasi sisi-server).
 require __DIR__ . '/../config.php';
 require __DIR__ . '/../portal-config.php';
 $judulHalaman = 'Riwayat Transaksi';
 $menuAktif = 'transaksi';
+
+$sqlBase = "SELECT t.no_invoice AS noInvoice, pk.nama AS paket, t.harga, t.tanggal, t.status
+            FROM tagihan t JOIN paket pk ON pk.id = t.paket_id
+            WHERE t.pelanggan_id = ? ORDER BY t.id";
+$sqlCount = "SELECT COUNT(*) FROM tagihan t WHERE t.pelanggan_id = ?";
+$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, [$idPelanggan]);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -15,11 +21,11 @@ $menuAktif = 'transaksi';
       <h5 class="fw-700 mb-1">Riwayat Transaksi</h5>
       <p class="text-muted small mb-0">Semua tagihan & pembayaran paket internet Anda.</p>
     </div>
-    <span class="badge bg-primary-subtle text-primary fs-6"><?= count($daftarTransaksi) ?> Transaksi</span>
+    <span class="badge bg-primary-subtle text-primary fs-6"><?= $hasil['total'] ?> Transaksi</span>
   </div>
 
   <div class="row g-3">
-    <?php foreach ($daftarTransaksi as $t):
+    <?php foreach ($hasil['baris'] as $t):
       $b = badgeStatus($t['status']);
       $lunas = $t['status'] === 'lunas'; ?>
     <div class="col-12">
@@ -57,5 +63,6 @@ $menuAktif = 'transaksi';
     </div>
     <?php endforeach; ?>
   </div>
+  <?php tampilPaginasi($hasil['hal'], $hasil['totalHal']); ?>
 
 <?php include __DIR__ . '/partials/shell-close.php'; ?>
