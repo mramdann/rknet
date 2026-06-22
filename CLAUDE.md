@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A redesigned/rebuilt UI for **Starlite Indonesia** (a fiber/FTTH ISP, brands "Starlite" + "Weave"). Plain **PHP (native, no framework, no Composer) + Bootstrap 5** served from XAMPP. It is **UI-only**: every form, button, and "action" is a visual mock backed by dummy data — there is no database, authentication, or backend processing. Visual style is "Modern Biru" (blue, rounded cards, soft shadows, Poppins).
+A redesigned/rebuilt UI for **Starlite Indonesia** (a fiber/FTTH ISP, brands "Starlite" + "Weave"). Plain **PHP (native, no framework, no Composer) + Bootstrap 5** served from XAMPP. Visual style is "Modern Biru" (blue, rounded cards, soft shadows, Poppins).
+
+Data is read **read-only from the MySQL database `dbstarlite`** (port 3382) via `db.php` (PDO): `admin-config.php` & `portal-config.php` run `SELECT`s and map the rows onto the same array shapes the partials consume (via column aliases, so the markup is untouched). Landing marketing copy (`config.php`) stays static. **Write actions (add/edit/delete/mark/login) are still mocks** — INSERT/UPDATE/DELETE are planned for Fase 2. Schema & seed live in `database/schema.sql` + `database/seed.sql` (table/column names in Bahasa Indonesia; the lead table is named `prospek` to avoid the `lead` reserved word).
 
 ## Running & checking
 
@@ -16,6 +18,7 @@ A redesigned/rebuilt UI for **Starlite Indonesia** (a fiber/FTTH ISP, brands "St
   Use the full path to the XAMPP PHP binary (`php` is not on PATH). Lint every `.php` you touch.
 - **Verification = open the page in a browser** and confirm it renders and behaves. There is nothing to assert against in code.
 - The Bash tool is sandboxed away from localhost; check Apache/ports by reading config, and verify pages through a browser, not `curl localhost`.
+- **Database:** import `database/schema.sql` then `database/seed.sql` into MySQL `dbstarlite` (host 127.0.0.1, port 3382, user root, no password). Without the DB, admin/portal pages show a "Koneksi database gagal." message. The Bash tool is also sandboxed away from MySQL — import & inspect via phpMyAdmin/CLI outside the session.
 
 ## Three areas, one shared style
 
