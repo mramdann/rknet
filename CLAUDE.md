@@ -80,3 +80,5 @@ Coverage "in/out of range" is a dummy string match against covered-city keywords
 ## Specs & plans
 
 Design specs and implementation plans for completed/ongoing work live in `docs/superpowers/specs/` and `docs/superpowers/plans/`. Check there before redesigning a feature.
+
+Full technical documentation — architecture, ERD, and flow diagrams (Mermaid) — is in **`docs/DOKUMENTASI.md`**.
