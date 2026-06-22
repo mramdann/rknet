@@ -71,3 +71,11 @@ $daftarNotifikasi = [
     ['judul' => 'Selamat datang pelanggan baru',    'isi' => 'Draf sambutan untuk pelanggan yang baru bergabung.', 'target' => 'Pelanggan baru',   'tanggal' => '12 Jun 2026', 'status' => 'draft'],
     ['judul' => 'Survei kepuasan layanan Q2',       'isi' => 'Draf undangan mengisi survei kepuasan kuartal 2.', 'target' => 'Semua pelanggan',  'tanggal' => '10 Jun 2026', 'status' => 'draft'],
 ];
+
+// Pengaturan situs (UI only)
+$pengaturan = [
+    'namaSitus' => 'Starlite Indonesia',
+    'email'     => 'cs@starlite.id',
+    'telepon'   => '0804-1-555-666',
+    'alamat'    => 'Jl. Fiber Optik No. 1, Jakarta Selatan',
+];
