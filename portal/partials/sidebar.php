@@ -26,7 +26,7 @@ $menuPortal = [
     <?php endforeach; ?>
   </ul>
   <div class="portal-sidebar-foot">
-    <a href="login.php" class="portal-nav-foot d-flex align-items-center gap-2 text-decoration-none text-danger fw-500">
+    <a href="logout.php" class="portal-nav-foot d-flex align-items-center gap-2 text-decoration-none text-danger fw-500">
       <i class="bi bi-box-arrow-right"></i> Keluar
     </a>
   </div>

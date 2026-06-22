@@ -2,9 +2,12 @@
 // portal-config.php — data portal pelanggan, dibaca read-only dari database dbstarlite.
 require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
 require_once __DIR__ . '/db.php';        // db(): PDO
+require_once __DIR__ . '/auth.php';      // sesi & guard
+
+wajibLoginPelanggan();                   // halaman portal wajib login
 
 $pdo = db();
-$idPelanggan = 'STL-2024-008812';        // pelanggan yang "sedang login" (mock)
+$idPelanggan = idPelangganSaatIni();     // pelanggan dari sesi
 
 // Data pelanggan yang sedang login
 $stmt = $pdo->prepare("SELECT id, nama, email, hp, alamat FROM pelanggan WHERE id = ?");
