@@ -1,0 +1,43 @@
+<?php
+// aksi-profil.php — simpan info akun & ganti password pelanggan (POST, CSRF, redirect).
+require __DIR__ . '/../db.php';
+require __DIR__ . '/../auth.php';
+require __DIR__ . '/../aksi.php';
+wajibLoginPelanggan();
+cekCsrf();
+
+$pdo  = db();
+$id   = idPelangganSaatIni();
+$aksi = $_POST['aksi'] ?? '';
+
+if ($aksi === 'info') {
+    $nama   = trim($_POST['nama'] ?? '');
+    $email  = trim($_POST['email'] ?? '');
+    $hp     = trim($_POST['hp'] ?? '');
+    $alamat = trim($_POST['alamat'] ?? '');
+    if ($nama === '' || $email === '' || $hp === '') {
+        setFlash('danger', 'Nama, email, dan No. HP wajib diisi.');
+    } else {
+        $stmt = $pdo->prepare("UPDATE pelanggan SET nama = ?, email = ?, hp = ?, alamat = ? WHERE id = ?");
+        $stmt->execute([$nama, $email, $hp, $alamat, $id]);
+        setFlash('success', 'Informasi akun berhasil disimpan.');
+    }
+} elseif ($aksi === 'password') {
+    $lama       = $_POST['lama'] ?? '';
+    $baru       = $_POST['baru'] ?? '';
+    $konfirmasi = $_POST['konfirmasi'] ?? '';
+    $stmt = $pdo->prepare("SELECT kata_sandi FROM pelanggan WHERE id = ?");
+    $stmt->execute([$id]);
+    $row = $stmt->fetch();
+    if (!$row || !password_verify($lama, $row['kata_sandi'])) {
+        setFlash('danger', 'Password lama salah.');
+    } elseif (strlen($baru) < 6 || $baru !== $konfirmasi) {
+        setFlash('danger', 'Password baru minimal 6 karakter & harus sama dengan konfirmasi.');
+    } else {
+        $stmt = $pdo->prepare("UPDATE pelanggan SET kata_sandi = ? WHERE id = ?");
+        $stmt->execute([password_hash($baru, PASSWORD_DEFAULT), $id]);
+        setFlash('success', 'Password berhasil diperbarui.');
+    }
+}
+header('Location: profil.php');
+exit;

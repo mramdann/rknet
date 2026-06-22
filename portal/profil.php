@@ -41,10 +41,12 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
       <div class="kartu kartu-pad h-100">
         <h6 class="fw-700 mb-3"><i class="bi bi-person-vcard text-st me-2"></i>Informasi Akun</h6>
         <!-- Form UI only: kembali ke halaman ini setelah "simpan" -->
-        <form action="profil.php" method="get" class="row g-3">
+        <form action="aksi-profil.php" method="post" class="row g-3">
+          <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+          <input type="hidden" name="aksi" value="info">
           <div class="col-md-6">
             <label class="form-label fw-500 small">Nama Lengkap</label>
-            <input type="text" class="form-control" value="<?= htmlspecialchars($pelanggan['nama']) ?>">
+            <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($pelanggan['nama']) ?>">
           </div>
           <div class="col-md-6">
             <label class="form-label fw-500 small">ID Pelanggan</label>
@@ -52,15 +54,15 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
           </div>
           <div class="col-md-6">
             <label class="form-label fw-500 small">Email</label>
-            <input type="email" class="form-control" value="<?= htmlspecialchars($pelanggan['email']) ?>">
+            <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($pelanggan['email']) ?>">
           </div>
           <div class="col-md-6">
             <label class="form-label fw-500 small">No. Handphone</label>
-            <input type="text" class="form-control" value="<?= htmlspecialchars($pelanggan['hp']) ?>">
+            <input type="text" name="hp" class="form-control" value="<?= htmlspecialchars($pelanggan['hp']) ?>">
           </div>
           <div class="col-12">
             <label class="form-label fw-500 small">Alamat</label>
-            <textarea class="form-control" rows="2"><?= htmlspecialchars($pelanggan['alamat']) ?></textarea>
+            <textarea name="alamat" class="form-control" rows="2"><?= htmlspecialchars($pelanggan['alamat']) ?></textarea>
           </div>
           <div class="col-12 d-flex justify-content-end">
             <button type="submit" class="btn btn-st"><i class="bi bi-check2 me-1"></i>Simpan Perubahan</button>
@@ -73,18 +75,20 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
     <div class="col-lg-5">
       <div class="kartu kartu-pad h-100">
         <h6 class="fw-700 mb-3"><i class="bi bi-shield-lock text-st me-2"></i>Keamanan</h6>
-        <form action="profil.php" method="get" class="row g-3">
+        <form action="aksi-profil.php" method="post" class="row g-3">
+          <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+          <input type="hidden" name="aksi" value="password">
           <div class="col-12">
             <label class="form-label fw-500 small">Password Saat Ini</label>
-            <input type="password" class="form-control" placeholder="Masukkan password lama">
+            <input type="password" name="lama" class="form-control" placeholder="Masukkan password lama" required>
           </div>
           <div class="col-12">
             <label class="form-label fw-500 small">Password Baru</label>
-            <input type="password" class="form-control" placeholder="Minimal 6 karakter">
+            <input type="password" name="baru" class="form-control" placeholder="Minimal 6 karakter" required>
           </div>
           <div class="col-12">
             <label class="form-label fw-500 small">Konfirmasi Password Baru</label>
-            <input type="password" class="form-control" placeholder="Ulangi password baru">
+            <input type="password" name="konfirmasi" class="form-control" placeholder="Ulangi password baru" required>
           </div>
           <div class="col-12 d-flex justify-content-end">
             <button type="submit" class="btn btn-outline-primary"><i class="bi bi-key me-1"></i>Perbarui Password</button>
