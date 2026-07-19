@@ -117,19 +117,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
 
             <div class="col-md-6">
               <label class="form-label fw-500 small">Nomor Telepon</label>
-              <div class="input-group">
-                <input type="tel" class="form-control" id="inputTelepon" placeholder="08xxxxxxxxxx" required>
-                <button class="btn btn-outline-primary" type="button" id="btnKirimOtp">Kirim</button>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-500 small">Kode OTP (WhatsApp/SMS)</label>
-              <div class="otp-grup d-flex gap-2" id="grupOtp">
-                <?php for ($i = 0; $i < 6; $i++): ?>
-                <input type="text" maxlength="1" class="form-control text-center otp-kotak" inputmode="numeric" disabled>
-                <?php endfor; ?>
-              </div>
-              <small class="text-muted" id="infoOtp">Klik "Kirim" untuk menerima kode.</small>
+              <input type="tel" class="form-control" id="inputTelepon" placeholder="08xxxxxxxxxx" required>
             </div>
 
             <div class="col-md-6">
@@ -205,6 +193,6 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="assets/js/cek-jangkauan.js?v=4"></script>
+  <script src="assets/js/cek-jangkauan.js?v=5"></script>
 </body>
 </html>

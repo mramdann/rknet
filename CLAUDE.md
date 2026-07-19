@@ -75,7 +75,7 @@ Stylesheet/script `<link>`/`<script>` tags carry a manual version query, e.g. `s
 - **Nominatim** (`nominatim.openstreetmap.org`) — address autocomplete & map search geocoding.
 - **emsifa wilayah API** (`emsifa.com/api-wilayah-indonesia`) — cascading Provinsi→Kota→Kecamatan→Kelurahan dropdowns.
 
-Coverage "in/out of range" is a dummy string match against covered-city keywords from `cek-jangkauan-config.php`; OTP and form submits are mocked.
+Coverage "in/out of range" is a dummy string match against covered-city keywords from `cek-jangkauan-config.php`; the "Isi Data" form submit is mocked (no OTP step).
 
 ## Specs & plans
 

@@ -153,19 +153,6 @@
     isiSelect(selKelurahan, await ambilWilayah(`villages/${selKecamatan.value}`), 'Pilih Desa / Kelurahan');
   });
 
-  // ====== OTP mock (tidak benar-benar mengirim) ======
-  document.getElementById('btnKirimOtp').addEventListener('click', () => {
-    const telepon = document.getElementById('inputTelepon').value.trim();
-    const info = document.getElementById('infoOtp');
-    if (!telepon) { info.textContent = 'Isi nomor telepon dulu.'; return; }
-    document.querySelectorAll('#grupOtp .otp-kotak').forEach(k => k.disabled = false);
-    info.textContent = 'Kode OTP telah dikirim (demo). Masukkan 6 digit.';
-    const kotak = document.querySelectorAll('#grupOtp .otp-kotak');
-    kotak[0].focus();
-    // Pindah fokus otomatis antar kotak OTP
-    kotak.forEach((k, i) => k.addEventListener('input', () => { if (k.value && i < 5) kotak[i + 1].focus(); }));
-  });
-
   // ====== Submit (UI only) ======
   document.getElementById('formIsiData').addEventListener('submit', (e) => {
     e.preventDefault();
