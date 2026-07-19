@@ -115,7 +115,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
               <input type="email" class="form-control" placeholder="emailkamu@domain.com">
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
               <label class="form-label fw-500 small">Nomor Telepon</label>
               <input type="tel" class="form-control" id="inputTelepon" placeholder="08xxxxxxxxxx" required>
             </div>
