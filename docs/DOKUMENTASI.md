@@ -202,6 +202,8 @@ erDiagram
 
 Setup: `mysql -h 127.0.0.1 -P 3382 -u root < database/schema.sql` lalu `< database/seed.sql`.
 
+**Perbarui seed dari data terkini:** jalankan `powershell -File database/dump-seed.ps1` untuk meregenerasi `database/seed.sql` (data-only) dari isi DB saat ini — berguna sebelum memindahkan proyek ke komputer lain agar datanya identik.
+
 ---
 
 ## 6. Alur Otentikasi (login + guard)
