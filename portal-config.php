@@ -1,5 +1,5 @@
 <?php
-// portal-config.php — data portal pelanggan, dibaca read-only dari database dbstarlite.
+// portal-config.php — data portal pelanggan, dibaca read-only dari database dbrknet.
 require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
 require_once __DIR__ . '/db.php';        // db(): mysqli + kueri()/kueriSatu()
 require_once __DIR__ . '/auth.php';      // sesi & guard

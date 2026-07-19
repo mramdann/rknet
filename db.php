@@ -1,11 +1,11 @@
 <?php
-// db.php — koneksi mysqli ke dbstarlite + helper query. Setelan koneksi di satu tempat (konstanta di bawah).
+// db.php — koneksi mysqli ke dbrknet + helper query. Setelan koneksi di satu tempat (konstanta di bawah).
 
 const DB_HOST = '127.0.0.1';
 const DB_PORT = 3382;
 const DB_USER = 'root';
 const DB_PASS = '';
-const DB_NAME = 'dbstarlite';
+const DB_NAME = 'dbrknet';
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);   // error mysqli sebagai exception
 
@@ -72,7 +72,7 @@ function pesanErrorDb(string $judul, string $detail): never
        . 'border:1px solid #f0c0c0;border-radius:12px;background:#fff6f6;color:#7a1f1f">'
        . '<h2 style="margin:0 0 .5rem">' . $judul . '</h2>'
        . '<p style="margin:0">' . $detail . ' Jalankan <code>database/schema.sql</code> lalu '
-       . '<code>database/seed.sql</code> ke database <code>dbstarlite</code>.</p></div>');
+       . '<code>database/seed.sql</code> ke database <code>dbrknet</code>.</p></div>');
 }
 
 // Tangani error query tak tertangkap (mis. tabel belum dibuat) agar tampil rapi.

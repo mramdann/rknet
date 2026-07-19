@@ -41,7 +41,7 @@ $judulHalaman = 'Login Admin';
           <label class="form-label fw-500">Email</label>
           <div class="input-group input-group-lg">
             <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
-            <input type="email" name="email" class="form-control" placeholder="admin@starlite.id" required>
+            <input type="email" name="email" class="form-control" placeholder="admin@rknet.id" required>
           </div>
         </div>
         <div class="mb-4">
@@ -54,7 +54,7 @@ $judulHalaman = 'Login Admin';
         <button type="submit" class="btn btn-rk w-100 btn-lg">Masuk</button>
       </form>
 
-      <p class="text-center small text-muted mt-3 mb-0">Demo: <code>admin@starlite.id</code> / <code>admin123</code></p>
+      <p class="text-center small text-muted mt-3 mb-0">Demo: <code>admin@rknet.id</code> / <code>admin123</code></p>
       <p class="text-center small text-muted mt-2 mb-0">
         <a href="../portal/login.php" class="text-rk text-decoration-none">&larr; Login Pelanggan</a>
       </p>

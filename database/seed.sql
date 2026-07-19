@@ -1,11 +1,11 @@
--- seed.sql - data awal dbstarlite (regenerasi dari DB via database/dump-seed.ps1).
+-- seed.sql - data awal dbrknet (regenerasi dari DB via database/dump-seed.ps1).
 -- Jalankan SETELAH schema.sql.
-USE dbstarlite;
+USE dbrknet;
 SET FOREIGN_KEY_CHECKS=0;
 
-INSERT INTO `paket` (`id`, `nama`, `kecepatan`, `harga`, `status`) VALUES (1,'Paket 100 Mbps Starlite','100 Mbps',199000,'aktif');
-INSERT INTO `paket` (`id`, `nama`, `kecepatan`, `harga`, `status`) VALUES (2,'Paket 200 Mbps Starlite','200 Mbps',100000,'aktif');
-INSERT INTO `paket` (`id`, `nama`, `kecepatan`, `harga`, `status`) VALUES (3,'Paket 500 Mbps Starlite','500 Mbps',250000,'aktif');
+INSERT INTO `paket` (`id`, `nama`, `kecepatan`, `harga`, `status`) VALUES (1,'Paket 100 Mbps RKnet','100 Mbps',199000,'aktif');
+INSERT INTO `paket` (`id`, `nama`, `kecepatan`, `harga`, `status`) VALUES (2,'Paket 200 Mbps RKnet','200 Mbps',100000,'aktif');
+INSERT INTO `paket` (`id`, `nama`, `kecepatan`, `harga`, `status`) VALUES (3,'Paket 500 Mbps RKnet','500 Mbps',250000,'aktif');
 INSERT INTO `pelanggan` (`id`, `nama`, `email`, `hp`, `alamat`, `paket_id`, `status`, `tgl_bergabung`, `kata_sandi`) VALUES ('STL-2024-008812','Dwi Anjasmoro','dwi.anjasmoro@gmail.com','0811-7891-2233','Jl. Mawar No.12, Roa Malaka, Tambora, Jakarta Barat',2,'aktif','12 Jan 2024','$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.');
 INSERT INTO `pelanggan` (`id`, `nama`, `email`, `hp`, `alamat`, `paket_id`, `status`, `tgl_bergabung`, `kata_sandi`) VALUES ('STL-2024-008813','Siti Rahmawati','siti.rahma@gmail.com','0812-3344-5566',NULL,1,'aktif','03 Feb 2024','$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.');
 INSERT INTO `pelanggan` (`id`, `nama`, `email`, `hp`, `alamat`, `paket_id`, `status`, `tgl_bergabung`, `kata_sandi`) VALUES ('STL-2024-008814','Budi Hartono','budi.hartono@gmail.com','0813-7788-9900',NULL,3,'aktif','21 Mar 2024','$2y$10$Awm/jmel7m4UOz5lcz1Rme8jEn5XAaEnxMsQSoHBqf0z.XtUMGL6.');
@@ -37,7 +37,7 @@ INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) V
 INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) VALUES (3,'Pengingat jatuh tempo tagihan','Tagihan Juni jatuh tempo 15 Jun. Mohon segera lakukan pembayaran.','Pelanggan aktif','14 Jun 2026','terkirim');
 INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) VALUES (4,'Selamat datang pelanggan baru','Draf sambutan untuk pelanggan yang baru bergabung.','Pelanggan baru','12 Jun 2026','draft');
 INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) VALUES (5,'Survei kepuasan layanan Q2','Draf undangan mengisi survei kepuasan kuartal 2.','Semua pelanggan','10 Jun 2026','draft');
-INSERT INTO `pengaturan` (`id`, `nama_situs`, `email`, `telepon`, `alamat`) VALUES (1,'Starlite Indonesia','cs@starlite.id','0804-1-555-666','Jl. Fiber Optik No. 1, Jakarta Selatan');
-INSERT INTO `admin` (`id`, `nama`, `email`, `peran`, `kata_sandi`) VALUES (1,'Rangga Administrator','admin@starlite.id','Super Admin','$2y$10$odx5PyJMlbSxSQ06BpYOjOfWEkBKV1h9NDLAQeCLS9qQftVHE5UtK');
+INSERT INTO `pengaturan` (`id`, `nama_situs`, `email`, `telepon`, `alamat`) VALUES (1,'RKnet Indonesia','cs@rknet.id','0804-1-555-666','Jl. Fiber Optik No. 1, Jakarta Selatan');
+INSERT INTO `admin` (`id`, `nama`, `email`, `peran`, `kata_sandi`) VALUES (1,'Rangga Administrator','admin@rknet.id','Super Admin','$2y$10$odx5PyJMlbSxSQ06BpYOjOfWEkBKV1h9NDLAQeCLS9qQftVHE5UtK');
 
 SET FOREIGN_KEY_CHECKS=1;

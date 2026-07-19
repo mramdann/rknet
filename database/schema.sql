@@ -1,6 +1,6 @@
--- schema.sql — struktur tabel dbstarlite (Bahasa Indonesia). Jalankan sebelum seed.sql.
-CREATE DATABASE IF NOT EXISTS dbstarlite CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE dbstarlite;
+-- schema.sql — struktur tabel dbrknet (Bahasa Indonesia). Jalankan sebelum seed.sql.
+CREATE DATABASE IF NOT EXISTS dbrknet CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE dbrknet;
 
 DROP TABLE IF EXISTS tagihan;
 DROP TABLE IF EXISTS pelanggan;
