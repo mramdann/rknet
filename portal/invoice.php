@@ -32,9 +32,9 @@ $ppn     = $total - $dpp;                 // nilai PPN 11%
     <!-- Kepala kuitansi -->
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 pb-3 border-bottom">
       <div class="d-flex align-items-center gap-2">
-        <img src="../assets/img/logo-starlite.webp" alt="RKnet" height="32">
+        <img src="../assets/img/rknet.jpeg" alt="RKnet" height="32">
         <span class="brand-divider" style="display:inline-block;width:1px;height:24px;background:rgba(6,37,110,.2)"></span>
-        <img src="../assets/img/logo-weave.webp" alt="Weave" height="24">
+        <img src="../assets/img/rknet2.jpeg" alt="RWS Solution" height="24">
       </div>
       <div class="text-end">
         <h5 class="fw-800 text-rk mb-1">INVOICE</h5>

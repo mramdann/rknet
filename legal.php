@@ -46,9 +46,9 @@ $dokumen = $dokumenTersedia[$dok];
   <nav class="navbar bg-white shadow-sm sticky-top py-3">
     <div class="container">
       <a href="index.php" class="navbar-brand d-flex align-items-center gap-2">
-        <img src="assets/img/logo-starlite.webp" alt="RKnet" height="32">
+        <img src="assets/img/rknet.jpeg" alt="RKnet" height="32">
         <span class="brand-divider" style="background:rgba(6,37,110,.25)"></span>
-        <img src="assets/img/logo-weave.webp" alt="Weave" height="26">
+        <img src="assets/img/rknet2.jpeg" alt="RWS Solution" height="26">
       </a>
       <a href="index.php" class="btn btn-light"><i class="bi bi-arrow-left me-1"></i>Kembali ke Beranda</a>
     </div>

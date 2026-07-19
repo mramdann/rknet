@@ -25,9 +25,9 @@ $judulHalaman = 'Login';
     <div class="auth-kartu kartu">
       <div class="text-center mb-4">
         <div class="d-inline-flex align-items-center gap-2 mb-3">
-          <img src="../assets/img/logo-starlite.webp" alt="RKnet" height="34">
+          <img src="../assets/img/rknet.jpeg" alt="RKnet" height="34">
           <span class="auth-divider"></span>
-          <img src="../assets/img/logo-weave.webp" alt="Weave" height="28">
+          <img src="../assets/img/rknet2.jpeg" alt="RWS Solution" height="28">
         </div>
         <h4 class="fw-700 mb-1">Masuk ke Akun Anda</h4>
         <p class="text-muted small mb-0">Portal Pelanggan RKnet Indonesia</p>

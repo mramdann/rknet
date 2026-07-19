@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-5">
-        <img src="assets/img/logo-starlite.webp" alt="RKnet" height="36" class="mb-3 footer-logo">
+        <img src="assets/img/rknet.jpeg" alt="RKnet" height="36" class="mb-3 footer-logo">
         <p class="text-white-50 mb-1"><?= htmlspecialchars($site['company']) ?></p>
       </div>
       <div class="col-lg-4">

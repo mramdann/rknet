@@ -12,9 +12,9 @@ $menuPortal = [
 ?>
 <aside class="portal-sidebar" id="portalSidebar">
   <div class="portal-brand">
-    <img src="../assets/img/logo-starlite.webp" alt="RKnet">
+    <img src="../assets/img/rknet.jpeg" alt="RKnet">
     <span class="brand-divider"></span>
-    <img src="../assets/img/logo-weave.webp" alt="Weave" style="height:24px">
+    <img src="../assets/img/rknet2.jpeg" alt="RWS Solution" style="height:24px">
   </div>
   <ul class="portal-nav">
     <?php foreach ($menuPortal as $kunci => $menu): ?>
