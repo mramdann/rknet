@@ -14,7 +14,7 @@ if ($status === 'terkirim' || $status === 'draft') {
 }
 $sqlBase  = "SELECT id, judul, isi, target, tanggal, status FROM notifikasi $where ORDER BY id";
 $sqlCount = "SELECT COUNT(*) FROM notifikasi $where";
-$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, $params);
+$hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
 $paramFilter = $status !== '' ? ['status' => $status] : [];
 ?>
 <!DOCTYPE html>

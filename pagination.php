@@ -1,5 +1,7 @@
 <?php
 // pagination.php — helper paginasi sisi-server (LIMIT/OFFSET + nav).
+require_once __DIR__ . '/db.php';   // kueri(), kueriNilai()
+
 const PER_HALAMAN = 5;
 
 function halamanSaatIni(): int
@@ -8,20 +10,14 @@ function halamanSaatIni(): int
     return $hal < 1 ? 1 : $hal;
 }
 
-function ambilPaginasi(PDO $pdo, string $sqlBase, string $sqlCount, array $params, int $perHalaman = PER_HALAMAN): array
+function ambilPaginasi(string $sqlBase, string $sqlCount, array $params, int $perHalaman = PER_HALAMAN): array
 {
-    $stmtCount = $pdo->prepare($sqlCount);
-    $stmtCount->execute($params);
-    $total = (int) $stmtCount->fetchColumn();
-
+    $total = (int) kueriNilai($sqlCount, $params);
     $totalHal = max(1, (int) ceil($total / $perHalaman));
     $hal = min(halamanSaatIni(), $totalHal);
     $offset = ($hal - 1) * $perHalaman;
-
-    $stmt = $pdo->prepare($sqlBase . " LIMIT $perHalaman OFFSET $offset");
-    $stmt->execute($params);
-
-    return ['baris' => $stmt->fetchAll(), 'hal' => $hal, 'totalHal' => $totalHal, 'total' => $total];
+    $baris = kueri($sqlBase . " LIMIT $perHalaman OFFSET $offset", $params);
+    return ['baris' => $baris, 'hal' => $hal, 'totalHal' => $totalHal, 'total' => $total];
 }
 
 function tampilPaginasi(int $hal, int $totalHal, array $queryTambahan = []): void

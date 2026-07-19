@@ -23,7 +23,7 @@ if (in_array($status, $statusValid, true)) {
 $where = $klausa ? ('WHERE ' . implode(' AND ', $klausa)) : '';
 $sqlBase  = "SELECT id, nama, hp, area, tanggal, status FROM prospek $where ORDER BY id";
 $sqlCount = "SELECT COUNT(*) FROM prospek $where";
-$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, $params);
+$hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
 
 // Param difilter untuk dipertahankan di link halaman
 $paramFilter = [];

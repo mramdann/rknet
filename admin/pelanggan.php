@@ -16,7 +16,7 @@ if ($cari !== '') {
 $sqlBase = "SELECT pl.id, pl.nama, pl.email, pl.hp, pl.alamat, pk.kecepatan AS paket, pl.status, pl.tgl_bergabung AS bergabung
             FROM pelanggan pl LEFT JOIN paket pk ON pk.id = pl.paket_id $where ORDER BY pl.id";
 $sqlCount = "SELECT COUNT(*) FROM pelanggan pl $where";
-$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, $params);
+$hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
 ?>
 <!DOCTYPE html>
 <html lang="id">

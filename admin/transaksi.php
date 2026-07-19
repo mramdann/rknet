@@ -19,7 +19,7 @@ $sqlBase = "SELECT t.id AS idTagihan, t.no_invoice AS noInvoice, pl.nama AS pela
             LEFT JOIN paket pk ON pk.id = t.paket_id
             $where ORDER BY t.id";
 $sqlCount = "SELECT COUNT(*) FROM tagihan t $where";
-$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, $params);
+$hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
 $paramFilter = $status !== '' ? ['status' => $status] : [];
 ?>
 <!DOCTYPE html>
