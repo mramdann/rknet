@@ -1,10 +1,10 @@
-# Dokumentasi Teknis — Starlite Indonesia
+# Dokumentasi Teknis — RKnet Indonesia
 
-Dokumentasi arsitektur, basis data (ERD), dan alur (flow) aplikasi web Starlite Indonesia.
+Dokumentasi arsitektur, basis data (ERD), dan alur (flow) aplikasi web RKnet Indonesia.
 Diagram memakai **Mermaid** (terender otomatis di GitHub/VS Code).
 
 - **Stack:** PHP native (tanpa framework/Composer) · MySQL/MariaDB · Bootstrap 5.3 (CDN) · Leaflet (cek jangkauan).
-- **Server:** XAMPP — Apache **port 8282**, MySQL **port 3382**, database **`dbstarlite`**.
+- **Server:** XAMPP — Apache **port 8282**, MySQL **port 3382**, database **`dbrknet`**.
 - **Konvensi:** nama domain & komentar Bahasa Indonesia; output dinamis di-`htmlspecialchars()`.
 
 ---
@@ -16,8 +16,8 @@ Tiga area dalam satu aplikasi, berbagi gaya visual "Modern Biru":
 | Area | Akses | Otentikasi | Sumber data |
 |------|-------|-----------|-------------|
 | **Landing** (`index.php`, `cek-jangkauan.php`, `legal.php`) | Publik | — | `config.php`, `cek-jangkauan-config.php` (statis) |
-| **Portal Pelanggan** (`portal/`) | Login pelanggan | Session | DB `dbstarlite` (read) + aksi tulis |
-| **Portal Admin** (`admin/`) | Login admin | Session | DB `dbstarlite` (read) + aksi tulis (CRUD) |
+| **Portal Pelanggan** (`portal/`) | Login pelanggan | Session | DB `dbrknet` (read) + aksi tulis |
+| **Portal Admin** (`admin/`) | Login admin | Session | DB `dbrknet` (read) + aksi tulis (CRUD) |
 
 Data terkelola dibaca **read-only** dari DB di config, lalu aksi tulis (CRUD, auth, profil) lewat handler ber-CSRF dengan pola **Post-Redirect-Get**. Konten marketing landing tetap statis di `config.php`.
 
@@ -43,7 +43,7 @@ flowchart TD
     CFG --> AUTH & DB & AKSI & PAG & HLP
     H -->|aksi tulis POST| ACT["admin/aksi-*.php<br/>portal/aksi-*.php"]
     ACT --> AUTH & DB & AKSI
-    DB -->|"mysql :3382"| M[("MySQL<br/>dbstarlite")]
+    DB -->|"mysql :3382"| M[("MySQL<br/>dbrknet")]
     H -. CDN .-> CDN["Bootstrap 5 · Icons · Poppins · Leaflet"]
 ```
 
@@ -348,12 +348,12 @@ flowchart TD
 ## 11. Menjalankan & Kredensial Demo
 
 1. Jalankan **Apache (8282)** & **MySQL (3382)** dari XAMPP.
-2. Import DB: `database/schema.sql` lalu `database/seed.sql` ke `dbstarlite` (host 127.0.0.1, port 3382, user `root`, tanpa password).
+2. Import DB: `database/schema.sql` lalu `database/seed.sql` ke `dbrknet` (host 127.0.0.1, port 3382, user `root`, tanpa password).
 3. Buka `http://localhost:8282/starlite/`.
 
 | Peran | Email | Password |
 |-------|-------|----------|
-| Admin | `admin@starlite.id` | `admin123` |
+| Admin | `admin@rknet.id` | `admin123` |
 | Pelanggan | `dwi.anjasmoro@gmail.com` | `pelanggan123` |
 
 > Semua pelanggan seed memakai password `pelanggan123`.
