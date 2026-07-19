@@ -7,8 +7,7 @@ wajibLoginAdmin();
 cekCsrf();
 
 if (($_POST['aksi'] ?? '') === 'lunas') {
-    $stmt = db()->prepare("UPDATE tagihan SET status = 'lunas' WHERE id = ?");
-    $stmt->execute([(int) ($_POST['id'] ?? 0)]);
+    eksekusi("UPDATE tagihan SET status = 'lunas' WHERE id = ?", [(int) ($_POST['id'] ?? 0)]);
     setFlash('success', 'Tagihan ditandai lunas.');
 }
 header('Location: transaksi.php');

@@ -6,7 +6,6 @@ require __DIR__ . '/../aksi.php';
 wajibLoginAdmin();
 cekCsrf();
 
-$pdo  = db();
 $aksi = $_POST['aksi'] ?? '';
 
 if ($aksi === 'tambah' || $aksi === 'edit') {
@@ -19,17 +18,16 @@ if ($aksi === 'tambah' || $aksi === 'edit') {
         exit;
     }
     if ($aksi === 'tambah') {
-        $stmt = $pdo->prepare("INSERT INTO area (nama, kota, status, jumlah_pelanggan) VALUES (?, ?, ?, 0)");
-        $stmt->execute([$nama, $kota, $status]);
+        eksekusi("INSERT INTO area (nama, kota, status, jumlah_pelanggan) VALUES (?, ?, ?, 0)",
+            [$nama, $kota, $status]);
         setFlash('success', 'Area berhasil ditambahkan.');
     } else {
-        $stmt = $pdo->prepare("UPDATE area SET nama = ?, kota = ?, status = ? WHERE id = ?");
-        $stmt->execute([$nama, $kota, $status, (int) ($_POST['id'] ?? 0)]);
+        eksekusi("UPDATE area SET nama = ?, kota = ?, status = ? WHERE id = ?",
+            [$nama, $kota, $status, (int) ($_POST['id'] ?? 0)]);
         setFlash('success', 'Area berhasil diperbarui.');
     }
 } elseif ($aksi === 'hapus') {
-    $stmt = $pdo->prepare("DELETE FROM area WHERE id = ?");
-    $stmt->execute([(int) ($_POST['id'] ?? 0)]);
+    eksekusi("DELETE FROM area WHERE id = ?", [(int) ($_POST['id'] ?? 0)]);
     setFlash('success', 'Area berhasil dihapus.');
 }
 header('Location: area.php');

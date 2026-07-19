@@ -6,7 +6,6 @@ require __DIR__ . '/../aksi.php';
 wajibLoginAdmin();
 cekCsrf();
 
-$pdo  = db();
 $aksi = $_POST['aksi'] ?? '';
 $id   = $_POST['id'] ?? '';
 
@@ -20,12 +19,11 @@ if ($aksi === 'edit') {
         header('Location: pelanggan.php');
         exit;
     }
-    $stmt = $pdo->prepare("UPDATE pelanggan SET nama = ?, email = ?, hp = ?, alamat = ? WHERE id = ?");
-    $stmt->execute([$nama, $email, $hp, $alamat, $id]);
+    eksekusi("UPDATE pelanggan SET nama = ?, email = ?, hp = ?, alamat = ? WHERE id = ?",
+        [$nama, $email, $hp, $alamat, $id]);
     setFlash('success', 'Data pelanggan berhasil diperbarui.');
 } elseif ($aksi === 'toggle') {
-    $stmt = $pdo->prepare("UPDATE pelanggan SET status = IF(status = 'aktif', 'nonaktif', 'aktif') WHERE id = ?");
-    $stmt->execute([$id]);
+    eksekusi("UPDATE pelanggan SET status = IF(status = 'aktif', 'nonaktif', 'aktif') WHERE id = ?", [$id]);
     setFlash('success', 'Status pelanggan berhasil diubah.');
 }
 header('Location: pelanggan.php');

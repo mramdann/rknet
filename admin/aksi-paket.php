@@ -6,7 +6,6 @@ require __DIR__ . '/../aksi.php';
 wajibLoginAdmin();
 cekCsrf();
 
-$pdo  = db();
 $aksi = $_POST['aksi'] ?? '';
 
 if ($aksi === 'tambah' || $aksi === 'edit') {
@@ -20,20 +19,19 @@ if ($aksi === 'tambah' || $aksi === 'edit') {
         exit;
     }
     if ($aksi === 'tambah') {
-        $stmt = $pdo->prepare("INSERT INTO paket (nama, kecepatan, harga, status) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$nama, $kecepatan, (int) $harga, $status]);
+        eksekusi("INSERT INTO paket (nama, kecepatan, harga, status) VALUES (?, ?, ?, ?)",
+            [$nama, $kecepatan, (int) $harga, $status]);
         setFlash('success', 'Paket berhasil ditambahkan.');
     } else {
-        $stmt = $pdo->prepare("UPDATE paket SET nama = ?, kecepatan = ?, harga = ?, status = ? WHERE id = ?");
-        $stmt->execute([$nama, $kecepatan, (int) $harga, $status, (int) ($_POST['id'] ?? 0)]);
+        eksekusi("UPDATE paket SET nama = ?, kecepatan = ?, harga = ?, status = ? WHERE id = ?",
+            [$nama, $kecepatan, (int) $harga, $status, (int) ($_POST['id'] ?? 0)]);
         setFlash('success', 'Paket berhasil diperbarui.');
     }
 } elseif ($aksi === 'hapus') {
     try {
-        $stmt = $pdo->prepare("DELETE FROM paket WHERE id = ?");
-        $stmt->execute([(int) ($_POST['id'] ?? 0)]);
+        eksekusi("DELETE FROM paket WHERE id = ?", [(int) ($_POST['id'] ?? 0)]);
         setFlash('success', 'Paket berhasil dihapus.');
-    } catch (PDOException $e) {
+    } catch (mysqli_sql_exception $e) {
         setFlash('danger', 'Paket tidak bisa dihapus, masih dipakai pelanggan atau tagihan.');
     }
 }

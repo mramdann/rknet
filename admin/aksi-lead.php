@@ -7,8 +7,7 @@ wajibLoginAdmin();
 cekCsrf();
 
 if (($_POST['aksi'] ?? '') === 'dihubungi') {
-    $stmt = db()->prepare("UPDATE prospek SET status = 'dihubungi' WHERE id = ?");
-    $stmt->execute([$_POST['id'] ?? '']);
+    eksekusi("UPDATE prospek SET status = 'dihubungi' WHERE id = ?", [$_POST['id'] ?? '']);
     setFlash('success', 'Lead ditandai sudah dihubungi.');
 }
 header('Location: lead.php');
