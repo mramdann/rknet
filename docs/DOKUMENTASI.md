@@ -33,7 +33,7 @@ flowchart TD
     subgraph Lapisan_Bersama["Lapisan bersama (require)"]
       CFG["*-config.php<br/>(rangkai data + guard)"]
       AUTH["auth.php<br/>(sesi, login, guard)"]
-      DB["db.php<br/>(PDO singleton)"]
+      DB["db.php<br/>(mysqli + helper)"]
       AKSI["aksi.php<br/>(CSRF + flash)"]
       PAG["pagination.php<br/>(LIMIT/OFFSET + nav)"]
       HLP["helpers.php<br/>(formatRupiah, badgeStatus)"]
@@ -70,7 +70,7 @@ starlite/
 ├── config.php                 # konten landing (statis)
 ├── cek-jangkauan-config.php   # data area tercakup (statis)
 │
-├── db.php                     # koneksi PDO -> dbstarlite
+├── db.php                     # koneksi mysqli + helper (kueri/kueriSatu/kueriNilai/eksekusi); konstanta DB_*
 ├── auth.php                   # sesi, login/logout, guard
 ├── aksi.php                   # CSRF (tokenCsrf/cekCsrf) + flash (setFlash/tampilFlash)
 ├── pagination.php             # halamanSaatIni/ambilPaginasi/tampilPaginasi
@@ -212,7 +212,7 @@ Setup: `mysql -h 127.0.0.1 -P 3382 -u root < database/schema.sql` lalu `< databa
 sequenceDiagram
     actor U as Pengguna
     participant L as login.php
-    participant DB as db.php (PDO)
+    participant DB as db.php (mysqli)
     participant S as Session
     participant P as Halaman ber-data
 
@@ -260,7 +260,7 @@ sequenceDiagram
         H-->>U: HTTP 403 "CSRF token tidak valid."
     else valid
         H->>DB: prepared statement (INSERT/UPDATE/DELETE)
-        DB-->>H: ok / PDOException (mis. FK)
+        DB-->>H: ok / mysqli_sql_exception (mis. FK)
         H->>S: setFlash('success'|'danger', pesan)
         H-->>U: 302 redirect ke halaman daftar
         U->>F: GET halaman daftar
@@ -310,7 +310,7 @@ flowchart LR
 - **Otentikasi:** `password_verify()` terhadap hash bcrypt (`password_hash`) di DB. Ganti password mem-verifikasi password lama.
 - **Proteksi halaman:** guard `wajibLogin*()` via rantai config; tanpa sesi → redirect login.
 - **CSRF:** setiap form tulis menyertakan token sesi (`tokenCsrf()`), diverifikasi `cekCsrf()` dengan `hash_equals`; gagal → HTTP 403.
-- **SQL Injection:** semua query parameter pakai **prepared statement** (PDO); `LIMIT/OFFSET` di-cast integer.
+- **SQL Injection:** semua query parameter pakai **prepared statement** (mysqli, via helper `kueri`/`kueriSatu`/`kueriNilai`/`eksekusi` dengan `bind_param` otomatis); `LIMIT/OFFSET` di-cast integer.
 - **XSS:** output dinamis di-`htmlspecialchars()`.
 - **PRG:** redirect setelah POST mencegah submit ganda; feedback via flash sekali tampil.
 - **Error DB:** `db.php` menangkap kegagalan koneksi & query (tabel belum ada) → kartu pesan rapi tanpa membocorkan stack trace.
