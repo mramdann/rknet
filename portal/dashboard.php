@@ -28,7 +28,7 @@ $badgePaket = badgeStatus($paketAktif['status']);
     <div class="col-lg-6">
       <div class="kartu kartu-pad h-100">
         <div class="d-flex align-items-center justify-content-between mb-3">
-          <h6 class="fw-700 mb-0"><i class="bi bi-person-circle text-st me-2"></i>Akun Anda</h6>
+          <h6 class="fw-700 mb-0"><i class="bi bi-person-circle text-rk me-2"></i>Akun Anda</h6>
           <span class="badge <?= $badgePaket['kelas'] ?>"><?= $badgePaket['label'] ?></span>
         </div>
         <ul class="list-unstyled mb-0 info-akun">
@@ -44,7 +44,7 @@ $badgePaket = badgeStatus($paketAktif['status']);
     <!-- Kolom kanan: Paket Anda -->
     <div class="col-lg-6">
       <div class="kartu kartu-pad h-100 d-flex flex-column">
-        <h6 class="fw-700 mb-3"><i class="bi bi-wifi text-st me-2"></i>Paket Anda</h6>
+        <h6 class="fw-700 mb-3"><i class="bi bi-wifi text-rk me-2"></i>Paket Anda</h6>
         <div class="paket-aktif-box mb-3">
           <div class="d-flex justify-content-between align-items-start">
             <div>
@@ -52,7 +52,7 @@ $badgePaket = badgeStatus($paketAktif['status']);
               <div class="text-muted small">Kecepatan hingga <?= htmlspecialchars($paketAktif['kecepatan']) ?></div>
             </div>
             <div class="text-end">
-              <div class="fw-800 text-st fs-5"><?= formatRupiah($paketAktif['harga']) ?></div>
+              <div class="fw-800 text-rk fs-5"><?= formatRupiah($paketAktif['harga']) ?></div>
               <div class="text-muted" style="font-size:.75rem">per bulan</div>
             </div>
           </div>
@@ -62,7 +62,7 @@ $badgePaket = badgeStatus($paketAktif['status']);
           </div>
         </div>
         <div class="mt-auto d-flex gap-2">
-          <a href="paket.php" class="btn btn-st flex-fill">Perpanjang Paket</a>
+          <a href="paket.php" class="btn btn-rk flex-fill">Perpanjang Paket</a>
           <a href="paket.php" class="btn btn-outline-primary flex-fill">Ubah Paket</a>
         </div>
       </div>
@@ -72,8 +72,8 @@ $badgePaket = badgeStatus($paketAktif['status']);
   <!-- Ringkasan transaksi terakhir -->
   <div class="kartu kartu-pad mt-4">
     <div class="d-flex align-items-center justify-content-between mb-3">
-      <h6 class="fw-700 mb-0"><i class="bi bi-clock-history text-st me-2"></i>Transaksi Terakhir</h6>
-      <a href="transaksi.php" class="small text-st text-decoration-none fw-500">Lihat semua <i class="bi bi-arrow-right"></i></a>
+      <h6 class="fw-700 mb-0"><i class="bi bi-clock-history text-rk me-2"></i>Transaksi Terakhir</h6>
+      <a href="transaksi.php" class="small text-rk text-decoration-none fw-500">Lihat semua <i class="bi bi-arrow-right"></i></a>
     </div>
     <div class="table-responsive">
       <table class="table align-middle mb-0 tabel-portal">

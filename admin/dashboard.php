@@ -42,8 +42,8 @@ $kartuStatistik = [
     <div class="col-xl-7">
       <div class="kartu kartu-pad h-100">
         <div class="d-flex align-items-center justify-content-between mb-3">
-          <h6 class="fw-700 mb-0"><i class="bi bi-people text-st me-2"></i>Pelanggan Terbaru</h6>
-          <a href="pelanggan.php" class="small text-st text-decoration-none fw-500">Lihat semua <i class="bi bi-arrow-right"></i></a>
+          <h6 class="fw-700 mb-0"><i class="bi bi-people text-rk me-2"></i>Pelanggan Terbaru</h6>
+          <a href="pelanggan.php" class="small text-rk text-decoration-none fw-500">Lihat semua <i class="bi bi-arrow-right"></i></a>
         </div>
         <div class="table-responsive">
           <table class="table align-middle mb-0 tabel-portal">
@@ -69,8 +69,8 @@ $kartuStatistik = [
     <div class="col-xl-5">
       <div class="kartu kartu-pad h-100">
         <div class="d-flex align-items-center justify-content-between mb-3">
-          <h6 class="fw-700 mb-0"><i class="bi bi-receipt-cutoff text-st me-2"></i>Tagihan Terbaru</h6>
-          <a href="transaksi.php" class="small text-st text-decoration-none fw-500">Lihat semua <i class="bi bi-arrow-right"></i></a>
+          <h6 class="fw-700 mb-0"><i class="bi bi-receipt-cutoff text-rk me-2"></i>Tagihan Terbaru</h6>
+          <a href="transaksi.php" class="small text-rk text-decoration-none fw-500">Lihat semua <i class="bi bi-arrow-right"></i></a>
         </div>
         <div class="table-responsive">
           <table class="table align-middle mb-0 tabel-portal">

@@ -29,11 +29,11 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
     </div>
     <div class="d-flex flex-wrap gap-2">
       <div class="btn-group" role="group">
-        <a href="?status=" class="btn btn-sm <?= $status === '' ? 'btn-st' : 'btn-outline-primary' ?>">Semua</a>
-        <a href="?status=terkirim" class="btn btn-sm <?= $status === 'terkirim' ? 'btn-st' : 'btn-outline-primary' ?>">Terkirim</a>
-        <a href="?status=draft" class="btn btn-sm <?= $status === 'draft' ? 'btn-st' : 'btn-outline-primary' ?>">Draft</a>
+        <a href="?status=" class="btn btn-sm <?= $status === '' ? 'btn-rk' : 'btn-outline-primary' ?>">Semua</a>
+        <a href="?status=terkirim" class="btn btn-sm <?= $status === 'terkirim' ? 'btn-rk' : 'btn-outline-primary' ?>">Terkirim</a>
+        <a href="?status=draft" class="btn btn-sm <?= $status === 'draft' ? 'btn-rk' : 'btn-outline-primary' ?>">Draft</a>
       </div>
-      <button class="btn btn-st" type="button" data-bs-toggle="modal" data-bs-target="#modalTulisNotif">
+      <button class="btn btn-rk" type="button" data-bs-toggle="modal" data-bs-target="#modalTulisNotif">
         <i class="bi bi-plus-lg me-1"></i>Tulis Notifikasi</button>
     </div>
   </div>
@@ -77,7 +77,7 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
   <div class="modal fade" id="modalTulisNotif" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
-        <div class="modal-header st-modal-head text-white border-0">
+        <div class="modal-header rk-modal-head text-white border-0">
           <h5 class="modal-title fw-700 mb-0">Tulis Notifikasi</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
@@ -102,7 +102,7 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
               <textarea name="isi" class="form-control" rows="3" placeholder="Tulis isi notifikasi..." required></textarea>
             </div>
             <div class="col-12 d-grid mt-2">
-              <button type="submit" class="btn btn-st btn-lg">Kirim Notifikasi</button>
+              <button type="submit" class="btn btn-rk btn-lg">Kirim Notifikasi</button>
             </div>
           </form>
         </div>

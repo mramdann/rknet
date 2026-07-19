@@ -18,7 +18,7 @@ $menuAktif = 'pengaturan';
     <!-- Profil admin -->
     <div class="col-lg-7">
       <div class="kartu kartu-pad h-100">
-        <h6 class="fw-700 mb-3"><i class="bi bi-person-vcard text-st me-2"></i>Profil Admin</h6>
+        <h6 class="fw-700 mb-3"><i class="bi bi-person-vcard text-rk me-2"></i>Profil Admin</h6>
         <form action="aksi-pengaturan.php" method="post" class="row g-3">
           <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
           <input type="hidden" name="aksi" value="profil">
@@ -35,7 +35,7 @@ $menuAktif = 'pengaturan';
             <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($admin['email']) ?>">
           </div>
           <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-st"><i class="bi bi-check2 me-1"></i>Simpan Profil</button>
+            <button type="submit" class="btn btn-rk"><i class="bi bi-check2 me-1"></i>Simpan Profil</button>
           </div>
         </form>
       </div>
@@ -44,7 +44,7 @@ $menuAktif = 'pengaturan';
     <!-- Ubah password -->
     <div class="col-lg-5">
       <div class="kartu kartu-pad h-100">
-        <h6 class="fw-700 mb-3"><i class="bi bi-shield-lock text-st me-2"></i>Ubah Password</h6>
+        <h6 class="fw-700 mb-3"><i class="bi bi-shield-lock text-rk me-2"></i>Ubah Password</h6>
         <form action="aksi-pengaturan.php" method="post" class="row g-3">
           <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
           <input type="hidden" name="aksi" value="password">
@@ -70,7 +70,7 @@ $menuAktif = 'pengaturan';
     <!-- Info situs -->
     <div class="col-12">
       <div class="kartu kartu-pad">
-        <h6 class="fw-700 mb-3"><i class="bi bi-globe text-st me-2"></i>Informasi Situs</h6>
+        <h6 class="fw-700 mb-3"><i class="bi bi-globe text-rk me-2"></i>Informasi Situs</h6>
         <form action="aksi-pengaturan.php" method="post" class="row g-3">
           <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
           <input type="hidden" name="aksi" value="situs">
@@ -91,7 +91,7 @@ $menuAktif = 'pengaturan';
             <input type="text" name="alamat" class="form-control" value="<?= htmlspecialchars($pengaturan['alamat']) ?>">
           </div>
           <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-st"><i class="bi bi-check2 me-1"></i>Simpan Pengaturan</button>
+            <button type="submit" class="btn btn-rk"><i class="bi bi-check2 me-1"></i>Simpan Pengaturan</button>
           </div>
         </form>
       </div>

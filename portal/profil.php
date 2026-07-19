@@ -39,7 +39,7 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
     <!-- Informasi Akun (editable) -->
     <div class="col-lg-7">
       <div class="kartu kartu-pad h-100">
-        <h6 class="fw-700 mb-3"><i class="bi bi-person-vcard text-st me-2"></i>Informasi Akun</h6>
+        <h6 class="fw-700 mb-3"><i class="bi bi-person-vcard text-rk me-2"></i>Informasi Akun</h6>
         <!-- Form UI only: kembali ke halaman ini setelah "simpan" -->
         <form action="aksi-profil.php" method="post" class="row g-3">
           <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
@@ -65,7 +65,7 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
             <textarea name="alamat" class="form-control" rows="2"><?= htmlspecialchars($pelanggan['alamat']) ?></textarea>
           </div>
           <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn btn-st"><i class="bi bi-check2 me-1"></i>Simpan Perubahan</button>
+            <button type="submit" class="btn btn-rk"><i class="bi bi-check2 me-1"></i>Simpan Perubahan</button>
           </div>
         </form>
       </div>
@@ -74,7 +74,7 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
     <!-- Keamanan: ganti password -->
     <div class="col-lg-5">
       <div class="kartu kartu-pad h-100">
-        <h6 class="fw-700 mb-3"><i class="bi bi-shield-lock text-st me-2"></i>Keamanan</h6>
+        <h6 class="fw-700 mb-3"><i class="bi bi-shield-lock text-rk me-2"></i>Keamanan</h6>
         <form action="aksi-profil.php" method="post" class="row g-3">
           <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
           <input type="hidden" name="aksi" value="password">

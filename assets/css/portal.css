@@ -3,11 +3,11 @@
 body.portal{background:#f4f6fb;font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 
 /* Halaman login (auth) */
-body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)}
+body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)}
 .auth-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
 .auth-kartu{width:100%;max-width:420px;padding:2.5rem 2rem}
 .auth-divider{display:inline-block;width:1px;height:26px;background:rgba(6,37,110,.2)}
-.auth-form .input-group-text{border-right:0;color:var(--st-blue)}
+.auth-form .input-group-text{border-right:0;color:var(--rk-blue)}
 .auth-form .form-control{border-left:0}
 
 /* Layout dasar: sidebar tetap di kiri, konten di kanan */
@@ -28,8 +28,8 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
   border-radius:.75rem;color:#5b6478;text-decoration:none;font-weight:500;transition:.18s
 }
 .portal-nav a i{font-size:1.15rem}
-.portal-nav a:hover{background:var(--st-blue-soft);color:var(--st-blue)}
-.portal-nav a.aktif{background:var(--st-blue);color:#fff}
+.portal-nav a:hover{background:var(--rk-blue-soft);color:var(--rk-blue)}
+.portal-nav a.aktif{background:var(--rk-blue);color:#fff}
 .portal-nav-label{
   list-style:none;padding:.5rem 1rem .25rem;margin-top:.5rem;
   font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#aab1c2
@@ -49,29 +49,29 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
   width:42px;height:42px;border-radius:50%;border:1px solid #eaecf3;background:#fff;
   display:flex;align-items:center;justify-content:center;color:#5b6478;font-size:1.15rem;transition:.18s;position:relative
 }
-.topbar-ico:hover{background:var(--st-blue-soft);color:var(--st-blue)}
+.topbar-ico:hover{background:var(--rk-blue-soft);color:var(--rk-blue)}
 .topbar-ico .titik{position:absolute;top:9px;right:11px;width:8px;height:8px;border-radius:50%;background:#e0245e;border:2px solid #fff}
 .topbar-user{display:flex;align-items:center;gap:.6rem;padding:.25rem .35rem .25rem .85rem}
-.topbar-user .ava{width:38px;height:38px;border-radius:50%;background:var(--st-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
+.topbar-user .ava{width:38px;height:38px;border-radius:50%;background:var(--rk-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600}
 .portal-content{padding:1.75rem 1.5rem;flex:1}
 
 /* Panel notifikasi */
-.notif-ico{width:38px;height:38px;border-radius:50%;background:var(--st-blue-soft);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.notif-ico{width:38px;height:38px;border-radius:50%;background:var(--rk-blue-soft);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
 .notif-item:last-child{border-bottom:0 !important}
 #panelNotif .nav-tabs .nav-link{font-size:.85rem;font-weight:500;color:#5b6478;border:0}
-#panelNotif .nav-tabs .nav-link.active{color:var(--st-blue);border-bottom:2px solid var(--st-blue)}
+#panelNotif .nav-tabs .nav-link.active{color:var(--rk-blue);border-bottom:2px solid var(--rk-blue)}
 
 /* Kartu umum portal */
 .kartu{background:#fff;border:1px solid #eef0f6;border-radius:1rem;box-shadow:0 6px 24px rgba(6,37,110,.05)}
 .kartu-pad{padding:1.5rem}
 
 /* Dashboard */
-.dashboard-banner{background:linear-gradient(120deg,var(--st-blue),var(--st-blue-dark));border:0;color:#fff}
+.dashboard-banner{background:linear-gradient(120deg,var(--rk-blue),var(--rk-blue-dark));border:0;color:#fff}
 .info-akun li{display:flex;justify-content:space-between;gap:1rem;padding:.6rem 0;border-bottom:1px dashed #eef0f6}
 .info-akun li:last-child{border-bottom:0}
 .info-akun li span{color:#8a93a6;font-size:.85rem}
 .info-akun li strong{font-weight:600;font-size:.9rem;max-width:60%}
-.paket-aktif-box{background:var(--st-blue-soft);border-radius:.9rem;padding:1.25rem}
+.paket-aktif-box{background:var(--rk-blue-soft);border-radius:.9rem;padding:1.25rem}
 .tabel-portal thead th{font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;color:#8a93a6;font-weight:600;border-bottom:1px solid #eef0f6}
 .tabel-portal td{border-bottom:1px solid #f4f6fb;font-size:.9rem}
 
@@ -81,15 +81,15 @@ body.portal-auth{background:linear-gradient(135deg,var(--st-blue-soft),#fff 55%)
 .trx-ico{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
 
 /* Profil */
-.profil-header{background:linear-gradient(120deg,#fff,var(--st-blue-soft))}
-.profil-ava{width:64px;height:64px;border-radius:50%;background:var(--st-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;flex-shrink:0}
+.profil-header{background:linear-gradient(120deg,#fff,var(--rk-blue-soft))}
+.profil-ava{width:64px;height:64px;border-radius:50%;background:var(--rk-blue);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;flex-shrink:0}
 
 /* Pilih paket */
 .paket-pilih{cursor:pointer;border:2px solid #eef0f6;transition:.18s}
-.paket-pilih:hover{border-color:var(--st-blue);transform:translateY(-3px)}
+.paket-pilih:hover{border-color:var(--rk-blue);transform:translateY(-3px)}
 .paket-pilih .paket-cek{color:#dfe3ec;font-size:1.3rem;transition:.18s}
-.paket-pilih.terpilih{border-color:var(--st-blue);box-shadow:0 12px 32px rgba(11,94,215,.15)}
-.paket-pilih.terpilih .paket-cek{color:var(--st-blue)}
+.paket-pilih.terpilih{border-color:var(--rk-blue);box-shadow:0 12px 32px rgba(11,94,215,.15)}
+.paket-pilih.terpilih .paket-cek{color:var(--rk-blue)}
 
 /* Invoice / kuitansi */
 .invoice-sheet{max-width:760px}

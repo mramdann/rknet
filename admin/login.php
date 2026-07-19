@@ -51,12 +51,12 @@ $judulHalaman = 'Login Admin';
             <input type="password" name="kata_sandi" class="form-control" placeholder="Masukkan password" required>
           </div>
         </div>
-        <button type="submit" class="btn btn-st w-100 btn-lg">Masuk</button>
+        <button type="submit" class="btn btn-rk w-100 btn-lg">Masuk</button>
       </form>
 
       <p class="text-center small text-muted mt-3 mb-0">Demo: <code>admin@starlite.id</code> / <code>admin123</code></p>
       <p class="text-center small text-muted mt-2 mb-0">
-        <a href="../portal/login.php" class="text-st text-decoration-none">&larr; Login Pelanggan</a>
+        <a href="../portal/login.php" class="text-rk text-decoration-none">&larr; Login Pelanggan</a>
       </p>
     </div>
     <p class="text-center small text-muted mt-3">PT Integrasi Jaringan Ekosistem</p>

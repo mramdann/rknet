@@ -2,7 +2,7 @@
 <div class="modal fade" id="modalLangganan" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-0 rounded-4 overflow-hidden">
-      <div class="modal-header st-modal-head text-white border-0">
+      <div class="modal-header rk-modal-head text-white border-0">
         <div>
           <h5 class="modal-title fw-700 mb-0">Berlangganan RKnet</h5>
           <small class="opacity-75">Isi data Anda, tim kami akan menghubungi Anda.</small>
@@ -36,7 +36,7 @@
             </select>
           </div>
           <div class="col-12 d-grid mt-2">
-            <button type="submit" class="btn btn-st btn-lg">Kirim Permintaan</button>
+            <button type="submit" class="btn btn-rk btn-lg">Kirim Permintaan</button>
           </div>
         </form>
         <div id="suksesLangganan" class="alert alert-success text-center mb-0 mt-3 d-none">

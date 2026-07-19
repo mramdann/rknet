@@ -69,7 +69,7 @@ $dokumen = $dokumenTersedia[$dok];
         <div class="d-flex flex-wrap gap-2 mb-4">
           <?php foreach ($dokumenTersedia as $kunci => $d): ?>
             <a href="legal.php?dok=<?= $kunci ?>"
-               class="btn btn-sm <?= $kunci === $dok ? 'btn-st' : 'btn-outline-primary' ?>">
+               class="btn btn-sm <?= $kunci === $dok ? 'btn-rk' : 'btn-outline-primary' ?>">
               <?= htmlspecialchars($d['judul']) ?>
             </a>
           <?php endforeach; ?>
@@ -77,7 +77,7 @@ $dokumen = $dokumenTersedia[$dok];
         <!-- Isi dokumen -->
         <div class="kartu-form p-4 p-md-5">
           <?php foreach ($dokumen['isi'] as $i => $paragraf): ?>
-            <h6 class="fw-700 text-st mb-2"><?= $i + 1 ?>. Ketentuan</h6>
+            <h6 class="fw-700 text-rk mb-2"><?= $i + 1 ?>. Ketentuan</h6>
             <p class="text-muted"><?= htmlspecialchars($paragraf) ?></p>
           <?php endforeach; ?>
           <p class="text-muted small mb-0 mt-4 pt-3 border-top">

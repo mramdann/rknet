@@ -8,6 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Reuse shell portal pelanggan -->
-    <link href="../assets/css/style.css?v=4" rel="stylesheet">
-    <link href="../assets/css/portal.css?v=5" rel="stylesheet">
+    <link href="../assets/css/style.css?v=6" rel="stylesheet">
+    <link href="../assets/css/portal.css?v=6" rel="stylesheet">
 </head>

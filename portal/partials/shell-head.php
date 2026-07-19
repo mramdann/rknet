@@ -12,5 +12,5 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Style: reuse variabel & tombol dari landing, lalu style khusus portal -->
     <link href="../assets/css/style.css" rel="stylesheet">
-    <link href="../assets/css/portal.css?v=5" rel="stylesheet">
+    <link href="../assets/css/portal.css?v=6" rel="stylesheet">
 </head>

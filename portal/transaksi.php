@@ -46,7 +46,7 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, [$idPelanggan]);
           </div>
           <div class="col-md-2 col-6">
             <div class="text-muted" style="font-size:.75rem">Nominal</div>
-            <div class="fw-700 text-st"><?= formatRupiah($t['harga']) ?></div>
+            <div class="fw-700 text-rk"><?= formatRupiah($t['harga']) ?></div>
           </div>
           <div class="col-md-3 col-12 text-md-end">
             <span class="badge <?= $b['kelas'] ?> mb-2 d-inline-block"><?= $b['label'] ?></span>
@@ -55,7 +55,7 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, [$idPelanggan]);
         <hr class="my-3">
         <div class="d-flex justify-content-end gap-2">
           <?php if (!$lunas): ?>
-            <a href="invoice.php" class="btn btn-st btn-sm">Bayar Sekarang</a>
+            <a href="invoice.php" class="btn btn-rk btn-sm">Bayar Sekarang</a>
           <?php endif; ?>
           <a href="invoice.php" class="btn btn-outline-primary btn-sm">Lihat Tagihan</a>
         </div>

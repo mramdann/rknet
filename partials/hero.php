@@ -1,4 +1,4 @@
-<section id="hero" class="st-hero">
+<section id="hero" class="rk-hero">
   <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
@@ -8,7 +8,7 @@
     <div class="carousel-inner">
       <?php foreach (['hero-1','hero-2','hero-3'] as $i => $img): ?>
       <div class="carousel-item <?= $i === 0 ? 'active' : '' ?>">
-        <img src="assets/img/<?= $img ?>.webp" class="d-block w-100 st-hero-img" alt="Banner RKnet <?= $i+1 ?>">
+        <img src="assets/img/<?= $img ?>.webp" class="d-block w-100 rk-hero-img" alt="Banner RKnet <?= $i+1 ?>">
       </div>
       <?php endforeach; ?>
     </div>

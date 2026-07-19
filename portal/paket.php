@@ -30,7 +30,7 @@ $menuAktif = 'paket';
           <span class="paket-cek"><i class="bi bi-check-circle-fill"></i></span>
         </div>
         <div class="fw-700"><?= htmlspecialchars($p['nama']) ?></div>
-        <div class="display-6 fw-800 text-st my-2"><?= formatRupiah($p['harga']) ?><small class="fs-6 text-muted fw-400">/bln</small></div>
+        <div class="display-6 fw-800 text-rk my-2"><?= formatRupiah($p['harga']) ?><small class="fs-6 text-muted fw-400">/bln</small></div>
         <ul class="list-unstyled small mb-0">
           <?php foreach ($p['fitur'] as $f): ?>
           <li class="mb-1"><i class="bi bi-check2 text-success me-1"></i><?= htmlspecialchars($f) ?></li>
@@ -50,7 +50,7 @@ $menuAktif = 'paket';
       <div class="col-md-8">
         <div class="text-muted text-uppercase fw-600 mb-1" style="font-size:.72rem">Paket Dipilih</div>
         <div class="d-flex align-items-center gap-2">
-          <i class="bi bi-wifi text-st fs-4"></i>
+          <i class="bi bi-wifi text-rk fs-4"></i>
           <div>
             <div class="fw-700" id="ringkasNama">—</div>
             <div class="text-muted small">Masa aktif s/d <strong>15 Juli 2026</strong> · <span id="ringkasHarga">—</span>/bulan</div>
@@ -58,7 +58,7 @@ $menuAktif = 'paket';
         </div>
       </div>
       <div class="col-md-4 text-md-end">
-        <button type="submit" class="btn btn-st btn-lg w-100 w-md-auto px-4">Konfirmasi</button>
+        <button type="submit" class="btn btn-rk btn-lg w-100 w-md-auto px-4">Konfirmasi</button>
       </div>
     </div>
   </form>

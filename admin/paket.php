@@ -14,7 +14,7 @@ $menuAktif = 'paket';
       <h5 class="fw-700 mb-1">Manajemen Paket</h5>
       <p class="text-muted small mb-0"><?= count($daftarPaket) ?> paket aktif.</p>
     </div>
-    <button class="btn btn-st" type="button" data-bs-toggle="modal" data-bs-target="#modalEditPaket"
+    <button class="btn btn-rk" type="button" data-bs-toggle="modal" data-bs-target="#modalEditPaket"
       data-mode="tambah"><i class="bi bi-plus-lg me-1"></i>Tambah Paket</button>
   </div>
 
@@ -27,9 +27,9 @@ $menuAktif = 'paket';
           <span class="badge <?= $b['kelas'] ?>"><?= $b['label'] ?></span>
         </div>
         <h6 class="fw-700 mb-1"><?= htmlspecialchars($p['nama']) ?></h6>
-        <div class="display-6 fw-800 text-st mb-2"><?= formatRupiah($p['harga']) ?><small class="fs-6 text-muted fw-400">/bln</small></div>
+        <div class="display-6 fw-800 text-rk mb-2"><?= formatRupiah($p['harga']) ?><small class="fs-6 text-muted fw-400">/bln</small></div>
         <div class="d-flex align-items-center gap-2 text-muted small mb-3">
-          <i class="bi bi-people-fill text-st"></i> <?= number_format($p['jumlahPelanggan'], 0, ',', '.') ?> pelanggan aktif
+          <i class="bi bi-people-fill text-rk"></i> <?= number_format($p['jumlahPelanggan'], 0, ',', '.') ?> pelanggan aktif
         </div>
         <button type="button" class="btn btn-outline-primary w-100 btn-edit-paket"
           data-mode="edit"
@@ -56,7 +56,7 @@ $menuAktif = 'paket';
   <div class="modal fade" id="modalEditPaket" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
-        <div class="modal-header st-modal-head text-white border-0">
+        <div class="modal-header rk-modal-head text-white border-0">
           <h5 class="modal-title fw-700 mb-0" id="judulModalPaket">Edit Paket</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
@@ -82,7 +82,7 @@ $menuAktif = 'paket';
               <select name="status" class="form-select" id="paketStatus"><option value="aktif">Aktif</option><option value="nonaktif">Nonaktif</option></select>
             </div>
             <div class="col-12 d-grid mt-2">
-              <button type="submit" class="btn btn-st btn-lg">Simpan Paket</button>
+              <button type="submit" class="btn btn-rk btn-lg">Simpan Paket</button>
             </div>
           </form>
         </div>

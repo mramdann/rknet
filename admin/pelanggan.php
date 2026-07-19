@@ -31,7 +31,7 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
     <form method="get" class="input-group cari-pelanggan">
       <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
       <input type="text" name="cari" class="form-control" placeholder="Cari nama / ID pelanggan..." value="<?= htmlspecialchars($cari) ?>">
-      <button class="btn btn-st" type="submit">Cari</button>
+      <button class="btn btn-rk" type="submit">Cari</button>
     </form>
   </div>
 
@@ -81,7 +81,7 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
   <div class="modal fade" id="modalDetailPelanggan" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
-        <div class="modal-header st-modal-head text-white border-0">
+        <div class="modal-header rk-modal-head text-white border-0">
           <h5 class="modal-title fw-700 mb-0">Detail Pelanggan</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
@@ -111,7 +111,7 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
               <input type="text" name="alamat" class="form-control" id="plAlamat">
             </div>
             <div class="col-12 d-grid">
-              <button type="submit" class="btn btn-st"><i class="bi bi-check2 me-1"></i>Simpan Perubahan</button>
+              <button type="submit" class="btn btn-rk"><i class="bi bi-check2 me-1"></i>Simpan Perubahan</button>
             </div>
           </form>
           <form method="post" action="aksi-pelanggan.php" class="mt-2">

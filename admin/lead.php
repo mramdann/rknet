@@ -51,7 +51,7 @@ if (in_array($status, $statusValid, true)) $paramFilter['status'] = $status;
         <option value="<?= $sv ?>" <?= $status === $sv ? 'selected' : '' ?>><?= ucfirst($sv) ?></option>
         <?php endforeach; ?>
       </select>
-      <button type="submit" class="btn btn-st">Cari</button>
+      <button type="submit" class="btn btn-rk">Cari</button>
     </form>
   </div>
 
@@ -88,7 +88,7 @@ if (in_array($status, $statusValid, true)) $paramFilter['status'] = $status;
                   <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
                   <input type="hidden" name="aksi" value="dihubungi">
                   <input type="hidden" name="id" value="<?= htmlspecialchars($l['id']) ?>">
-                  <button type="submit" class="btn btn-sm btn-st"><i class="bi bi-telephone me-1"></i>Tandai Dihubungi</button>
+                  <button type="submit" class="btn btn-sm btn-rk"><i class="bi bi-telephone me-1"></i>Tandai Dihubungi</button>
                 </form>
               <?php endif; ?>
             </td>
@@ -107,7 +107,7 @@ if (in_array($status, $statusValid, true)) $paramFilter['status'] = $status;
   <div class="modal fade" id="modalDetailLead" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
-        <div class="modal-header st-modal-head text-white border-0">
+        <div class="modal-header rk-modal-head text-white border-0">
           <h5 class="modal-title fw-700 mb-0">Detail Lead</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>

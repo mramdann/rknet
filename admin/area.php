@@ -14,7 +14,7 @@ $menuAktif = 'area';
       <h5 class="fw-700 mb-1">Area Cakupan</h5>
       <p class="text-muted small mb-0"><?= count($daftarArea) ?> area terdaftar.</p>
     </div>
-    <button class="btn btn-st" type="button" data-bs-toggle="modal" data-bs-target="#modalEditArea"
+    <button class="btn btn-rk" type="button" data-bs-toggle="modal" data-bs-target="#modalEditArea"
       data-mode="tambah"><i class="bi bi-plus-lg me-1"></i>Tambah Area</button>
   </div>
 
@@ -28,7 +28,7 @@ $menuAktif = 'area';
         </div>
         <h6 class="fw-700 mb-1"><?= htmlspecialchars($a['nama']) ?></h6>
         <div class="d-flex align-items-center gap-2 text-muted small mb-3">
-          <i class="bi bi-people-fill text-st"></i> <?= number_format($a['jumlahPelanggan'], 0, ',', '.') ?> pelanggan
+          <i class="bi bi-people-fill text-rk"></i> <?= number_format($a['jumlahPelanggan'], 0, ',', '.') ?> pelanggan
         </div>
         <button type="button" class="btn btn-outline-primary w-100 btn-edit-area"
           data-mode="edit"
@@ -54,7 +54,7 @@ $menuAktif = 'area';
   <div class="modal fade" id="modalEditArea" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
-        <div class="modal-header st-modal-head text-white border-0">
+        <div class="modal-header rk-modal-head text-white border-0">
           <h5 class="modal-title fw-700 mb-0" id="judulModalArea">Edit Area</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
         </div>
@@ -79,7 +79,7 @@ $menuAktif = 'area';
               </select>
             </div>
             <div class="col-12 d-grid mt-2">
-              <button type="submit" class="btn btn-st btn-lg">Simpan Area</button>
+              <button type="submit" class="btn btn-rk btn-lg">Simpan Area</button>
             </div>
           </form>
         </div>

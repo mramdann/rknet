@@ -1,4 +1,4 @@
-<footer class="st-footer text-white pt-5 pb-4">
+<footer class="rk-footer text-white pt-5 pb-4">
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-5">

@@ -33,9 +33,9 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
       <p class="text-muted small mb-0">Kelola status pembayaran pelanggan.</p>
     </div>
     <div class="btn-group" role="group">
-      <a href="?status=" class="btn btn-sm <?= $status === '' ? 'btn-st' : 'btn-outline-primary' ?>">Semua</a>
-      <a href="?status=lunas" class="btn btn-sm <?= $status === 'lunas' ? 'btn-st' : 'btn-outline-primary' ?>">Lunas</a>
-      <a href="?status=menunggu" class="btn btn-sm <?= $status === 'menunggu' ? 'btn-st' : 'btn-outline-primary' ?>">Menunggu</a>
+      <a href="?status=" class="btn btn-sm <?= $status === '' ? 'btn-rk' : 'btn-outline-primary' ?>">Semua</a>
+      <a href="?status=lunas" class="btn btn-sm <?= $status === 'lunas' ? 'btn-rk' : 'btn-outline-primary' ?>">Lunas</a>
+      <a href="?status=menunggu" class="btn btn-sm <?= $status === 'menunggu' ? 'btn-rk' : 'btn-outline-primary' ?>">Menunggu</a>
     </div>
   </div>
 
@@ -60,7 +60,7 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
                   <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
                   <input type="hidden" name="aksi" value="lunas">
                   <input type="hidden" name="id" value="<?= $t['idTagihan'] ?>">
-                  <button type="submit" class="btn btn-sm btn-st"><i class="bi bi-check2 me-1"></i>Tandai Lunas</button>
+                  <button type="submit" class="btn btn-sm btn-rk"><i class="bi bi-check2 me-1"></i>Tandai Lunas</button>
                 </form>
               <?php else: ?>
                 <span class="text-muted small">—</span>

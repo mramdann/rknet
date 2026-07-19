@@ -19,7 +19,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="assets/css/style.css?v=5" rel="stylesheet">
+  <link href="assets/css/style.css?v=6" rel="stylesheet">
 </head>
 <body>
   <!-- Header sederhana -->
@@ -45,7 +45,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
       <div class="cari-wrap mx-auto position-relative">
         <div class="input-group input-group-lg shadow">
           <input type="text" id="inputAlamat" class="form-control border-0" placeholder="Masukkan alamat Anda" autocomplete="off">
-          <button class="btn btn-st px-4" id="btnCekJangkauan" type="button" disabled>Cek Ketersediaan</button>
+          <button class="btn btn-rk px-4" id="btnCekJangkauan" type="button" disabled>Cek Ketersediaan</button>
         </div>
         <!-- Dropdown hasil autocomplete -->
         <div id="dropdownAlamat" class="dropdown-alamat d-none"></div>
@@ -63,11 +63,11 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
     <div class="container">
       <?php foreach ($areaTerjangkau as $provinsi => $daftarKota): ?>
       <div class="mb-4">
-        <h6 class="fw-700 text-uppercase text-st mb-3"><?= htmlspecialchars($provinsi) ?></h6>
+        <h6 class="fw-700 text-uppercase text-rk mb-3"><?= htmlspecialchars($provinsi) ?></h6>
         <div class="row g-2">
           <?php foreach ($daftarKota as $kota): ?>
           <div class="col-md-4 col-sm-6">
-            <div class="area-item"><i class="bi bi-geo-alt-fill text-st me-2"></i><?= htmlspecialchars($kota) ?></div>
+            <div class="area-item"><i class="bi bi-geo-alt-fill text-rk me-2"></i><?= htmlspecialchars($kota) ?></div>
           </div>
           <?php endforeach; ?>
         </div>
@@ -87,7 +87,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
           <div id="hasilIkon" class="hasil-ikon mb-3"></div>
           <h4 id="hasilJudul" class="fw-700 mb-2"></h4>
           <p id="hasilPesan" class="text-muted mb-4"></p>
-          <button type="button" class="btn btn-st btn-lg w-100" id="btnIsiData">Isi Data</button>
+          <button type="button" class="btn btn-rk btn-lg w-100" id="btnIsiData">Isi Data</button>
         </div>
       </div>
     </div>
@@ -97,7 +97,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
   <div class="modal fade" id="modalIsiData" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
       <div class="modal-content border-0 rounded-4 overflow-hidden">
-        <div class="modal-header st-modal-head text-white border-0">
+        <div class="modal-header rk-modal-head text-white border-0">
           <div>
             <h5 class="modal-title fw-700 mb-0">Silahkan Isi Data Anda</h5>
             <small class="opacity-75">Tim kami akan menghubungi Anda untuk pemasangan.</small>
@@ -169,14 +169,14 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
               <label class="form-label fw-500 small">Arahkan Pin Lokasi ke Titik Alamat Pemasangan Anda</label>
               <div class="input-group mb-2">
                 <input type="text" class="form-control" id="inputCariPeta" placeholder="Cari alamat pemasangan">
-                <button class="btn btn-st" type="button" id="btnCariPeta"><i class="bi bi-search me-1"></i>Cari</button>
+                <button class="btn btn-rk" type="button" id="btnCariPeta"><i class="bi bi-search me-1"></i>Cari</button>
               </div>
               <div id="petaPemasangan" class="peta-pemasangan"></div>
               <small class="text-muted" id="koordinatTerpilih">Koordinat: -</small>
             </div>
 
             <div class="col-12 d-grid mt-2">
-              <button type="submit" class="btn btn-st btn-lg">Kirim Pendaftaran</button>
+              <button type="submit" class="btn btn-rk btn-lg">Kirim Pendaftaran</button>
             </div>
           </form>
           <div id="suksesIsiData" class="alert alert-success text-center mb-0 mt-3 d-none">

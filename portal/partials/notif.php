@@ -7,7 +7,7 @@
 function tampilkanNotif(array $n): void
 {
     $ikon = $n['tipe'] === 'informasi' ? 'bi-info-circle' : 'bi-bell';
-    $warna = $n['tipe'] === 'informasi' ? 'text-st' : 'text-success';
+    $warna = $n['tipe'] === 'informasi' ? 'text-rk' : 'text-success';
     ?>
     <div class="notif-item d-flex gap-3 py-3 border-bottom">
       <div class="notif-ico <?= $warna ?>"><i class="bi <?= $ikon ?>"></i></div>

@@ -52,12 +52,12 @@ $judulHalaman = 'Login';
             <input type="password" name="kata_sandi" class="form-control" placeholder="Masukkan password" required>
           </div>
         </div>
-        <button type="submit" class="btn btn-st w-100 btn-lg mt-3">Login</button>
+        <button type="submit" class="btn btn-rk w-100 btn-lg mt-3">Login</button>
       </form>
 
       <p class="text-center small text-muted mt-3 mb-1">Demo: <code>dwi.anjasmoro@gmail.com</code> / <code>pelanggan123</code></p>
       <p class="text-center small text-muted mt-2 mb-1">
-        Belum punya akun? <a href="../index.php#paket" class="text-st text-decoration-none fw-500">Berlangganan</a>
+        Belum punya akun? <a href="../index.php#paket" class="text-rk text-decoration-none fw-500">Berlangganan</a>
       </p>
       <p class="text-center small mb-0">
         <a href="../admin/login.php" class="text-muted text-decoration-none"><i class="bi bi-shield-lock me-1"></i>Masuk sebagai Admin</a>
