@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top st-navbar py-3">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-      <img src="assets/img/logo-starlite.webp" alt="Starlite" height="34">
+      <img src="assets/img/logo-starlite.webp" alt="RKnet" height="34">
       <span class="brand-divider"></span>
       <img src="assets/img/logo-weave.webp" alt="Weave" height="28">
     </a>

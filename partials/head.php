@@ -1,8 +1,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starlite Indonesia — Internet Fiber Unlimited</title>
-    <meta name="description" content="Starlite — Internet fiber rumah unlimited, bebas FUP, gratis instalasi.">
+    <title>RKnet Indonesia — Internet Fiber Unlimited</title>
+    <meta name="description" content="RKnet — Internet fiber rumah unlimited, bebas FUP, gratis instalasi.">
     <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->

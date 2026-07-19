@@ -19,7 +19,7 @@ $kartuStatistik = [
 
   <div class="mb-4">
     <h5 class="fw-700 mb-1">Selamat datang, <?= htmlspecialchars(explode(' ', $admin['nama'])[0]) ?> 👋</h5>
-    <p class="text-muted small mb-0">Ringkasan layanan Starlite hari ini.</p>
+    <p class="text-muted small mb-0">Ringkasan layanan RKnet hari ini.</p>
   </div>
 
   <!-- Kartu statistik -->

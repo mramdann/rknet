@@ -1,5 +1,5 @@
 <?php
-// cek-jangkauan-config.php — data area yang sudah terjangkau jaringan Starlite (dummy).
+// cek-jangkauan-config.php — data area yang sudah terjangkau jaringan RKnet (dummy).
 
 // Area terjangkau dikelompokkan per provinsi
 $areaTerjangkau = [

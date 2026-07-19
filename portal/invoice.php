@@ -32,7 +32,7 @@ $ppn     = $total - $dpp;                 // nilai PPN 11%
     <!-- Kepala kuitansi -->
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 pb-3 border-bottom">
       <div class="d-flex align-items-center gap-2">
-        <img src="../assets/img/logo-starlite.webp" alt="Starlite" height="32">
+        <img src="../assets/img/logo-starlite.webp" alt="RKnet" height="32">
         <span class="brand-divider" style="display:inline-block;width:1px;height:24px;background:rgba(6,37,110,.2)"></span>
         <img src="../assets/img/logo-weave.webp" alt="Weave" height="24">
       </div>
@@ -91,7 +91,7 @@ $ppn     = $total - $dpp;                 // nilai PPN 11%
     </div>
 
     <div class="text-center text-muted small mt-4 pt-3 border-top">
-      Terima kasih telah berlangganan Starlite Indonesia. Kuitansi ini sah & dihasilkan otomatis oleh sistem.
+      Terima kasih telah berlangganan RKnet Indonesia. Kuitansi ini sah & dihasilkan otomatis oleh sistem.
     </div>
   </div>
 

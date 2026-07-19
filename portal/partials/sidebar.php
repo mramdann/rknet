@@ -12,7 +12,7 @@ $menuPortal = [
 ?>
 <aside class="portal-sidebar" id="portalSidebar">
   <div class="portal-brand">
-    <img src="../assets/img/logo-starlite.webp" alt="Starlite">
+    <img src="../assets/img/logo-starlite.webp" alt="RKnet">
     <span class="brand-divider"></span>
     <img src="../assets/img/logo-weave.webp" alt="Weave" style="height:24px">
   </div>

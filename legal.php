@@ -7,7 +7,7 @@ $dokumenTersedia = [
     'terms' => [
         'judul' => 'Syarat & Ketentuan',
         'isi'   => [
-            'Dengan berlangganan layanan Starlite Indonesia, Anda menyetujui seluruh syarat dan ketentuan yang berlaku. Layanan diberikan oleh PT Integrasi Jaringan Ekosistem.',
+            'Dengan berlangganan layanan RKnet Indonesia, Anda menyetujui seluruh syarat dan ketentuan yang berlaku. Layanan diberikan oleh PT Integrasi Jaringan Ekosistem.',
             'Pelanggan wajib memberikan data yang benar saat pendaftaran. Penyalahgunaan layanan, termasuk pemakaian di luar ketentuan wajar, dapat mengakibatkan penangguhan akun.',
             'Tarif, kecepatan, dan masa berlaku paket mengikuti ketentuan yang tertera pada halaman paket. Perusahaan berhak memperbarui ketentuan sewaktu-waktu dengan pemberitahuan.',
             'Layanan internet bersifat unlimited tanpa FUP sesuai paket yang dipilih. Gangguan jaringan akan ditangani sesuai prosedur layanan pelanggan.',
@@ -46,7 +46,7 @@ $dokumen = $dokumenTersedia[$dok];
   <nav class="navbar bg-white shadow-sm sticky-top py-3">
     <div class="container">
       <a href="index.php" class="navbar-brand d-flex align-items-center gap-2">
-        <img src="assets/img/logo-starlite.webp" alt="Starlite" height="32">
+        <img src="assets/img/logo-starlite.webp" alt="RKnet" height="32">
         <span class="brand-divider" style="background:rgba(6,37,110,.25)"></span>
         <img src="assets/img/logo-weave.webp" alt="Weave" height="26">
       </a>
@@ -58,7 +58,7 @@ $dokumen = $dokumenTersedia[$dok];
   <header class="legal-hero text-white py-5">
     <div class="container">
       <h1 class="fw-700 mb-1"><?= htmlspecialchars($dokumen['judul']) ?></h1>
-      <p class="mb-0 opacity-75 small">Terakhir diperbarui: Juni 2026 &middot; Starlite Indonesia</p>
+      <p class="mb-0 opacity-75 small">Terakhir diperbarui: Juni 2026 &middot; RKnet Indonesia</p>
     </div>
   </header>
 

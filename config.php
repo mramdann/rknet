@@ -1,7 +1,7 @@
 <?php
 // config.php — sumber konten landing page (UI only)
 $site = [
-    'name'    => 'Starlite',
+    'name'    => 'RKnet',
     'phone'   => '+62811789111',
     'company' => 'PT Integrasi Jaringan Ekosistem',
     'address' => 'Jalan Tiang Bendera V No.20 Roa Malaka, Tambora, Jakarta Barat',

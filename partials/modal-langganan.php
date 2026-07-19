@@ -4,7 +4,7 @@
     <div class="modal-content border-0 rounded-4 overflow-hidden">
       <div class="modal-header st-modal-head text-white border-0">
         <div>
-          <h5 class="modal-title fw-700 mb-0">Berlangganan Starlite</h5>
+          <h5 class="modal-title fw-700 mb-0">Berlangganan RKnet</h5>
           <small class="opacity-75">Isi data Anda, tim kami akan menghubungi Anda.</small>
         </div>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>

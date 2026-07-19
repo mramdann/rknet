@@ -74,7 +74,7 @@
     if (terjangkau) {
       ikon.innerHTML  = '<i class="bi bi-check-circle-fill text-success"></i>';
       judul.textContent = 'Hore! Area Anda terjangkau';
-      pesan.textContent = 'Jaringan fiber Starlite tersedia di lokasi Anda. Lanjutkan pendaftaran sekarang.';
+      pesan.textContent = 'Jaringan fiber RKnet tersedia di lokasi Anda. Lanjutkan pendaftaran sekarang.';
       btn.textContent = 'Daftar Sekarang';
     } else {
       ikon.innerHTML  = '<i class="bi bi-emoji-frown text-warning"></i>';

@@ -1,7 +1,7 @@
 <section class="section bg-white">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="fw-700">Kenapa Pilih Starlite?</h2>
+      <h2 class="fw-700">Kenapa Pilih RKnet?</h2>
     </div>
     <div class="row g-4 text-center">
       <?php foreach ($site['features'] as $f): ?>

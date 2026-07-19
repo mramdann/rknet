@@ -67,7 +67,7 @@ $menuAktif = 'paket';
             <input type="hidden" name="id" id="paketId" value="">
             <div class="col-12">
               <label class="form-label fw-500 small">Nama Paket</label>
-              <input type="text" name="nama" class="form-control" id="paketNama" placeholder="Paket ... Mbps Starlite" required>
+              <input type="text" name="nama" class="form-control" id="paketNama" placeholder="Paket ... Mbps RKnet" required>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-500 small">Kecepatan</label>

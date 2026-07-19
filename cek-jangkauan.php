@@ -11,7 +11,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cek Jangkauan — Starlite Indonesia</title>
+  <title>Cek Jangkauan — RKnet Indonesia</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <!-- Leaflet 1.9.4 -->
@@ -26,7 +26,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
   <nav class="navbar bg-white shadow-sm sticky-top py-3">
     <div class="container">
       <a href="index.php" class="navbar-brand d-flex align-items-center gap-2">
-        <img src="assets/img/logo-starlite.webp" alt="Starlite" height="32">
+        <img src="assets/img/logo-starlite.webp" alt="RKnet" height="32">
         <span class="brand-divider" style="background:rgba(6,37,110,.25)"></span>
         <img src="assets/img/logo-weave.webp" alt="Weave" height="26">
       </a>
@@ -40,7 +40,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
   <!-- Hero: cari alamat -->
   <header class="jangkauan-hero text-white text-center">
     <div class="container py-5">
-      <h1 class="fw-800 mb-2">Apakah area Anda dalam jangkauan Starlite?</h1>
+      <h1 class="fw-800 mb-2">Apakah area Anda dalam jangkauan RKnet?</h1>
       <p class="opacity-75 mb-4">Yuk, cek alamat Anda di sini!</p>
       <div class="cari-wrap mx-auto position-relative">
         <div class="input-group input-group-lg shadow">
@@ -180,7 +180,7 @@ $keywordTerjangkau = daftarKeywordTerjangkau($areaTerjangkau);
             </div>
           </form>
           <div id="suksesIsiData" class="alert alert-success text-center mb-0 mt-3 d-none">
-            <i class="bi bi-check-circle-fill me-1"></i> Terima kasih! Data Anda telah kami terima. Tim Starlite akan segera menghubungi Anda.
+            <i class="bi bi-check-circle-fill me-1"></i> Terima kasih! Data Anda telah kami terima. Tim RKnet akan segera menghubungi Anda.
           </div>
         </div>
       </div>
