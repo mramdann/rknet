@@ -7,9 +7,7 @@ $pesanError = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $sandi = $_POST['kata_sandi'] ?? '';
-    $stmt = db()->prepare("SELECT id, kata_sandi FROM pelanggan WHERE email = ?");
-    $stmt->execute([$email]);
-    $row = $stmt->fetch();
+    $row = kueriSatu("SELECT id, kata_sandi FROM pelanggan WHERE email = ?", [$email]);
     if ($row && password_verify($sandi, $row['kata_sandi'])) {
         loginPelanggan($row['id']);
         header('Location: dashboard.php');

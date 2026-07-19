@@ -1,41 +1,36 @@
 <?php
 // portal-config.php — data portal pelanggan, dibaca read-only dari database dbstarlite.
 require_once __DIR__ . '/helpers.php';   // formatRupiah(), badgeStatus()
-require_once __DIR__ . '/db.php';        // db(): PDO
+require_once __DIR__ . '/db.php';        // db(): mysqli + kueri()/kueriSatu()
 require_once __DIR__ . '/auth.php';      // sesi & guard
 require_once __DIR__ . '/aksi.php';      // CSRF & flash
 require_once __DIR__ . '/pagination.php';  // paginasi
 
 wajibLoginPelanggan();                   // halaman portal wajib login
 
-$pdo = db();
 $idPelanggan = idPelangganSaatIni();     // pelanggan dari sesi
 
 // Data pelanggan yang sedang login
-$stmt = $pdo->prepare("SELECT id, nama, email, hp, alamat, paket_id FROM pelanggan WHERE id = ?");
-$stmt->execute([$idPelanggan]);
-$pelanggan = $stmt->fetch();
+$pelanggan = kueriSatu("SELECT id, nama, email, hp, alamat, paket_id FROM pelanggan WHERE id = ?", [$idPelanggan]);
 
 // Paket internet yang sedang aktif (+ masa aktif presentasional)
-$stmt = $pdo->prepare(
+$paketAktif = kueriSatu(
     "SELECT pk.nama, pk.kecepatan, pk.harga, pk.status
      FROM pelanggan pl JOIN paket pk ON pk.id = pl.paket_id
-     WHERE pl.id = ?"
+     WHERE pl.id = ?",
+    [$idPelanggan]
 );
-$stmt->execute([$idPelanggan]);
-$paketAktif = $stmt->fetch();
 $paketAktif['masaAktif'] = '15 Juli 2026';
 
 // Riwayat transaksi pelanggan (urut sesuai seed: Jun, Mei, Apr, Jul)
-$stmt = $pdo->prepare(
+$daftarTransaksi = kueri(
     "SELECT t.no_invoice AS noInvoice, pk.nama AS paket, pk.kecepatan AS kecepatan,
             t.harga, t.tanggal, t.status
      FROM tagihan t JOIN paket pk ON pk.id = t.paket_id
      WHERE t.pelanggan_id = ?
-     ORDER BY t.id"
+     ORDER BY t.id",
+    [$idPelanggan]
 );
-$stmt->execute([$idPelanggan]);
-$daftarTransaksi = $stmt->fetchAll();
 
 // Pilihan paket pada halaman "Pilih Paket" — harga dari DB, fitur & flag presentasional
 $fiturPaket = [
@@ -44,7 +39,7 @@ $fiturPaket = [
     '500 Mbps' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Prioritas jaringan'],
 ];
 $paketTersedia = [];
-foreach ($pdo->query("SELECT id, nama, kecepatan, harga FROM paket ORDER BY id") as $row) {
+foreach (kueri("SELECT id, nama, kecepatan, harga FROM paket ORDER BY id") as $row) {
     $row['fitur']   = $fiturPaket[$row['kecepatan']] ?? [];
     $row['dipilih'] = ((int) $row['id'] === (int) ($pelanggan['paket_id'] ?? 0));
     $paketTersedia[] = $row;

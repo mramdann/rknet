@@ -9,7 +9,7 @@ $sqlBase = "SELECT t.no_invoice AS noInvoice, pk.nama AS paket, t.harga, t.tangg
             FROM tagihan t JOIN paket pk ON pk.id = t.paket_id
             WHERE t.pelanggan_id = ? ORDER BY t.id";
 $sqlCount = "SELECT COUNT(*) FROM tagihan t WHERE t.pelanggan_id = ?";
-$hasil = ambilPaginasi($pdo, $sqlBase, $sqlCount, [$idPelanggan]);
+$hasil = ambilPaginasi($sqlBase, $sqlCount, [$idPelanggan]);
 ?>
 <!DOCTYPE html>
 <html lang="id">
