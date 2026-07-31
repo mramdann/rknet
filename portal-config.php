@@ -39,7 +39,7 @@ $fiturPaket = [
     '500 Mbps' => ['Bebas FUP - Unlimited', 'Termasuk sewa modem', 'Gratis instalasi', 'Prioritas jaringan'],
 ];
 $paketTersedia = [];
-foreach (kueri("SELECT id, nama, kecepatan, harga FROM paket ORDER BY id") as $row) {
+foreach (kueri("SELECT id, nama, kecepatan, harga FROM paket WHERE status = 'aktif' ORDER BY id") as $row) {
     $row['fitur']   = $fiturPaket[$row['kecepatan']] ?? [];
     $row['dipilih'] = ((int) $row['id'] === (int) ($pelanggan['paket_id'] ?? 0));
     $paketTersedia[] = $row;

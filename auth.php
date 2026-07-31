@@ -11,12 +11,14 @@ function mulaiSesi(): void
 function loginAdmin(int $id): void
 {
     mulaiSesi();
+    session_regenerate_id(true);
     $_SESSION['admin_id'] = $id;
 }
 
 function loginPelanggan(string $id): void
 {
     mulaiSesi();
+    session_regenerate_id(true);
     $_SESSION['pelanggan_id'] = $id;
 }
 
@@ -42,8 +44,22 @@ function wajibLoginAdmin(): void
 
 function wajibLoginPelanggan(): void
 {
-    if (idPelangganSaatIni() === null) {
+    $id = idPelangganSaatIni();
+    if ($id === null) {
         header('Location: login.php');
+        exit;
+    }
+
+    if (!function_exists('kueriSatu')) {
+        require_once __DIR__ . '/db.php';
+    }
+    $pelanggan = kueriSatu("SELECT status FROM pelanggan WHERE id = ?", [$id]);
+    if ($pelanggan === null || $pelanggan['status'] !== 'aktif') {
+        unset($_SESSION['pelanggan_id']);
+        $status = in_array($pelanggan['status'] ?? '', ['pending', 'nonaktif'], true)
+            ? $pelanggan['status']
+            : 'sesi';
+        header('Location: login.php?status=' . rawurlencode($status));
         exit;
     }
 }

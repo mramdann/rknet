@@ -15,9 +15,9 @@ if (($_POST['aksi'] ?? '') === 'pilih') {
         header('Location: paket.php');
         exit;
     }
-    // Pastikan paket ada sebelum update
-    if (!kueriSatu("SELECT id FROM paket WHERE id = ?", [(int) $paketId])) {
-        setFlash('danger', 'Paket tidak ditemukan.');
+    // Paket yang sudah dinonaktifkan tidak boleh dipilih dari permintaan lama.
+    if (!kueriSatu("SELECT id FROM paket WHERE id = ? AND status = 'aktif'", [(int) $paketId])) {
+        setFlash('danger', 'Paket tidak ditemukan atau sudah tidak aktif.');
         header('Location: paket.php');
         exit;
     }

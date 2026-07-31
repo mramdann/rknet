@@ -6,7 +6,10 @@ body.portal{background:#f4f6fb;font-family:'Poppins',system-ui,sans-serif;color:
 body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)}
 .auth-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem}
 .auth-kartu{width:100%;max-width:420px;padding:2.5rem 2rem}
-.auth-divider{display:inline-block;width:1px;height:26px;background:rgba(6,37,110,.2)}
+.auth-kartu-daftar{max-width:720px}
+.auth-logo-rk{height:68px;width:auto}
+.auth-logo-rws{height:56px;width:auto}
+.auth-divider{display:inline-block;width:1px;height:52px;background:rgba(6,37,110,.2)}
 .auth-form .input-group-text{border-right:0;color:var(--rk-blue)}
 .auth-form .form-control{border-left:0}
 
@@ -20,8 +23,9 @@ body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)
   position:sticky;top:0;height:100vh
 }
 .portal-brand{padding:0 1.5rem 1.25rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #f0f2f7}
-.portal-brand img{height:30px}
-.portal-brand .brand-divider{display:inline-block;width:1px;height:24px;background:rgba(6,37,110,.2)}
+.portal-brand .logo-sidebar-rk{height:50px;width:auto}
+.portal-brand .logo-sidebar-rws{height:40px;width:auto}
+.portal-brand .brand-divider{display:inline-block;width:1px;height:40px;background:rgba(6,37,110,.2)}
 .portal-nav{list-style:none;margin:1rem 0 0;padding:0 .75rem;flex:1}
 .portal-nav a{
   display:flex;align-items:center;gap:.75rem;padding:.75rem 1rem;margin-bottom:.25rem;
@@ -93,6 +97,9 @@ body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)
 
 /* Invoice / kuitansi */
 .invoice-sheet{max-width:760px}
+.logo-invoice-rk{height:54px;width:auto}
+.logo-invoice-rws{height:42px;width:auto}
+.logo-invoice-divider{height:42px;background:rgba(6,37,110,.2)}
 
 /* Saat mencetak: sembunyikan shell & tombol, tampilkan kuitansi saja */
 @media print{
@@ -129,4 +136,17 @@ body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)
   .btn-sidebar{display:inline-flex}
   .sidebar-overlay{position:fixed;inset:0;background:rgba(6,37,110,.4);z-index:1040;display:none}
   .sidebar-overlay.tampil{display:block}
+}
+@media(max-width:575px){
+  .auth-wrap{padding:1rem}
+  .auth-kartu{padding:2rem 1.25rem}
+  .auth-logo-rk{height:54px}
+  .auth-logo-rws{height:44px}
+  .auth-divider{height:40px}
+  .portal-brand .logo-sidebar-rk{height:40px}
+  .portal-brand .logo-sidebar-rws{height:32px}
+  .portal-brand .brand-divider{height:32px}
+  .logo-invoice-rk{height:44px}
+  .logo-invoice-rws{height:34px}
+  .logo-invoice-divider{height:34px}
 }

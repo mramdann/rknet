@@ -55,9 +55,9 @@ $daftarRekeningAktif = $dapatMengunggah
   <div class="kartu kartu-pad invoice-sheet mx-auto">
     <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 pb-3 border-bottom">
       <div class="d-flex align-items-center gap-2">
-        <img src="../assets/img/rknet.jpeg" alt="RKnet" height="32">
-        <span class="brand-divider" style="display:inline-block;width:1px;height:24px;background:rgba(6,37,110,.2)"></span>
-        <img src="../assets/img/rknet2.jpeg" alt="RWS Solution" height="24">
+        <img src="../assets/img/rknet.jpeg" alt="RKnet" class="logo-invoice-rk">
+        <span class="brand-divider logo-invoice-divider"></span>
+        <img src="../assets/img/rknet2.jpeg" alt="RWS Solution" class="logo-invoice-rws">
       </div>
       <div class="text-end">
         <h5 class="fw-800 text-rk mb-1">INVOICE</h5>

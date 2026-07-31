@@ -22,6 +22,7 @@ if (!function_exists('badgeStatus')) {
             'menunggu'   => ['kelas' => 'bg-warning-subtle text-warning',     'label' => 'Menunggu Pembayaran'],
             'verifikasi' => ['kelas' => 'bg-info-subtle text-info',           'label' => 'Menunggu Verifikasi'],
             'ditolak'    => ['kelas' => 'bg-danger-subtle text-danger',       'label' => 'Bukti Ditolak'],
+            'pending'    => ['kelas' => 'bg-warning-subtle text-warning',     'label' => 'Menunggu Persetujuan'],
             'aktif'      => ['kelas' => 'bg-success-subtle text-success',     'label' => 'Aktif'],
             'nonaktif'   => ['kelas' => 'bg-secondary-subtle text-secondary', 'label' => 'Nonaktif'],
             // Status notifikasi

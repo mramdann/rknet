@@ -12,21 +12,24 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .text-rk{color:var(--rk-blue)}
 
 /* Navbar */
-.rk-navbar{background:transparent;transition:.3s}
-.rk-navbar.scrolled{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
-/* default = transparan di atas hero: teks putih + shadow biar kebaca */
-.rk-navbar .nav-link{font-weight:500;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35)}
-.rk-navbar .nav-link:hover{color:#cfe2ff}
-.brand-divider{display:inline-block;width:1px;height:26px;background:rgba(255,255,255,.5)}
-/* scrolled = background putih: balik ke teks gelap */
-.rk-navbar.scrolled .nav-link{color:#1c2434;text-shadow:none}
-.rk-navbar.scrolled .nav-link:hover{color:var(--rk-blue)}
-.rk-navbar.scrolled .brand-divider{background:rgba(6,37,110,.25)}
+.rk-navbar{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
+.rk-navbar .nav-link{font-weight:500;color:#1c2434}
+.rk-navbar .nav-link:hover{color:var(--rk-blue)}
+.brand-divider{display:inline-block;width:1px;height:44px;background:rgba(6,37,110,.25)}
+.logo-navbar-rk{height:56px;width:auto}
+.logo-navbar-rws{height:46px;width:auto}
 
 /* Hero */
-.rk-hero{margin-top:0}
-.rk-hero-img{height:auto;max-height:640px;object-fit:cover}
-@media(max-width:768px){.rk-hero-img{max-height:360px}}
+.rk-hero{position:relative;display:flex;align-items:center;min-height:clamp(540px,78vh,760px);padding:9rem 0 5rem;overflow:hidden;background:radial-gradient(circle at 15% 20%,rgba(54,197,240,.4),transparent 30%),radial-gradient(circle at 85% 75%,rgba(11,94,215,.8),transparent 32%),linear-gradient(135deg,#03194e 0%,#06256e 50%,#0b5ed7 100%)}
+.rk-hero::before,.rk-hero::after{content:"";position:absolute;border:1px solid rgba(255,255,255,.14);border-radius:50%;pointer-events:none}
+.rk-hero::before{width:420px;height:420px;left:-170px;bottom:-240px}
+.rk-hero::after{width:560px;height:560px;right:-280px;top:-300px}
+.hero-brand-lockup{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1.35fr);align-items:center;gap:clamp(1rem,3vw,2.5rem);max-width:1100px;margin:0 auto}
+.hero-logo-card{height:clamp(250px,30vw,340px);padding:clamp(1rem,2.5vw,2rem);display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid rgba(255,255,255,.65);border-radius:2rem;box-shadow:0 28px 70px rgba(2,15,52,.35)}
+.hero-logo-card img{display:block;width:100%;height:100%;object-fit:contain}
+.hero-logo-card-rk{transform:rotate(-1.5deg)}
+.hero-logo-card-rws{transform:rotate(1.5deg)}
+.hero-brand-divider{width:1px;height:150px;background:linear-gradient(transparent,rgba(255,255,255,.8),transparent)}
 
 /* Benefits */
 .benefit-card{background:var(--rk-blue-soft);border-radius:1rem;padding:1.5rem 1rem;transition:.2s}
@@ -44,17 +47,15 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 
 /* Halaman legal */
 .legal-hero{background:linear-gradient(120deg,var(--rk-blue),var(--rk-blue-dark))}
+.logo-legal-rk{height:54px;width:auto}
+.logo-legal-rws{height:42px;width:auto}
+.logo-legal-divider{height:42px;background:rgba(6,37,110,.25)}
 
 /* Form card */
 .kartu-form{background:#fff;border-radius:1.25rem;box-shadow:0 12px 40px rgba(6,37,110,.08)}
 
-/* Header modal (berlangganan & redeem) */
+/* Header modal */
 .rk-modal-head{background:linear-gradient(120deg,var(--rk-blue),var(--rk-blue-dark))}
-
-/* Redeem */
-.redeem-banner{background:linear-gradient(120deg,var(--rk-blue),var(--rk-blue-dark));border-radius:1.5rem;padding:3rem 2.5rem;box-shadow:0 20px 50px rgba(6,37,110,.25)}
-.btn-redeem{border-radius:50rem;padding:.7rem 1.6rem;color:var(--rk-blue)}
-.btn-redeem:hover{color:var(--rk-blue-dark)}
 
 /* Features */
 .feature-ico{width:84px;height:84px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--rk-blue-soft);transition:.25s}
@@ -64,17 +65,34 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 
 /* Footer */
 .rk-footer{background:var(--rk-blue-dark)}
-.footer-logo{background:#fff;padding:.35rem .6rem;border-radius:.6rem;display:inline-block}
-.footer-logo{filter:brightness(0) invert(1)}
+.footer-logo{width:auto;background:#fff;padding:.3rem .5rem;border-radius:.6rem;display:inline-block;object-fit:contain}
+.footer-logo-rk{height:64px}
+.footer-logo-rws{height:54px}
+.footer-brand-divider{display:inline-block;width:1px;height:48px;background:rgba(255,255,255,.3)}
 .social-ico{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:#fff;transition:.2s}
 .social-ico:hover{background:var(--rk-blue);color:#fff}
 
 /* Polish / responsive */
 @media(max-width:991px){
-  .rk-navbar{background:#fff;box-shadow:0 4px 24px rgba(6,37,110,.08)}
   .navbar-collapse{padding-top:.5rem}
-  /* navbar selalu putih di mobile -> teks gelap */
-  .rk-navbar .nav-link{color:#1c2434;text-shadow:none}
-  .rk-navbar .nav-link:hover{color:var(--rk-blue)}
-  .rk-navbar .brand-divider{background:rgba(6,37,110,.25)}
+}
+@media(max-width:575px){
+  .rk-navbar{padding-top:.65rem !important;padding-bottom:.65rem !important}
+  .logo-navbar-rk{height:44px}
+  .logo-navbar-rws{height:36px}
+  .rk-navbar .brand-divider{height:34px}
+  .logo-legal-rk{height:44px}
+  .logo-legal-rws{height:34px}
+  .logo-legal-divider{height:34px}
+  .footer-logo-rk{height:52px}
+  .footer-logo-rws{height:44px}
+  .footer-brand-divider{height:40px}
+}
+
+@media(max-width:767px){
+  .rk-hero{min-height:auto;padding:8.5rem 0 4rem}
+  .hero-brand-lockup{grid-template-columns:1fr;gap:1rem;max-width:520px}
+  .hero-logo-card{height:230px;border-radius:1.5rem;transform:none}
+  .hero-logo-card-rws{height:200px}
+  .hero-brand-divider{width:50%;height:1px;margin:0 auto;background:linear-gradient(90deg,transparent,rgba(255,255,255,.8),transparent)}
 }

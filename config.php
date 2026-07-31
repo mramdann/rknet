@@ -2,9 +2,10 @@
 // config.php — sumber konten landing page (UI only)
 $site = [
     'name'    => 'RKnet',
-    'phone'   => '+62811789111',
-    'company' => 'PT Integrasi Jaringan Ekosistem',
-    'address' => 'Jalan Tiang Bendera V No.20 Roa Malaka, Tambora, Jakarta Barat',
+    'phone'   => '083815256355',
+    'email'   => 'rizkywin.rs@gmail.com',
+    'company' => 'CV. Rizky Win Solution',
+    'address' => 'Kp. Cipangasaman RT. 009 RW. 003, Desa Legokhuni, Kabupaten Purwakarta, Jawa Barat',
 
     'benefits' => [
         ['icon' => 'bi-calendar-check', 'text' => 'Gratis 1 bulan'],
@@ -42,7 +43,7 @@ $site = [
     ],
 
     'features' => [
-        ['icon' => 'bi-house-wifi',   'title' => 'Wireless Home Network'],
+        ['icon' => 'bi-house-door-fill', 'title' => 'Wireless Home Network'],
         ['icon' => 'bi-speedometer2', 'title' => 'High Speed Internet'],
         ['icon' => 'bi-wifi',         'title' => 'Stable Internet Connection'],
         ['icon' => 'bi-broadcast',    'title' => 'Pure Fiber Network'],
@@ -51,6 +52,6 @@ $site = [
     'socials' => [
         ['icon' => 'bi-instagram', 'url' => 'https://www.instagram.com/rknetindonesia'],
         ['icon' => 'bi-facebook',  'url' => 'https://www.facebook.com/rknetindonesia'],
-        ['icon' => 'bi-whatsapp',  'url' => 'https://wa.me/62811789111'],
+        ['icon' => 'bi-whatsapp',  'url' => 'https://wa.me/6283815256355'],
     ],
 ];

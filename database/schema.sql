@@ -44,9 +44,10 @@ CREATE TABLE pelanggan (
     hp            VARCHAR(30)  NOT NULL,
     alamat        VARCHAR(255) NULL,
     paket_id      INT          NULL,
-    status        VARCHAR(20)  NOT NULL DEFAULT 'aktif',
+    status        VARCHAR(20)  NOT NULL DEFAULT 'pending',
     tgl_bergabung VARCHAR(20)  NOT NULL,
     kata_sandi    VARCHAR(255) NOT NULL,
+    CONSTRAINT uq_pelanggan_email UNIQUE (email),
     CONSTRAINT fk_pelanggan_paket FOREIGN KEY (paket_id) REFERENCES paket(id)
 );
 

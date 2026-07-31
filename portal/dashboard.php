@@ -19,7 +19,7 @@ $badgePaket = badgeStatus($paketAktif['status']);
         <h4 class="fw-700 mb-2 text-white"><?= htmlspecialchars($pelanggan['nama']) ?> 👋</h4>
         <p class="mb-0 opacity-75 small">Pantau paket internet & tagihan Anda di sini.</p>
       </div>
-      <i class="bi bi-house-wifi d-none d-md-block" style="font-size:5rem;opacity:.35"></i>
+      <i class="bi bi-house-door-fill d-none d-md-block" style="font-size:5rem;opacity:.35"></i>
     </div>
   </div>
 

@@ -17,9 +17,15 @@ if ($aksi === 'info') {
     if ($nama === '' || $email === '' || $hp === '') {
         setFlash('danger', 'Nama, email, dan No. HP wajib diisi.');
     } else {
-        eksekusi("UPDATE pelanggan SET nama = ?, email = ?, hp = ?, alamat = ? WHERE id = ?",
-            [$nama, $email, $hp, $alamat, $id]);
-        setFlash('success', 'Informasi akun berhasil disimpan.');
+        try {
+            eksekusi("UPDATE pelanggan SET nama = ?, email = ?, hp = ?, alamat = ? WHERE id = ?",
+                [$nama, $email, $hp, $alamat, $id]);
+            setFlash('success', 'Informasi akun berhasil disimpan.');
+        } catch (mysqli_sql_exception $e) {
+            setFlash('danger', $e->getCode() === 1062
+                ? 'Email sudah digunakan oleh akun lain.'
+                : 'Informasi akun gagal disimpan. Silakan coba lagi.');
+        }
     }
 } elseif ($aksi === 'password') {
     $lama       = $_POST['lama'] ?? '';

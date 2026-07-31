@@ -16,7 +16,7 @@ Tiga area dalam satu aplikasi, berbagi gaya visual "Modern Biru":
 | Area | Akses | Otentikasi | Sumber data |
 |------|-------|-----------|-------------|
 | **Landing & legal** (`index.php`, `legal.php`) | Publik | — | `config.php` (statis) |
-| **Portal Pelanggan** (`portal/`) | Login pelanggan | Session | DB `dbrknet` (read) + aksi tulis |
+| **Portal Pelanggan** (`portal/`) | Pendaftaran publik + login pelanggan aktif | Session | DB `dbrknet` (read) + aksi tulis |
 | **Portal Admin** (`admin/`) | Login admin | Session | DB `dbrknet` (read) + aksi tulis (CRUD) |
 
 Data terkelola dibaca dari DB di config/halaman, lalu aksi tulis (CRUD, auth, profil, pembayaran) lewat handler ber-CSRF dengan pola **Post-Redirect-Get**. Konten marketing landing tetap statis di `config.php`.
@@ -42,6 +42,8 @@ flowchart TD
     H --> CFG
     CFG --> AUTH & DB & AKSI & PAG & HLP
     H -->|aksi tulis POST| ACT["admin/aksi-*.php<br/>portal/aksi-*.php"]
+    H -. "pendaftaran publik" .-> DAFTAR["portal/daftar.php<br/>portal/aksi-daftar.php"]
+    DAFTAR --> DB & AKSI
     ACT --> AUTH & DB & AKSI
     ACT -. "portal/aksi-pembayaran.php: simpan bukti bernama acak" .-> FS["storage/bukti-pembayaran<br/>(akses web langsung ditolak)"]
     H -->|GET bukti oleh admin| BUKTI["admin/bukti-pembayaran.php"]
@@ -83,7 +85,8 @@ rknet/
 │   ├── schema.sql             # 7 tabel saat ini (setup baru)
 │   ├── seed.sql               # data awal, termasuk BCA/Mandiri/BRI/QRIS
 │   ├── migrasi-pembayaran-bank.sql  # migrasi aditif satu kali untuk DB lama
-│   └── migrasi-qris.sql       # satu kali jika migrasi pembayaran sudah pernah dijalankan
+│   ├── migrasi-qris.sql       # satu kali jika migrasi pembayaran sudah pernah dijalankan
+│   └── migrasi-pendaftaran-pelanggan.sql # email unik + default status pending untuk DB lama
 │
 ├── admin/
 │   ├── login.php  logout.php
@@ -95,9 +98,9 @@ rknet/
 │   └── partials/  (shell-head, sidebar, topbar, shell-open, shell-close)
 │
 ├── portal/
-│   ├── login.php  logout.php
+│   ├── daftar.php  login.php  logout.php
 │   ├── dashboard.php  transaksi.php  invoice.php  paket.php  profil.php
-│   ├── aksi-profil.php  aksi-paket.php  aksi-pembayaran.php
+│   ├── aksi-daftar.php  aksi-profil.php  aksi-paket.php  aksi-pembayaran.php
 │   └── partials/  (shell-head, sidebar, topbar, shell-open, shell-close, notif)
 │
 ├── partials/                  # section landing (navbar, hero, package, dst.)
@@ -143,11 +146,11 @@ erDiagram
     PELANGGAN {
         varchar id PK "mis. RKNET-2024-008812"
         varchar nama
-        varchar email
+        varchar email UK
         varchar hp
         varchar alamat "nullable"
         int paket_id FK "nullable"
-        varchar status "aktif|nonaktif"
+        varchar status "pending|aktif|nonaktif"
         varchar tgl_bergabung "string tampilan"
         varchar kata_sandi "hash bcrypt"
     }
@@ -191,7 +194,7 @@ erDiagram
 - `tagihan.diverifikasi_oleh → admin.id` (admin penerima/penolak bukti; nullable).
 - `notifikasi` dan `pengaturan` berdiri sendiri (tanpa FK).
 
-**Catatan desain:** `rekening_bank.jenis` dibatasi aplikasi ke `bank|qris`; baris QRIS dinormalisasi dengan `nama_bank='QRIS'` dan `nomor_rekening='QRIS'`. Tanggal tagihan/bergabung tetap `VARCHAR` berisi string tampilan Indonesia (mis. "15 Jun 2026"); waktu pengajuan dan verifikasi pembayaran memakai `DATETIME`. `bukti_pembayaran` hanya menyimpan basename acak, bukan path dari klien.
+**Catatan desain:** `pelanggan.email` memiliki constraint unik `uq_pelanggan_email` dan status default `pending`. `rekening_bank.jenis` dibatasi aplikasi ke `bank|qris`; baris QRIS dinormalisasi dengan `nama_bank='QRIS'` dan `nomor_rekening='QRIS'`. Tanggal tagihan/bergabung tetap `VARCHAR` berisi string tampilan Indonesia (mis. "15 Jun 2026"); waktu pengajuan dan verifikasi pembayaran memakai `DATETIME`. `bukti_pembayaran` hanya menyimpan basename acak, bukan path dari klien.
 
 ---
 
@@ -202,12 +205,12 @@ erDiagram
 | `admin` | `id` (AI) | nama, email, peran, kata_sandi | — |
 | `rekening_bank` | `id` (AI) | jenis (`bank`/`qris`), nama_bank, nomor_rekening, atas_nama, status | aktif, nonaktif |
 | `paket` | `id` (AI) | nama, kecepatan, harga, status | aktif, nonaktif |
-| `pelanggan` | `id` (varchar) | nama, email, hp, alamat, **paket_id→paket**, status, tgl_bergabung, kata_sandi | aktif, nonaktif |
+| `pelanggan` | `id` (varchar) | nama, email unik, hp, alamat, **paket_id→paket**, status (default `pending`), tgl_bergabung, kata_sandi | pending, aktif, nonaktif |
 | `tagihan` | `id` (AI) | no_invoice unik, **pelanggan_id→pelanggan**, **paket_id→paket**, **rekening_bank_id→rekening_bank**, harga, tanggal, bukti basename, catatan/waktu/admin verifikasi | menunggu, verifikasi, lunas, ditolak |
 | `notifikasi` | `id` (AI) | judul, isi, target, tanggal, status | terkirim, draft |
 | `pengaturan` | `id` (AI) | nama_situs, email, telepon, alamat | — (1 baris) |
 
-Setup baru: `mysql -h 127.0.0.1 -P 3382 -u root < database/schema.sql` lalu `< database/seed.sql`. Seed menyertakan pilihan aktif BCA, Mandiri, BRI, dan QRIS. Untuk database enam tabel yang belum memiliki alur pembayaran, jalankan `database/migrasi-pembayaran-bank.sql` **sekali** sebagai migrasi aditif; jangan jalankan ulang schema/seed. Database yang sudah menjalankan migrasi pembayaran versi sebelumnya harus menjalankan `database/migrasi-qris.sql` **sekali**.
+Setup baru: `mysql -h 127.0.0.1 -P 3382 -u root < database/schema.sql` lalu `< database/seed.sql`. Seed menyertakan pilihan aktif BCA, Mandiri, BRI, dan QRIS serta menetapkan status pelanggan seed secara eksplisit. Untuk database enam tabel yang belum memiliki alur pembayaran, jalankan `database/migrasi-pembayaran-bank.sql` **sekali** sebagai migrasi aditif; jangan jalankan ulang schema/seed. Database yang sudah menjalankan migrasi pembayaran versi sebelumnya harus menjalankan `database/migrasi-qris.sql` **sekali**. Database lama juga harus menjalankan preflight duplikat email pada komentar `database/migrasi-pendaftaran-pelanggan.sql`, lalu menjalankan migrasi tersebut **sekali** untuk menambah email unik dan default status `pending`.
 
 **Perbarui seed dari data terkini:** jalankan `powershell -File database/dump-seed.ps1` untuk meregenerasi `database/seed.sql` (data-only) dari isi DB saat ini — berguna sebelum memindahkan proyek ke komputer lain agar datanya identik.
 
@@ -224,11 +227,13 @@ sequenceDiagram
     participant P as Halaman ber-data
 
     U->>L: POST email + kata_sandi
-    L->>DB: SELECT id, kata_sandi WHERE email=?
+    L->>DB: SELECT id, kata_sandi, status WHERE email=?
     DB-->>L: baris (atau kosong)
-    alt password_verify cocok
+    alt password_verify cocok dan status aktif
         L->>S: loginAdmin/Pelanggan(id)
         L-->>U: 302 redirect dashboard
+    else pelanggan pending/nonaktif
+        L-->>U: tampil pesan persetujuan/nonaktif
     else gagal
         L-->>U: tampil "Email atau kata sandi salah."
     end
@@ -238,15 +243,18 @@ sequenceDiagram
     alt belum login
         P-->>U: 302 redirect login.php
     else sudah login
+        P->>DB: pelanggan masih ada dan status aktif
         P->>DB: SELECT data (by id sesi)
         DB-->>P: data
         P-->>U: render halaman
     end
 ```
 
-- Sesi **admin & pelanggan terpisah** (`$_SESSION['admin_id']` int, `$_SESSION['pelanggan_id']` string) → bisa login dua area sekaligus.
-- Guard dipasang lewat **rantai config** (`admin-config.php`/`portal-config.php` memanggil `wajibLogin*()`), jadi setiap halaman ber-data otomatis terproteksi; halaman login standalone (tak memuat config) tetap bisa diakses.
+- Sesi **admin & pelanggan terpisah** (`$_SESSION['admin_id']` int, `$_SESSION['pelanggan_id']` string) dan ID sesi diregenerasi setelah login berhasil.
+- Guard dipasang lewat **rantai config** (`admin-config.php`/`portal-config.php` memanggil `wajibLogin*()`), lalu guard pelanggan memvalidasi ulang keberadaan dan status `aktif` pada setiap request. Halaman daftar/login standalone tetap publik.
 - Logout (`logout.php`) menghapus key sesi area itu lalu redirect ke login.
+
+**Alur pendaftaran:** `portal/daftar.php` hanya menampilkan paket aktif dan mengirim POST+CSRF ke `portal/aksi-daftar.php`. Handler memvalidasi semua field, memeriksa ulang paket aktif, membuat hash password, lalu di bawah advisory lock `rknet_id_pelanggan` menghasilkan ID `RKNET-YYYY-NNNNNN` dari suffix valid tertinggi global. Pelanggan disimpan dengan status `pending`; pendaftaran **tidak membuat tagihan**. Admin kemudian memilih transisi eksplisit `pending→aktif` (setujui) atau `pending→nonaktif` (tolak).
 
 ---
 
@@ -282,12 +290,13 @@ sequenceDiagram
 | `admin/aksi-paket.php` | tambah · edit · hapus (FK terpakai → flash gagal) |
 | `admin/aksi-rekening.php` | CRUD tujuan bank/QRIS; metode yang pernah dipakai dinonaktifkan |
 | `admin/aksi-notifikasi.php` | tambah · hapus |
-| `admin/aksi-pelanggan.php` | edit · toggle status (aktif↔nonaktif) |
+| `admin/aksi-pelanggan.php` | edit · status eksplisit (`pending→aktif/nonaktif`, `aktif→nonaktif`, `nonaktif→aktif`) dengan expected-status kondisional |
 | `admin/aksi-transaksi.php` | terima/tolak bukti berstatus `verifikasi`; penolakan wajib punya catatan |
 | `admin/aksi-pengaturan.php` | profil admin · ubah password · info situs |
 | `portal/aksi-profil.php` | edit info akun · ganti password |
 | `portal/aksi-paket.php` | ubah paket aktif (UPDATE `pelanggan.paket_id`) |
 | `portal/aksi-pembayaran.php` | pilih metode bank/QRIS aktif · validasi/unggah bukti · ajukan verifikasi |
+| `portal/aksi-daftar.php` | buat akun publik berstatus `pending` tanpa membuat invoice/tagihan |
 
 **Alur pembayaran bank/QRIS:**
 
@@ -331,7 +340,8 @@ flowchart LR
 ## 9. Keamanan
 
 - **Otentikasi:** `password_verify()` terhadap hash bcrypt (`password_hash`) di DB. Ganti password mem-verifikasi password lama.
-- **Proteksi halaman:** guard `wajibLogin*()` via rantai config; tanpa sesi → redirect login.
+- **Proteksi halaman:** guard `wajibLogin*()` via rantai config; pelanggan harus tetap ada dan berstatus `aktif`, jika tidak sesi dibersihkan dan diarahkan ke login.
+- **Pendaftaran:** email pelanggan unik; ID pelanggan dibuat di dalam MySQL advisory lock; akun baru berstatus `pending` sampai transisi persetujuan admin berhasil.
 - **CSRF:** setiap form tulis menyertakan token sesi (`tokenCsrf()`), diverifikasi `cekCsrf()` dengan `hash_equals`; gagal → HTTP 403.
 - **SQL Injection:** semua query parameter pakai **prepared statement** (mysqli, via helper `kueri`/`kueriSatu`/`kueriNilai`/`eksekusi` dengan `bind_param` otomatis); `LIMIT/OFFSET` di-cast integer.
 - **XSS:** output dinamis di-`htmlspecialchars()`.
@@ -350,6 +360,8 @@ flowchart LR
 flowchart TD
     subgraph Publik
       IDX["index.php (landing)"] --> LEG["legal.php"]
+      IDX --> REG["portal/daftar.php"]
+      REG -. POST .-> XREG["portal/aksi-daftar.php"]
     end
     subgraph Portal["Portal Pelanggan (login)"]
       PL["portal/login.php"] --> PD["dashboard.php"]
@@ -368,6 +380,7 @@ flowchart TD
       AD --> ALO["logout.php"]
     end
     IDX -. "Login" .-> PL
+    REG -. "setelah disetujui admin" .-> PL
     PL -. "Masuk sebagai Admin" .-> AL
 ```
 
@@ -379,8 +392,9 @@ flowchart TD
 2. Setup baru: import `database/schema.sql` lalu `database/seed.sql` ke `dbrknet` (host 127.0.0.1, port 3382, user `root`, tanpa password).
 3. DB enam tabel yang belum memiliki alur pembayaran: jalankan `database/migrasi-pembayaran-bank.sql` satu kali, bukan schema/seed.
 4. DB yang sudah menjalankan migrasi pembayaran versi sebelumnya: jalankan `database/migrasi-qris.sql` satu kali.
-5. Pastikan Apache memiliki izin tulis ke `storage/bukti-pembayaran/`.
-6. Buka `http://localhost:8282/rknet/`.
+5. DB lama: preflight duplikat email lalu jalankan `database/migrasi-pendaftaran-pelanggan.sql` satu kali.
+6. Pastikan Apache memiliki izin tulis ke `storage/bukti-pembayaran/`.
+7. Buka `http://localhost:8282/rknet/`.
 
 | Peran | Email | Password |
 |-------|-------|----------|
@@ -396,6 +410,6 @@ flowchart TD
 ## 12. Status Modul
 
 - Landing/legal: konten publik statis.
-- Portal pelanggan: auth, dashboard, transaksi, invoice milik sesi, pembayaran bank/QRIS, paket, dan profil.
-- Portal admin: auth, dashboard, pelanggan, paket, verifikasi pembayaran, rekening & QRIS, notifikasi, dan pengaturan.
+- Portal pelanggan: pendaftaran publik dengan persetujuan admin, auth pelanggan aktif, dashboard, transaksi, invoice milik sesi, pembayaran bank/QRIS, paket aktif, dan profil.
+- Portal admin: auth, dashboard, pelanggan dengan transisi persetujuan eksplisit, paket, verifikasi pembayaran, rekening & QRIS, notifikasi, dan pengaturan.
 - Data: 7 tabel aktif, aksi tulis ber-CSRF/PRG, serta pagination sisi server pada daftar utama.

@@ -18,7 +18,7 @@ $menuAdmin = [
 ?>
 <aside class="portal-sidebar" id="portalSidebar">
   <div class="portal-brand">
-    <img src="../assets/img/rknet.jpeg" alt="RKnet">
+    <img src="../assets/img/rknet.jpeg" alt="RKnet" class="logo-sidebar-rk">
     <span class="brand-divider"></span>
     <span class="badge bg-primary-subtle text-primary fw-600">ADMIN</span>
   </div>
