@@ -21,25 +21,32 @@ $sqlBase = "SELECT pl.id, pl.nama, pl.email, pl.hp, pl.alamat, pk.kecepatan AS p
             ORDER BY CASE WHEN pl.status = 'pending' THEN 0 ELSE 1 END, pl.id DESC";
 $sqlCount = "SELECT COUNT(*) FROM pelanggan pl $where";
 $hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
+
+// Data untuk lembar cetak: SEMUA pelanggan (hormati ?cari=), tanpa paginasi.
+$daftarCetak = kueri($sqlBase, $params);
+$jumlahAktifCetak = count(array_filter($daftarCetak, static fn(array $p): bool => $p['status'] === 'aktif'));
 ?>
 <!DOCTYPE html>
 <html lang="id">
 <?php include __DIR__ . '/partials/shell-head.php'; ?>
 <?php include __DIR__ . '/partials/shell-open.php'; ?>
 
-  <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-4">
+  <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between mb-4 no-print">
     <div>
       <h5 class="fw-700 mb-1">Manajemen Pelanggan</h5>
       <p class="text-muted small mb-0">Total <?= $hasil['total'] ?> pelanggan<?= $cari !== '' ? ' cocok' : ' terdaftar' ?>.</p>
     </div>
-    <form method="get" class="input-group cari-pelanggan">
-      <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
-      <input type="text" name="cari" class="form-control" placeholder="Cari nama / ID pelanggan..." value="<?= htmlspecialchars($cari) ?>" maxlength="150">
-      <button class="btn btn-rk" type="submit">Cari</button>
-    </form>
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+      <form method="get" class="input-group cari-pelanggan">
+        <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+        <input type="text" name="cari" class="form-control" placeholder="Cari nama / ID pelanggan..." value="<?= htmlspecialchars($cari) ?>" maxlength="150">
+        <button class="btn btn-rk" type="submit">Cari</button>
+      </form>
+      <button onclick="window.print()" class="btn btn-outline-primary"><i class="bi bi-printer me-1"></i>Cetak</button>
+    </div>
   </div>
 
-  <div class="kartu kartu-pad">
+  <div class="kartu kartu-pad no-print">
     <div class="table-responsive">
       <table class="table align-middle mb-0 tabel-portal">
         <thead>
@@ -164,5 +171,46 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
       document.getElementById('plAlamat').value = d.alamat || '';
     });
   </script>
+
+  <!-- Lembar cetak: seluruh pelanggan (hormati ?cari=), tidak terpengaruh paginasi -->
+  <div class="print-sheet">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3 pb-3 mb-3 border-bottom">
+      <div>
+        <h5 class="fw-700 mb-1">Laporan Data Pelanggan</h5>
+        <p class="text-muted small mb-0">
+          RKnet Indonesia • <?= tanggalIndonesia() ?>
+          <?= $cari !== '' ? ' • Pencarian: ' . htmlspecialchars($cari) : '' ?>
+        </p>
+      </div>
+      <div class="text-end">
+        <div class="fw-600">Total <?= count($daftarCetak) ?> pelanggan</div>
+        <div class="text-muted small"><?= $jumlahAktifCetak ?> aktif • <?= count($daftarCetak) - $jumlahAktifCetak ?> nonaktif/pending</div>
+      </div>
+    </div>
+    <table class="table align-middle mb-0">
+      <thead>
+        <tr><th style="width:50px">No</th><th>ID</th><th>Nama</th><th>Kontak</th><th>Paket</th><th>Bergabung</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <?php $no = 1; foreach ($daftarCetak as $p): $b = badgeStatus($p['status']); ?>
+        <tr>
+          <td><?= $no++ ?></td>
+          <td><?= htmlspecialchars($p['id']) ?></td>
+          <td class="fw-600"><?= htmlspecialchars($p['nama']) ?></td>
+          <td>
+            <div class="small"><?= htmlspecialchars($p['email']) ?></div>
+            <div class="text-muted" style="font-size:.78rem"><?= htmlspecialchars($p['hp']) ?></div>
+          </td>
+          <td><?= htmlspecialchars($p['paket']) ?></td>
+          <td class="text-muted small"><?= htmlspecialchars($p['bergabung']) ?></td>
+          <td><span class="badge <?= $b['kelas'] ?>"><?= $b['label'] ?></span></td>
+        </tr>
+        <?php endforeach; ?>
+        <?php if ($daftarCetak === []): ?>
+        <tr><td colspan="7" class="text-muted small text-center py-3">Tidak ada data pelanggan.</td></tr>
+        <?php endif; ?>
+      </tbody>
+    </table>
+  </div>
 
 <?php include __DIR__ . '/partials/shell-close.php'; ?>

@@ -99,12 +99,20 @@ body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)
 .logo-invoice-rws{height:42px;width:auto}
 .logo-invoice-divider{height:42px;background:rgba(6,37,110,.2)}
 
-/* Saat mencetak: sembunyikan shell & tombol, tampilkan kuitansi saja */
+/* Lembar cetak pada halaman pelanggan/transaksi: hanya tampil saat mencetak */
+.print-sheet{display:none}
+
+/* Saat mencetak: sembunyikan shell & tombol, tampilkan lembar cetak saja */
 @media print{
   .portal-sidebar,.portal-topbar,.sidebar-overlay,.no-print,#panelNotif{display:none !important}
   body.portal{background:#fff}
   .portal-content{padding:0}
-  .invoice-sheet{box-shadow:none;border:0;max-width:100%}
+  .invoice-sheet,.print-sheet{box-shadow:none;border:0;max-width:100%}
+  .print-sheet{display:block}
+  .print-sheet table{font-size:.8rem}
+  .print-sheet thead{display:table-header-group}
+  .print-sheet tfoot{display:table-footer-group}
+  .print-sheet tr{break-inside:avoid}
 }
 
 /* Cari pelanggan */
