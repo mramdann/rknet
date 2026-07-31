@@ -32,3 +32,17 @@ if (!function_exists('badgeStatus')) {
         };
     }
 }
+
+if (!function_exists('tanggalIndonesia')) {
+    /**
+     * Format tanggal menjadi "d MMM yyyy" Bahasa Indonesia (kosong = hari ini).
+     */
+    function tanggalIndonesia(string $tanggal = ''): string
+    {
+        $bulan = [1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'Mei', 6 => 'Jun',
+                  7 => 'Jul', 8 => 'Agu', 9 => 'Sep', 10 => 'Okt', 11 => 'Nov', 12 => 'Des'];
+        $ts = $tanggal === '' ? time() : strtotime($tanggal);
+        if ($ts === false) return $tanggal;
+        return date('d', $ts) . ' ' . $bulan[(int) date('n', $ts)] . ' ' . date('Y', $ts);
+    }
+}

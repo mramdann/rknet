@@ -45,10 +45,22 @@ foreach (kueri("SELECT id, nama, kecepatan, harga FROM paket WHERE status = 'akt
     $paketTersedia[] = $row;
 }
 
-// Feed notifikasi & informasi untuk panel offcanvas — presentasional (tetap statis)
-$daftarNotifikasi = [
-    ['tipe' => 'notifikasi', 'judul' => 'Pembayaran Berhasil', 'isi' => 'Tagihan INV/2026/06/008812 sebesar Rp100.000 telah dibayar.', 'waktu' => '15 Jun 2026, 09:14'],
-    ['tipe' => 'informasi',  'judul' => 'Internet Aktif',       'isi' => 'Paket 200 Mbps RKnet aktif hingga 15 Juli 2026.', 'waktu' => '15 Jun 2026, 09:15'],
-    ['tipe' => 'informasi',  'judul' => 'Promo Upgrade 500 Mbps', 'isi' => 'Nikmati internet 500 Mbps hanya Rp250.000/bulan. Unlimited!', 'waktu' => '10 Jun 2026, 12:00'],
-    ['tipe' => 'notifikasi', 'judul' => 'Pemeliharaan Sistem',  'isi' => 'Pemeliharaan terjadwal 20 Jun 2026, 01:00-03:00 WIB.', 'waktu' => '08 Jun 2026, 17:30'],
-];
+// Feed notifikasi & informasi untuk panel offcanvas — dari DB (broadcast + khusus pelanggan)
+$daftarNotifikasi = [];
+foreach (kueri(
+    "SELECT id AS idNotifikasi, judul, isi, tanggal, pelanggan_id, dibaca
+     FROM notifikasi
+     WHERE pelanggan_id IS NULL OR pelanggan_id = ?
+     ORDER BY id DESC",
+    [$idPelanggan]
+) as $row) {
+    $daftarNotifikasi[] = [
+        'id'     => (int) $row['idNotifikasi'],
+        'tipe'   => $row['pelanggan_id'] !== null ? 'notifikasi' : 'informasi',
+        'judul'  => $row['judul'],
+        'isi'    => $row['isi'],
+        'waktu'  => $row['tanggal'],
+        'dibaca' => (int) $row['dibaca'] === 1,
+    ];
+}
+$jumlahNotifikasiBelumDibaca = count(array_filter($daftarNotifikasi, static fn(array $n): bool => !$n['dibaca']));

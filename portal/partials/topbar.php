@@ -15,9 +15,12 @@ $inisial = mb_strtoupper(mb_substr($inisial, 0, 2));
     <h6 class="mb-0 fw-700"><?= htmlspecialchars($judulHalaman ?? 'Portal Pelanggan') ?></h6>
   </div>
   <div class="kanan">
-    <!-- Lonceng notifikasi membuka offcanvas -->
+    <!-- Lonceng notifikasi membuka offcanvas (badge tampil bila ada yang belum dibaca) -->
     <button class="topbar-ico" type="button" data-bs-toggle="offcanvas" data-bs-target="#panelNotif" aria-label="Notifikasi">
-      <i class="bi bi-bell"></i><span class="titik"></span>
+      <i class="bi bi-bell"></i>
+      <?php if ($jumlahNotifikasiBelumDibaca > 0): ?>
+        <span class="badge-notif" id="badgeNotif"><?= $jumlahNotifikasiBelumDibaca > 9 ? '9+' : $jumlahNotifikasiBelumDibaca ?></span>
+      <?php endif; ?>
     </button>
     <div class="dropdown">
       <button class="topbar-user btn p-0 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false">

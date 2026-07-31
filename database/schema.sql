@@ -4,10 +4,10 @@ USE dbrknet;
 
 DROP TABLE IF EXISTS tagihan;
 DROP TABLE IF EXISTS rekening_bank;
+DROP TABLE IF EXISTS notifikasi;
 DROP TABLE IF EXISTS pelanggan;
 DROP TABLE IF EXISTS paket;
 DROP TABLE IF EXISTS prospek, area;
-DROP TABLE IF EXISTS notifikasi;
 DROP TABLE IF EXISTS pengaturan;
 DROP TABLE IF EXISTS admin;
 
@@ -73,12 +73,15 @@ CREATE TABLE tagihan (
 );
 
 CREATE TABLE notifikasi (
-    id       INT AUTO_INCREMENT PRIMARY KEY,
-    judul    VARCHAR(150) NOT NULL,
-    isi      TEXT         NOT NULL,
-    target   VARCHAR(80)  NOT NULL,
-    tanggal  VARCHAR(20)  NOT NULL,
-    status   VARCHAR(20)  NOT NULL DEFAULT 'draft'
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    judul        VARCHAR(150) NOT NULL,
+    isi          TEXT         NOT NULL,
+    pelanggan_id VARCHAR(30)  NULL,
+    target       VARCHAR(80)  NOT NULL,
+    tanggal      VARCHAR(20)  NOT NULL,
+    status       VARCHAR(20)  NOT NULL DEFAULT 'draft',
+    dibaca       TINYINT(1)   NOT NULL DEFAULT 0,
+    CONSTRAINT fk_notifikasi_pelanggan FOREIGN KEY (pelanggan_id) REFERENCES pelanggan(id)
 );
 
 CREATE TABLE pengaturan (

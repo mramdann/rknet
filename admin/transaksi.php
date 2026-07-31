@@ -24,6 +24,9 @@ $sqlBase = "SELECT t.id AS idTagihan, t.no_invoice AS noInvoice, pl.nama AS pela
 $sqlCount = "SELECT COUNT(*) FROM tagihan t $where";
 $hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
 $paramFilter = $status !== '' ? ['status' => $status] : [];
+
+// Data untuk modal "Buat Transaksi"
+$daftarPelangganAktif = kueri("SELECT id, nama FROM pelanggan WHERE status = 'aktif' ORDER BY nama");
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -35,12 +38,16 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
       <h5 class="fw-700 mb-1">Transaksi & Tagihan</h5>
       <p class="text-muted small mb-0">Kelola status pembayaran pelanggan.</p>
     </div>
-    <div class="btn-group" role="group">
-      <a href="?status=" class="btn btn-sm <?= $status === '' ? 'btn-rk' : 'btn-outline-primary' ?>">Semua</a>
-      <a href="?status=menunggu" class="btn btn-sm <?= $status === 'menunggu' ? 'btn-rk' : 'btn-outline-primary' ?>">Menunggu</a>
-      <a href="?status=verifikasi" class="btn btn-sm <?= $status === 'verifikasi' ? 'btn-rk' : 'btn-outline-primary' ?>">Verifikasi</a>
-      <a href="?status=ditolak" class="btn btn-sm <?= $status === 'ditolak' ? 'btn-rk' : 'btn-outline-primary' ?>">Ditolak</a>
-      <a href="?status=lunas" class="btn btn-sm <?= $status === 'lunas' ? 'btn-rk' : 'btn-outline-primary' ?>">Lunas</a>
+    <div class="d-flex flex-wrap gap-2">
+      <div class="btn-group" role="group">
+        <a href="?status=" class="btn btn-sm <?= $status === '' ? 'btn-rk' : 'btn-outline-primary' ?>">Semua</a>
+        <a href="?status=menunggu" class="btn btn-sm <?= $status === 'menunggu' ? 'btn-rk' : 'btn-outline-primary' ?>">Menunggu</a>
+        <a href="?status=verifikasi" class="btn btn-sm <?= $status === 'verifikasi' ? 'btn-rk' : 'btn-outline-primary' ?>">Verifikasi</a>
+        <a href="?status=ditolak" class="btn btn-sm <?= $status === 'ditolak' ? 'btn-rk' : 'btn-outline-primary' ?>">Ditolak</a>
+        <a href="?status=lunas" class="btn btn-sm <?= $status === 'lunas' ? 'btn-rk' : 'btn-outline-primary' ?>">Lunas</a>
+      </div>
+      <button class="btn btn-rk" type="button" data-bs-toggle="modal" data-bs-target="#modalBuatTransaksi">
+        <i class="bi bi-plus-lg me-1"></i>Buat Transaksi</button>
     </div>
   </div>
 
@@ -110,5 +117,64 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
       <?php tampilPaginasi($hasil['hal'], $hasil['totalHal'], $paramFilter); ?>
     </div>
   </div>
+
+  <!-- Modal buat transaksi -->
+  <div class="modal fade" id="modalBuatTransaksi" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 rounded-4 overflow-hidden">
+        <div class="modal-header rk-modal-head text-white border-0">
+          <h5 class="modal-title fw-700 mb-0">Buat Transaksi Baru</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form method="post" action="aksi-transaksi.php" class="row g-3">
+            <input type="hidden" name="csrf" value="<?= tokenCsrf() ?>">
+            <input type="hidden" name="aksi" value="buat">
+            <div class="col-12">
+              <label class="form-label fw-500 small">Tujuan</label>
+              <select name="jenis_target" id="jenisTarget" class="form-select">
+                <option value="satu">Satu pelanggan</option>
+                <option value="semua">Semua pelanggan aktif</option>
+              </select>
+            </div>
+            <div class="col-12" id="blokPilihPelanggan">
+              <label class="form-label fw-500 small">Pelanggan</label>
+              <select name="pelanggan_id" class="form-select">
+                <option value="">— Pilih pelanggan —</option>
+                <?php foreach ($daftarPelangganAktif as $p): ?>
+                  <option value="<?= htmlspecialchars($p['id']) ?>"><?= htmlspecialchars($p['nama']) ?> (<?= htmlspecialchars($p['id']) ?>)</option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-500 small">Tanggal</label>
+              <input type="date" name="tanggal" class="form-control" value="<?= date('Y-m-d') ?>">
+            </div>
+            <div class="col-12">
+              <p class="text-muted small mb-0"><i class="bi bi-info-circle me-1"></i>Paket & nominal otomatis mengikuti paket yang disubscribe tiap pelanggan.</p>
+            </div>
+            <div class="col-12 d-grid mt-2">
+              <button type="submit" class="btn btn-rk btn-lg">Buat Transaksi</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Modal buat transaksi: tampilkan pilihan pelanggan hanya saat "satu pelanggan".
+    (function () {
+      const jenisTarget   = document.getElementById('jenisTarget');
+      const blokPelanggan = document.getElementById('blokPilihPelanggan');
+      const ubahTarget = () => blokPelanggan.classList.toggle('d-none', jenisTarget.value !== 'satu');
+      jenisTarget.addEventListener('change', ubahTarget);
+      document.getElementById('modalBuatTransaksi').addEventListener('shown.bs.modal', () => {
+        document.querySelector('#modalBuatTransaksi select[name="pelanggan_id"]').value = '';
+        ubahTarget();
+      });
+      ubahTarget();
+    })();
+  </script>
 
 <?php include __DIR__ . '/partials/shell-close.php'; ?>

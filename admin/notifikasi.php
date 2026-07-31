@@ -16,6 +16,9 @@ $sqlBase  = "SELECT id, judul, isi, target, tanggal, status FROM notifikasi $whe
 $sqlCount = "SELECT COUNT(*) FROM notifikasi $where";
 $hasil = ambilPaginasi($sqlBase, $sqlCount, $params);
 $paramFilter = $status !== '' ? ['status' => $status] : [];
+
+// Pelanggan aktif untuk target per-pelanggan
+$daftarPelangganAktif = kueri("SELECT id, nama FROM pelanggan WHERE status = 'aktif' ORDER BY nama");
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -91,11 +94,22 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
             </div>
             <div class="col-12">
               <label class="form-label fw-500 small">Target</label>
-              <select name="target" class="form-select">
-                <option>Semua pelanggan</option>
-                <option>Pelanggan aktif</option>
-                <option>Pelanggan baru</option>
-              </select>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="target_mode" value="semua" id="targetSemua" checked>
+                <label class="form-check-label" for="targetSemua">Kirim ke semua pelanggan</label>
+              </div>
+              <div id="blokPilihPelanggan">
+                <label class="form-label fw-500 small">Pilih pelanggan (satu atau lebih)</label>
+                <div class="border rounded-3 p-2 mb-2" style="max-height:200px;overflow-y:auto;background:#fff">
+                  <?php foreach ($daftarPelangganAktif as $p): ?>
+                    <div class="form-check">
+                      <input class="form-check-input target-pelanggan" type="checkbox" name="pelanggan_id[]" value="<?= htmlspecialchars($p['id']) ?>" id="plg-<?= htmlspecialchars($p['id']) ?>">
+                      <label class="form-check-label small" for="plg-<?= htmlspecialchars($p['id']) ?>"><?= htmlspecialchars($p['nama']) ?> (<?= htmlspecialchars($p['id']) ?>)</label>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+                <div class="form-text" id="infoTarget">Semua pelanggan aktif akan menerima notifikasi ini.</div>
+              </div>
             </div>
             <div class="col-12">
               <label class="form-label fw-500 small">Isi Pesan</label>
@@ -109,5 +123,34 @@ $paramFilter = $status !== '' ? ['status' => $status] : [];
       </div>
     </div>
   </div>
+
+  <script>
+    // Modal tulis notifikasi: pilih semua pelanggan (broadcast) atau pelanggan tertentu.
+    (function () {
+      const cbSemua = document.getElementById('targetSemua');
+      const blok    = document.getElementById('blokPilihPelanggan');
+      const kotak   = blok.querySelectorAll('input.target-pelanggan');
+      const info    = document.getElementById('infoTarget');
+      const sinkron = () => {
+        const semua = cbSemua.checked;
+        blok.classList.toggle('d-none', semua);
+        kotak.forEach((c) => { c.disabled = semua; });
+        if (semua) {
+          info.textContent = 'Semua pelanggan aktif akan menerima notifikasi ini.';
+        } else {
+          const n = [...kotak].filter((c) => c.checked).length;
+          info.textContent = n + ' pelanggan dipilih.';
+        }
+      };
+      cbSemua.addEventListener('change', sinkron);
+      kotak.forEach((c) => c.addEventListener('change', sinkron));
+      document.getElementById('modalTulisNotif').addEventListener('shown.bs.modal', () => {
+        cbSemua.checked = true;
+        kotak.forEach((c) => { c.checked = false; });
+        sinkron();
+      });
+      sinkron();
+    })();
+  </script>
 
 <?php include __DIR__ . '/partials/shell-close.php'; ?>
