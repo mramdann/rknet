@@ -3,7 +3,7 @@
     <div class="row g-4">
       <div class="col-lg-5">
         <div class="footer-brand d-flex align-items-center gap-2 mb-3">
-          <img src="assets/img/rknet.jpeg" alt="RKnet" class="footer-logo footer-logo-rk">
+          <img src="assets/img/rknet2.jpeg" alt="CV. Rizky Win Solution" class="footer-logo footer-logo-rws">
         </div>
         <p class="text-white-50 mb-1"><?= htmlspecialchars($site['company']) ?></p>
       </div>
