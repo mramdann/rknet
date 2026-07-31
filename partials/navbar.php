@@ -2,8 +2,6 @@
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
       <img src="assets/img/rknet.jpeg" alt="RKnet" class="logo-navbar-rk">
-      <span class="brand-divider"></span>
-      <img src="assets/img/rknet2.jpeg" alt="RWS Solution" class="logo-navbar-rws">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>

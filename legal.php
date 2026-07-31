@@ -47,8 +47,6 @@ $dokumen = $dokumenTersedia[$dok];
     <div class="container">
       <a href="index.php" class="navbar-brand d-flex align-items-center gap-2">
         <img src="assets/img/rknet.jpeg" alt="RKnet" class="logo-legal-rk">
-        <span class="brand-divider logo-legal-divider"></span>
-        <img src="assets/img/rknet2.jpeg" alt="RWS Solution" class="logo-legal-rws">
       </a>
       <a href="index.php" class="btn btn-light"><i class="bi bi-arrow-left me-1"></i>Kembali ke Beranda</a>
     </div>

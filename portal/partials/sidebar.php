@@ -12,8 +12,6 @@ $menuPortal = [
 <aside class="portal-sidebar" id="portalSidebar">
   <div class="portal-brand">
     <img src="../assets/img/rknet.jpeg" alt="RKnet" class="logo-sidebar-rk">
-    <span class="brand-divider"></span>
-    <img src="../assets/img/rknet2.jpeg" alt="RWS Solution" class="logo-sidebar-rws">
   </div>
   <ul class="portal-nav">
     <?php foreach ($menuPortal as $kunci => $menu): ?>

@@ -14,10 +14,8 @@ $judulHalaman = 'Daftar Akun';
   <div class="auth-wrap">
     <div class="auth-kartu auth-kartu-daftar kartu">
       <div class="text-center mb-4">
-        <div class="d-inline-flex align-items-center gap-2 mb-3">
+        <div class="d-inline-block mb-3">
           <img src="../assets/img/rknet.jpeg" alt="RKnet" class="auth-logo-rk">
-          <span class="auth-divider"></span>
-          <img src="../assets/img/rknet2.jpeg" alt="RWS Solution" class="auth-logo-rws">
         </div>
         <h4 class="fw-700 mb-1">Daftar Akun Pelanggan</h4>
         <p class="text-muted small mb-0">Akun dapat digunakan setelah disetujui admin RKnet.</p>

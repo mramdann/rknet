@@ -12,5 +12,5 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Custom -->
-    <link href="assets/css/style.css?v=12" rel="stylesheet">
+    <link href="assets/css/style.css?v=16" rel="stylesheet">
 </head>

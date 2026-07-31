@@ -8,8 +8,6 @@ body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)
 .auth-kartu{width:100%;max-width:420px;padding:2.5rem 2rem}
 .auth-kartu-daftar{max-width:720px}
 .auth-logo-rk{height:68px;width:auto}
-.auth-logo-rws{height:56px;width:auto}
-.auth-divider{display:inline-block;width:1px;height:52px;background:rgba(6,37,110,.2)}
 .auth-form .input-group-text{border-right:0;color:var(--rk-blue)}
 .auth-form .form-control{border-left:0}
 
@@ -24,7 +22,6 @@ body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)
 }
 .portal-brand{padding:0 1.5rem 1.25rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid #f0f2f7}
 .portal-brand .logo-sidebar-rk{height:50px;width:auto}
-.portal-brand .logo-sidebar-rws{height:40px;width:auto}
 .portal-brand .brand-divider{display:inline-block;width:1px;height:40px;background:rgba(6,37,110,.2)}
 .portal-nav{list-style:none;margin:1rem 0 0;padding:0 .75rem;flex:1}
 .portal-nav a{
@@ -141,10 +138,7 @@ body.portal-auth{background:linear-gradient(135deg,var(--rk-blue-soft),#fff 55%)
   .auth-wrap{padding:1rem}
   .auth-kartu{padding:2rem 1.25rem}
   .auth-logo-rk{height:54px}
-  .auth-logo-rws{height:44px}
-  .auth-divider{height:40px}
   .portal-brand .logo-sidebar-rk{height:40px}
-  .portal-brand .logo-sidebar-rws{height:32px}
   .portal-brand .brand-divider{height:32px}
   .logo-invoice-rk{height:44px}
   .logo-invoice-rws{height:34px}
