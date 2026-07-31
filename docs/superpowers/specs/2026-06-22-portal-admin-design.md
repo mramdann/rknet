@@ -1,4 +1,4 @@
-# Portal Admin Starlite — UI Design (Inti)
+# Portal Admin RKnet — UI Design (Inti)
 
 **Date:** 2026-06-22
 **Status:** Approved design
@@ -6,7 +6,7 @@
 
 ## Goal
 
-Membangun portal admin Starlite untuk mengelola pelanggan, paket, dan transaksi, memakai PHP native + Bootstrap 5, gaya Modern Biru, reuse shell portal pelanggan.
+Membangun portal admin RKnet untuk mengelola pelanggan, paket, dan transaksi, memakai PHP native + Bootstrap 5, gaya Modern Biru, reuse shell portal pelanggan.
 
 ## Constraints & Decisions
 
@@ -60,4 +60,4 @@ Reuse pola portal: sidebar putih + topbar + konten abu (`portal.css`). Sidebar a
 ## Out of Scope
 
 - Auth nyata, database, proses Edit/Tandai Lunas.
-- Modul Lead Cek Jangkauan, Area, Notifikasi, Pengaturan (tahap berikutnya).
+- Modul Notifikasi dan Pengaturan (tahap berikutnya).

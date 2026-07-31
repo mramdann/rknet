@@ -7,11 +7,10 @@ $menuAdmin = [
         'dashboard' => ['Dashboard', 'bi-grid-1x2',      'dashboard.php'],
         'pelanggan' => ['Pelanggan', 'bi-people',        'pelanggan.php'],
         'paket'     => ['Paket',     'bi-box-seam',       'paket.php'],
+        'rekening'  => ['Rekening & QRIS', 'bi-bank',      'rekening.php'],
         'transaksi' => ['Transaksi', 'bi-receipt-cutoff', 'transaksi.php'],
     ],
     'LAINNYA' => [
-        'lead'       => ['Lead',       'bi-person-lines-fill', 'lead.php'],
-        'area'       => ['Area',       'bi-geo-alt',           'area.php'],
         'notifikasi' => ['Notifikasi', 'bi-bell',              'notifikasi.php'],
         'pengaturan' => ['Pengaturan', 'bi-gear',              'pengaturan.php'],
     ],

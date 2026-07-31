@@ -22,13 +22,13 @@ $paketAktif = kueriSatu(
 );
 $paketAktif['masaAktif'] = '15 Juli 2026';
 
-// Riwayat transaksi pelanggan (urut sesuai seed: Jun, Mei, Apr, Jul)
+// Riwayat transaksi pelanggan, terbaru lebih dahulu.
 $daftarTransaksi = kueri(
-    "SELECT t.no_invoice AS noInvoice, pk.nama AS paket, pk.kecepatan AS kecepatan,
-            t.harga, t.tanggal, t.status
-     FROM tagihan t JOIN paket pk ON pk.id = t.paket_id
+    "SELECT t.id AS idTagihan, t.no_invoice AS noInvoice, pk.nama AS paket, pk.kecepatan AS kecepatan,
+             t.harga, t.tanggal, t.status
+     FROM tagihan t LEFT JOIN paket pk ON pk.id = t.paket_id
      WHERE t.pelanggan_id = ?
-     ORDER BY t.id",
+     ORDER BY t.id DESC",
     [$idPelanggan]
 );
 

@@ -1,4 +1,4 @@
-# Auth Starlite — Design (Fase 2, Sub-proyek 1)
+# Auth RKnet — Design (Fase 2, Sub-proyek 1)
 
 **Date:** 2026-06-22
 **Status:** Approved design
@@ -14,7 +14,7 @@ Mengganti login mock menjadi autentikasi nyata: verifikasi email+password ke dat
 - Tabel `pelanggan` ditambah kolom `kata_sandi VARCHAR(255)`; di-seed hash password demo.
 - Session admin & pelanggan **terpisah** (key session beda) → bisa login di dua area sekaligus.
 - **Guard lewat rantai config**: `admin-config.php`/`portal-config.php` memanggil guard di awal; halaman login tidak memuat config sehingga tetap bisa diakses.
-- `$idPelanggan` di portal jadi **id pelanggan yang login** (bukan hardcode `STL-2024-008812`). `$admin` di admin diambil berdasarkan id session (bukan `LIMIT 1`).
+- `$idPelanggan` di portal jadi **id pelanggan yang login** (bukan hardcode `RKNET-2024-008812`). `$admin` di admin diambil berdasarkan id session (bukan `LIMIT 1`).
 - Login gagal → pesan generik di form (tidak membocorkan field mana yang salah). Akses tanpa login → redirect ke login.
 - Kredensial demo ditampilkan sebagai hint di halaman login.
 - **Tanpa** CSRF token (login low-risk; CSRF dibahas di sub-proyek Admin CRUD), **tanpa** registrasi/reset password (YAGNI).

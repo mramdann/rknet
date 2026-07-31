@@ -1,8 +1,8 @@
-# Pagination Starlite — Design (sisi-server)
+# Pagination RKnet — Design (sisi-server)
 
 **Date:** 2026-06-22
 **Status:** Approved design
-**Scope:** Pagination sisi-server (LIMIT/OFFSET) untuk tabel daftar, dengan cari/filter dipindah ke server (GET). Berlaku untuk 4 tabel admin + 1 tabel portal.
+**Scope:** Pagination sisi-server (LIMIT/OFFSET) untuk tabel daftar, dengan cari/filter dipindah ke server (GET). Berlaku untuk 3 tabel admin + 1 tabel portal.
 
 ## Goal
 
@@ -13,7 +13,7 @@ Membatasi tabel daftar menjadi per-halaman (5 baris) dengan navigasi halaman, da
 - Pagination **sisi-server**: query `LIMIT/OFFSET` + `COUNT` total; halaman via `?hal=N`.
 - Cari/filter pindah ke **GET** (query string), terikat sebagai parameter prepared statement.
 - **Page size = 5** (konstan), agar pagination terlihat dengan data seed kecil.
-- Tabel yang dipaginasi: admin **pelanggan, transaksi, lead, notifikasi**; portal **riwayat transaksi**. Kartu (paket, area) tidak dipaginasi.
+- Tabel yang dipaginasi: admin **pelanggan, transaksi, notifikasi**; portal **riwayat transaksi**. Kartu paket tidak dipaginasi.
 - Dashboard tidak berubah: kartu "Terbaru" tetap pakai array config (recent-N).
 - `LIMIT`/`OFFSET` di-interpolasi sebagai integer hasil `(int)` (aman); filter value via bound params. Output di link/value di-`htmlspecialchars()`.
 - `?hal` di luar rentang di-clamp ke `1..totalHalaman`. Filter kosong = tampil semua.
@@ -23,10 +23,9 @@ Membatasi tabel daftar menjadi per-halaman (5 baris) dengan navigasi halaman, da
 
 ```
 pagination.php                # baru — halamanSaatIni(), ambilPaginasi(), tampilPaginasi()
-admin-config.php              # ubah — hapus $daftarLead & $daftarNotifikasi (pindah ke halaman; hanya dipakai di sana)
+admin-config.php              # ubah — hapus $daftarNotifikasi (pindah ke halaman; hanya dipakai di sana)
 admin/pelanggan.php           # ubah — query paginasi+cari (GET), nav, hapus JS cari
 admin/transaksi.php           # ubah — query paginasi+filter status (GET), nav, hapus JS filter
-admin/lead.php                # ubah — query paginasi+cari+filter (GET), nav, hapus JS cari/filter
 admin/notifikasi.php          # ubah — query paginasi+filter status (GET), nav, hapus JS filter
 portal/transaksi.php          # ubah — query paginasi (GET), nav
 ```
@@ -76,10 +75,6 @@ Tiap halaman daftar:
 - Query base: join pelanggan & paket, ORDER BY t.id, termasuk `t.id AS idTagihan`.
 - Filter sebagai grup link (`?status=lunas` dst.), mempertahankan di nav. Hapus JS filter.
 
-### admin/lead.php
-- Filter: `?cari=` (nama/area LIKE) + `?status=` (baru/dihubungi/…). WHERE gabungan.
-- Form GET: input cari + select status (submit on change / tombol). Hapus JS cari/filter.
-
 ### admin/notifikasi.php
 - Filter: `?status=` (terkirim|draft|""). WHERE bila diisi.
 - Filter grup link. Hapus JS filter.
@@ -90,7 +85,7 @@ Tiap halaman daftar:
 
 ## admin-config.php
 
-Hapus blok query `$daftarLead` & `$daftarNotifikasi` (kini di-query di halaman lead/notifikasi dengan paginasi; tidak dipakai halaman lain). `$daftarPelanggan` & `$daftarTagihan` tetap (dipakai dashboard); halaman pelanggan/transaksi memakai query paginasi sendiri. Tambah `require_once pagination.php`.
+Hapus blok query `$daftarNotifikasi` (kini di-query di halaman notifikasi dengan paginasi; tidak dipakai halaman lain). `$daftarPelanggan` & `$daftarTagihan` tetap (dipakai dashboard); halaman pelanggan/transaksi memakai query paginasi sendiri. Tambah `require_once pagination.php`.
 
 ## Error Handling
 
@@ -101,7 +96,7 @@ Hapus blok query `$daftarLead` & `$daftarNotifikasi` (kini di-query di halaman l
 
 ## Out of Scope
 
-- Paginasi kartu paket & area (jumlah kecil).
+- Paginasi kartu paket (jumlah kecil).
 - Pengurutan kolom (sort) yang bisa diklik.
 - Pagination dengan AJAX (pakai reload halaman biasa).
 - Per-page size yang bisa dipilih pengguna.

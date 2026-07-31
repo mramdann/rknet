@@ -5,8 +5,8 @@ $ErrorActionPreference = 'Stop'
 
 $dump = 'D:\WebServer\xampp82\mysql\bin\mysqldump.exe'
 $seed = Join-Path $PSScriptRoot 'seed.sql'
-# Urutan tabel aman FK: paket -> pelanggan -> tagihan, sisanya bebas.
-$tabel = 'paket', 'pelanggan', 'tagihan', 'prospek', 'area', 'notifikasi', 'pengaturan', 'admin'
+# Urutan tabel aman untuk seluruh foreign key.
+$tabel = 'admin', 'paket', 'pelanggan', 'rekening_bank', 'tagihan', 'notifikasi', 'pengaturan'
 
 $header = @(
     '-- seed.sql - data awal dbrknet (regenerasi dari DB via database/dump-seed.ps1).',

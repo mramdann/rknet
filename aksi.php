@@ -17,7 +17,8 @@ function cekCsrf(): void
         return;
     }
     mulaiSesi();
-    if (!hash_equals($_SESSION['csrf'] ?? '', $_POST['csrf'] ?? '')) {
+    $tokenDikirim = $_POST['csrf'] ?? null;
+    if (!is_string($tokenDikirim) || !hash_equals($_SESSION['csrf'] ?? '', $tokenDikirim)) {
         http_response_code(403);
         exit('CSRF token tidak valid.');
     }

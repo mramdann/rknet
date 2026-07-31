@@ -85,11 +85,11 @@ $badgePaket = badgeStatus($paketAktif['status']);
             $b = badgeStatus($t['status']); ?>
           <tr>
             <td class="fw-500"><?= htmlspecialchars($t['noInvoice']) ?></td>
-            <td><?= htmlspecialchars($t['paket']) ?></td>
+            <td><?= htmlspecialchars($t['paket'] ?? 'Paket tidak tersedia') ?></td>
             <td class="text-muted"><?= htmlspecialchars($t['tanggal']) ?></td>
             <td class="fw-600"><?= formatRupiah($t['harga']) ?></td>
             <td><span class="badge <?= $b['kelas'] ?>"><?= $b['label'] ?></span></td>
-            <td class="text-end"><a href="invoice.php" class="btn btn-sm btn-light">Detail</a></td>
+            <td class="text-end"><a href="invoice.php?id=<?= (int) $t['idTagihan'] ?>" class="btn btn-sm btn-light">Detail</a></td>
           </tr>
           <?php endforeach; ?>
         </tbody>

@@ -1,4 +1,4 @@
-# Admin CRUD Starlite — Design (Fase 2, Sub-proyek 2)
+# Admin CRUD RKnet — Design (Fase 2, Sub-proyek 2)
 
 **Date:** 2026-06-22
 **Status:** Approved design
@@ -6,7 +6,7 @@
 
 ## Goal
 
-Mengubah semua aksi admin yang masih mock menjadi operasi DB nyata: tambah/edit/hapus paket, area, notifikasi; edit & toggle status pelanggan; tandai lunas tagihan; tandai dihubungi lead; simpan pengaturan (profil admin, ubah password, info situs). Aman (CSRF + guard login) dan ramah (flash + PRG).
+Mengubah semua aksi admin yang masih mock menjadi operasi DB nyata: tambah/edit/hapus paket dan notifikasi; edit & toggle status pelanggan; tandai lunas tagihan; simpan pengaturan (profil admin, ubah password, info situs). Aman (CSRF + guard login) dan ramah (flash + PRG).
 
 ## Constraints & Decisions
 
@@ -15,7 +15,7 @@ Mengubah semua aksi admin yang masih mock menjadi operasi DB nyata: tambah/edit/
 - **Flash message**: hasil aksi (sukses/gagal) disimpan di session, ditampilkan sekali di atas konten admin.
 - Handler diletakkan di folder `admin/` (bukan subfolder) agar redirect relatif `login.php`/`<list>.php` benar.
 - Query pakai **prepared statement** (PDO). Guard `wajibLoginAdmin()` di tiap handler.
-- **Hapus**: paket, area, notifikasi punya tombol Hapus (konfirmasi `confirm()` JS). Pelanggan **tidak** dihapus (punya FK tagihan) — hanya toggle aktif/nonaktif.
+- **Hapus**: paket dan notifikasi punya tombol Hapus (konfirmasi `confirm()` JS). Pelanggan **tidak** dihapus (punya FK tagihan) — hanya toggle aktif/nonaktif.
 - Hapus paket yang masih dipakai (FK `pelanggan.paket_id`/`tagihan.paket_id`) → tangkap `PDOException`, flash error.
 - Ubah password admin pakai `password_hash()` + verifikasi password lama dengan `password_verify()`.
 - Validasi dasar server-side (field wajib tak kosong, harga numerik). Output di-`htmlspecialchars()`.
@@ -27,18 +27,14 @@ Mengubah semua aksi admin yang masih mock menjadi operasi DB nyata: tambah/edit/
 aksi.php                       # baru — tokenCsrf(), cekCsrf(), setFlash(), tampilFlash()
 admin/partials/shell-open.php  # ubah — panggil tampilFlash() di atas konten
 admin/aksi-paket.php           # baru — tambah/edit/hapus paket
-admin/aksi-area.php            # baru — tambah/edit/hapus area
 admin/aksi-notifikasi.php      # baru — tambah/hapus notifikasi
 admin/aksi-pelanggan.php       # baru — edit + toggle status pelanggan
 admin/aksi-transaksi.php       # baru — tandai lunas
-admin/aksi-lead.php            # baru — tandai dihubungi
 admin/aksi-pengaturan.php      # baru — simpan profil / ubah password / info situs
 admin/paket.php                # ubah — form modal jadi POST nyata + tombol hapus + id
-admin/area.php                 # ubah — idem
 admin/notifikasi.php           # ubah — form tulis POST nyata + tombol hapus + id
 admin/pelanggan.php            # ubah — form edit + toggle POST nyata + id
 admin/transaksi.php            # ubah — tombol Tandai Lunas jadi form POST + id tagihan
-admin/lead.php                 # ubah — tombol Tandai Dihubungi jadi form POST + id prospek
 admin/pengaturan.php           # ubah — 3 form jadi POST nyata
 ```
 
@@ -76,8 +72,6 @@ Akses GET langsung ke handler (tanpa POST) → cekCsrf lolos (karena hanya cek s
 - `hapus`: DELETE WHERE id = ? (tangkap FK error → flash danger).
 - `paket.php`: modal tambah/edit jadi `<form method=post action=aksi-paket.php>` dengan hidden `csrf`, `aksi`, `id` (saat edit). Tiap kartu tambah form hapus kecil (`confirm()`).
 
-**Area** (`aksi-area.php` → `area.php`): tambah/edit/hapus (nama, kota, status). Sama polanya; area tanpa FK.
-
 **Notifikasi** (`aksi-notifikasi.php` → `notifikasi.php`):
 - `tambah`: INSERT (judul, isi, target, tanggal = tanggal hari ini string, status = 'terkirim').
 - `hapus`: DELETE WHERE id = ?.
@@ -92,10 +86,6 @@ Akses GET langsung ke handler (tanpa POST) → cekCsrf lolos (karena hanya cek s
 - `lunas`: UPDATE status = 'lunas' WHERE id = ?.
 - `transaksi.php`: tombol "Tandai Lunas" jadi `<form method=post>` dgn hidden `id` tagihan + `csrf`. (Hapus JS mock lama.) Perlu kolom `id` tagihan ikut di-query di `admin-config.php` (`t.id`).
 
-**Lead** (`aksi-lead.php` → `lead.php`):
-- `dihubungi`: UPDATE status = 'dihubungi' WHERE id = ?.
-- `lead.php`: tombol "Tandai Dihubungi" jadi form POST dgn hidden id prospek + `csrf`. (Hapus JS mock.)
-
 **Pengaturan** (`aksi-pengaturan.php` → `pengaturan.php`):
 - `profil`: UPDATE admin SET nama, email WHERE id = (admin login).
 - `password`: verifikasi password lama (`password_verify`) → bila cocok UPDATE kata_sandi = `password_hash(baru)`, else flash danger.
@@ -104,7 +94,7 @@ Akses GET langsung ke handler (tanpa POST) → cekCsrf lolos (karena hanya cek s
 
 ## Perubahan admin-config.php
 
-`$daftarTagihan` query tambah `t.id AS idTagihan` (dibutuhkan form tandai lunas). `$daftarPaket`, `$daftarArea`, `$daftarNotifikasi` query tambah `id` (dibutuhkan form edit/hapus). `$daftarLead` & `$daftarPelanggan` sudah punya `id`.
+`$daftarTagihan` query tambah `t.id AS idTagihan` (dibutuhkan form tandai lunas). `$daftarPaket` dan `$daftarNotifikasi` query tambah `id` (dibutuhkan form edit/hapus). `$daftarPelanggan` sudah punya `id`.
 
 ## Data Flow
 
@@ -122,5 +112,5 @@ Halaman list render form (hidden `csrf` = `tokenCsrf()`, `aksi`, `id`) → submi
 
 - Aksi portal pelanggan (edit profil, pilih paket) — sub-proyek 3.
 - Hapus pelanggan (pakai toggle nonaktif).
-- Hapus/edit tagihan & lead selain transisi status di atas.
+- Hapus/edit tagihan selain transisi status di atas.
 - Pagination, audit log, validasi lanjutan (format email/regex ketat), upload berkas.

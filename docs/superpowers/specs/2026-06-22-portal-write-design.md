@@ -1,4 +1,4 @@
-# Portal Write Starlite — Design (Fase 2, Sub-proyek 3)
+# Portal Write RKnet — Design (Fase 2, Sub-proyek 3)
 
 **Date:** 2026-06-22
 **Status:** Approved design

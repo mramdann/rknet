@@ -1,4 +1,4 @@
-# Portal Pelanggan Starlite — Implementation Plan
+# Portal Pelanggan RKnet — Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: superpowers:executing-plans. Steps use checkbox (`- [ ]`).
 
@@ -12,7 +12,7 @@
 
 - Nama fungsi/variabel domain & komentar: Bahasa Indonesia.
 - UI only; tombol = navigasi antar halaman.
-- Branding Starlite + Weave, PT Integrasi Jaringan Ekosistem.
+- Branding RKnet + Weave, PT Integrasi Jaringan Ekosistem.
 - Reuse `:root` & `.btn-st` dari style.css; jangan duplikasi tanpa perlu.
 - Path include relatif `__DIR__`.
 

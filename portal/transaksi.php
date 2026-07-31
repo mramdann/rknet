@@ -5,9 +5,9 @@ require __DIR__ . '/../portal-config.php';
 $judulHalaman = 'Riwayat Transaksi';
 $menuAktif = 'transaksi';
 
-$sqlBase = "SELECT t.no_invoice AS noInvoice, pk.nama AS paket, t.harga, t.tanggal, t.status
-            FROM tagihan t JOIN paket pk ON pk.id = t.paket_id
-            WHERE t.pelanggan_id = ? ORDER BY t.id";
+$sqlBase = "SELECT t.id AS idTagihan, t.no_invoice AS noInvoice, pk.nama AS paket, t.harga, t.tanggal, t.status
+            FROM tagihan t LEFT JOIN paket pk ON pk.id = t.paket_id
+            WHERE t.pelanggan_id = ? ORDER BY t.id DESC";
 $sqlCount = "SELECT COUNT(*) FROM tagihan t WHERE t.pelanggan_id = ?";
 $hasil = ambilPaginasi($sqlBase, $sqlCount, [$idPelanggan]);
 ?>
@@ -37,7 +37,7 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, [$idPelanggan]);
             </div>
           </div>
           <div class="col-md-4 col-10">
-            <div class="fw-700"><?= htmlspecialchars($t['paket']) ?></div>
+            <div class="fw-700"><?= htmlspecialchars($t['paket'] ?? 'Paket tidak tersedia') ?></div>
             <div class="text-muted small"><i class="bi bi-receipt me-1"></i><?= htmlspecialchars($t['noInvoice']) ?></div>
           </div>
           <div class="col-md-2 col-6">
@@ -54,10 +54,10 @@ $hasil = ambilPaginasi($sqlBase, $sqlCount, [$idPelanggan]);
         </div>
         <hr class="my-3">
         <div class="d-flex justify-content-end gap-2">
-          <?php if (!$lunas): ?>
-            <a href="invoice.php" class="btn btn-rk btn-sm">Bayar Sekarang</a>
+          <?php if ($t['status'] === 'menunggu' || $t['status'] === 'ditolak'): ?>
+            <a href="invoice.php?id=<?= (int) $t['idTagihan'] ?>" class="btn btn-rk btn-sm">Bayar Sekarang</a>
           <?php endif; ?>
-          <a href="invoice.php" class="btn btn-outline-primary btn-sm">Lihat Tagihan</a>
+          <a href="invoice.php?id=<?= (int) $t['idTagihan'] ?>" class="btn btn-outline-primary btn-sm">Lihat Tagihan</a>
         </div>
       </div>
     </div>

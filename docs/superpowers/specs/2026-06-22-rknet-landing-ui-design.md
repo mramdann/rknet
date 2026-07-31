@@ -1,4 +1,4 @@
-# Starlite Indonesia — Landing Page UI (Improve / Redesign)
+# RKnet Indonesia — Landing Page UI (Improve / Redesign)
 
 **Date:** 2026-06-22
 **Status:** Approved design
@@ -6,30 +6,30 @@
 
 ## Goal
 
-Membangun ulang landing page Starlite Indonesia (provider internet FTTH) versi
+Membangun ulang landing page RKnet Indonesia (provider internet FTTH) versi
 "improve/redesign" menggunakan **PHP native + Bootstrap 5**, dengan gaya visual
 **Modern Biru** (bersih, modern, mempertahankan identitas biru brand).
 
-Referensi konten & aset: https://starliteindonesia.com/
+Referensi konten & aset: https://rknetindonesia.com/
 
 ## Constraints & Decisions
 
 - **Fidelity:** Improve/redesign — ambil struktur & konten asli, UI ditingkatkan.
-- **Scope:** Landing page (home) saja. Halaman lain (Login, Cek Jangkauan, Redeem) menyusul.
+- **Scope:** Landing page (home) saja. Halaman lain (Login, Redeem) menyusul.
 - **Backend:** UI saja. Form belum diproses; tombol bersifat tampilan/anchor.
 - **Stack:** PHP native (komponen via `include`), Bootstrap 5.3 (CDN), Bootstrap Icons, CSS custom.
-- **Aset:** Logo Starlite & Weave + 3 banner hero **memakai gambar asli** (di-download ke `assets/img/`).
-- **Server:** Dijalankan via XAMPP — `http://localhost/starlite`.
+- **Aset:** Logo RKnet & Weave + 3 banner hero **memakai gambar asli** (di-download ke `assets/img/`).
+- **Server:** Dijalankan via XAMPP — `http://localhost/rknet`.
 
 ## Arsitektur & Struktur File
 
 ```
-starlite/
+rknet/
 ├── index.php                 # halaman utama, meng-include partials
 ├── config.php                # data konten (benefit, paket, fitur) sebagai array PHP
 ├── partials/
 │   ├── head.php              # <head>, meta, Bootstrap + CSS custom + Google Fonts
-│   ├── navbar.php            # logo, Cek Jangkauan, Login, CTA Berlangganan
+│   ├── navbar.php            # logo, Login, CTA Berlangganan
 │   ├── hero.php              # Bootstrap Carousel (3 banner asli) + overlay CTA
 │   ├── benefits.php          # 5 poin benefit (loop dari config)
 │   ├── package.php           # kartu paket Unlimited (loop dari config)
@@ -48,7 +48,7 @@ menjadi jembatan menuju backend nanti.
 
 ## Section Landing Page
 
-1. **Navbar** — Logo Starlite + Weave; link "Cek Jangkauan"; tombol "Login";
+1. **Navbar** — Logo RKnet + Weave; tombol "Login";
    CTA "Berlangganan Sekarang". Sticky; transparan → solid saat scroll.
 2. **Hero** — Bootstrap Carousel 3 banner asli, overlay teks + tombol CTA.
 3. **Benefits** — 5 poin: Gratis 1 bulan; Gratis biaya instalasi; Bebas FUP –
@@ -73,17 +73,17 @@ menjadi jembatan menuju backend nanti.
 
 ## Aset Asli (sumber)
 
-- Logo Starlite: `/_next/static/media/logo-starlite.*.webp`
+- Logo RKnet: `assets/img/rknet.jpeg`
 - Logo Weave: `/_next/static/media/logo-weave.*.webp`
 - Banner hero (3) dari CDN Huawei OBS (`codify.obs.ap-southeast-4.myhuaweicloud.com/IJE-FTTH_09122024/...`).
 
 ## Verifikasi
 
-UI statis → verifikasi manual: buka `http://localhost/starlite` di browser,
+UI statis → verifikasi manual: buka `http://localhost/rknet` di browser,
 cek render tiap section, carousel berjalan, dan responsif (desktop & mobile).
 
 ## Out of Scope (sekarang)
 
-- Pemrosesan form (cek jangkauan, login, redeem).
+- Pemrosesan form (login, redeem).
 - Halaman selain landing page.
 - Database / autentikasi.

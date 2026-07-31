@@ -1,10 +1,10 @@
-# Starlite Landing Page UI Implementation Plan
+# RKnet Landing Page UI Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Membangun landing page Starlite Indonesia (provider internet FTTH) versi improve/redesign memakai PHP native + Bootstrap 5, gaya "Modern Biru".
+**Goal:** Membangun landing page RKnet Indonesia (provider internet FTTH) versi improve/redesign memakai PHP native + Bootstrap 5, gaya "Modern Biru".
 
-**Architecture:** PHP native dengan komponen via `include`. `index.php` meng-include partial per section. Konten (benefit, paket, fitur) disimpan sebagai array di `config.php`; partial meng-loop data. Styling: Bootstrap 5.3 CDN + `assets/css/style.css`. Aset logo & hero memakai gambar asli dari starliteindonesia.com.
+**Architecture:** PHP native dengan komponen via `include`. `index.php` meng-include partial per section. Konten (benefit, paket, fitur) disimpan sebagai array di `config.php`; partial meng-loop data. Styling: Bootstrap 5.3 CDN + `assets/css/style.css`. Aset logo & hero memakai gambar RKnet.
 
 **Tech Stack:** PHP 8.2 (XAMPP), Bootstrap 5.3 (CDN), Bootstrap Icons 1.11 (CDN), Google Fonts (Poppins), vanilla JS.
 
@@ -13,7 +13,7 @@
 - PHP native saja — tanpa framework, tanpa Composer.
 - Bootstrap 5.3 via CDN; jangan pakai jQuery (Bootstrap 5 bundle sudah cukup).
 - UI saja — form & tombol bersifat tampilan/anchor, belum ada proses backend.
-- Dijalankan di XAMPP: `http://localhost/starlite`.
+- Dijalankan di XAMPP: `http://localhost/rknet`.
 - Semua partial di-include relatif terhadap `__DIR__`.
 - Escape output dinamis dengan `htmlspecialchars()`.
 - Gaya visual: biru primer `#0B5ED7`, biru tua `#06256E`, dominan putih, kartu `rounded-4`, shadow lembut, font Poppins.
@@ -38,7 +38,7 @@
 <?php
 // config.php — sumber konten landing page (UI only)
 $site = [
-    'name'    => 'Starlite',
+    'name'    => 'RKnet',
     'phone'   => '+62811789111',
     'company' => 'PT Integrasi Jaringan Ekosistem',
     'address' => 'Jalan Tiang Bendera V No.20 Roa Malaka, Tambora, Jakarta Barat',
@@ -99,8 +99,8 @@ $site = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starlite Indonesia — Internet Fiber Unlimited</title>
-    <meta name="description" content="Starlite — Internet fiber rumah unlimited, bebas FUP, gratis instalasi.">
+    <title>RKnet Indonesia — Internet Fiber Unlimited</title>
+    <meta name="description" content="RKnet — Internet fiber rumah unlimited, bebas FUP, gratis instalasi.">
     <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -129,7 +129,7 @@ $site = [
     <!-- redeem   -> Task 6 -->
     <!-- features -> Task 7 -->
     <!-- footer   -> Task 8 -->
-    <main class="container py-5"><h1>Starlite — scaffold OK</h1></main>
+    <main class="container py-5"><h1>RKnet — scaffold OK</h1></main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
@@ -167,7 +167,7 @@ Expected: `No syntax errors detected` untuk ketiga file.
 
 - [ ] **Step 7: Verifikasi di browser**
 
-Buka `http://localhost/starlite` → tampil heading "Starlite — scaffold OK", Bootstrap & font ter-load (cek Network tab tidak ada 404 untuk CSS).
+Buka `http://localhost/rknet` → tampil heading "RKnet — scaffold OK", Bootstrap & font ter-load (cek Network tab tidak ada 404 untuk CSS).
 
 - [ ] **Step 8: Init git & commit**
 
@@ -175,7 +175,7 @@ Buka `http://localhost/starlite` → tampil heading "Starlite — scaffold OK", 
 git init
 printf "docs/superpowers/specs/\n" > /dev/null  # (no ignore needed)
 git add .
-git commit -m "feat: scaffold starlite landing (config, head, index skeleton)"
+git commit -m "feat: scaffold rknet landing (config, head, index skeleton)"
 ```
 
 ---
@@ -195,11 +195,11 @@ git commit -m "feat: scaffold starlite landing (config, head, index skeleton)"
 
 ```bash
 mkdir -p assets/img
-curl -L "https://starliteindonesia.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-starlite.3ac98462.webp&w=640&q=75" -o assets/img/logo-starlite.webp
-curl -L "https://starliteindonesia.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo-weave.cec1df59.webp&w=828&q=75" -o assets/img/logo-weave.webp
+curl -L "https://rknetindonesia.com/assets/img/rknet.jpeg" -o assets/img/rknet.jpeg
+curl -L "https://rknetindonesia.com/assets/img/logo-weave.webp" -o assets/img/logo-weave.webp
 ```
 Jika URL `_next/image` gagal, fallback ambil sumber webp langsung:
-`curl -L "https://starliteindonesia.com/_next/static/media/logo-starlite.3ac98462.webp" -o assets/img/logo-starlite.webp`
+`curl -L "https://rknetindonesia.com/assets/img/rknet.jpeg" -o assets/img/rknet.jpeg`
 
 - [ ] **Step 2: Buat `partials/navbar.php`**
 
@@ -207,7 +207,7 @@ Jika URL `_next/image` gagal, fallback ambil sumber webp langsung:
 <nav class="navbar navbar-expand-lg fixed-top st-navbar py-3">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-      <img src="assets/img/logo-starlite.webp" alt="Starlite" height="34">
+      <img src="assets/img/rknet.jpeg" alt="RKnet" height="34">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
@@ -215,7 +215,6 @@ Jika URL `_next/image` gagal, fallback ambil sumber webp langsung:
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
         <li class="nav-item"><a class="nav-link" href="#paket">Paket</a></li>
-        <li class="nav-item"><a class="nav-link" href="#coverage">Cek Jangkauan</a></li>
         <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-circle"></i> Login</a></li>
         <li class="nav-item"><a class="btn btn-st" href="#paket">Berlangganan Sekarang <i class="bi bi-arrow-right"></i></a></li>
       </ul>
@@ -288,7 +287,7 @@ Verifikasi file > 10KB (`ls -la assets/img/`). Jika gagal/0 byte, catat dan guna
     <div class="carousel-inner">
       <?php foreach (['hero-1','hero-2','hero-3'] as $i => $img): ?>
       <div class="carousel-item <?= $i === 0 ? 'active' : '' ?>">
-        <img src="assets/img/<?= $img ?>.webp" class="d-block w-100 st-hero-img" alt="Banner Starlite <?= $i+1 ?>">
+        <img src="assets/img/<?= $img ?>.webp" class="d-block w-100 st-hero-img" alt="Banner RKnet <?= $i+1 ?>">
       </div>
       <?php endforeach; ?>
     </div>
@@ -475,7 +474,7 @@ git commit -m "feat: add unlimited package section"
     <div class="redeem-banner row align-items-center g-4">
       <div class="col-lg-8">
         <h3 class="fw-700 text-white mb-2">Punya Voucher Folaplay?</h3>
-        <p class="text-white-50 mb-0">Redeem sekarang & nikmati internet gratis dari Starlite.</p>
+        <p class="text-white-50 mb-0">Redeem sekarang & nikmati internet gratis dari RKnet.</p>
       </div>
       <div class="col-lg-4 text-lg-end">
         <a href="#" class="btn btn-light btn-redeem fw-600">Redeem Sekarang <i class="bi bi-ticket-perforated"></i></a>
@@ -529,7 +528,7 @@ git commit -m "feat: add redeem voucher banner"
 <section class="section bg-white">
   <div class="container">
     <div class="text-center mb-5">
-      <h2 class="fw-700">Kenapa Pilih Starlite?</h2>
+      <h2 class="fw-700">Kenapa Pilih RKnet?</h2>
     </div>
     <div class="row g-4 text-center">
       <?php foreach ($site['features'] as $f): ?>
@@ -591,7 +590,7 @@ git commit -m "feat: add features section"
   <div class="container">
     <div class="row g-4">
       <div class="col-lg-5">
-        <img src="assets/img/logo-starlite.webp" alt="Starlite" height="36" class="mb-3 footer-logo">
+        <img src="assets/img/rknet.jpeg" alt="RKnet" height="36" class="mb-3 footer-logo">
         <p class="text-white-50 mb-1"><?= htmlspecialchars($site['company']) ?></p>
       </div>
       <div class="col-lg-4">
@@ -686,7 +685,7 @@ onScroll();
 
 - [ ] **Step 3: Verifikasi responsif menyeluruh**
 
-Buka `http://localhost/starlite`:
+Buka `http://localhost/rknet`:
 - Desktop: scroll dari atas → navbar transparan menjadi putih + shadow.
 - Resize ≤ 768px: hamburger berfungsi, semua section rapi (benefit 2 kolom, paket menumpuk, footer menumpuk), tidak ada horizontal scroll.
 

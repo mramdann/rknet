@@ -42,28 +42,10 @@ body{font-family:'Poppins',system-ui,sans-serif;color:#1c2434}
 .package-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(11,94,215,.15)}
 .package-card.featured{border-color:var(--rk-blue);transform:scale(1.03)}
 
-/* Halaman cek jangkauan */
-.jangkauan-hero{background:linear-gradient(120deg,var(--rk-blue),var(--rk-blue-dark));padding:3rem 0}
-.jangkauan-hero h1{font-size:clamp(1.6rem,3.5vw,2.6rem)}
-.cari-wrap{max-width:640px}
-.cari-wrap .form-control{padding:.9rem 1.2rem}
-.dropdown-alamat{position:absolute;left:0;right:0;top:calc(100% + .35rem);background:#fff;border-radius:.75rem;box-shadow:0 12px 40px rgba(6,37,110,.18);overflow:hidden;z-index:30;text-align:left}
-.dropdown-alamat .opsi{padding:.7rem 1rem;cursor:pointer;border-bottom:1px solid #f0f2f7;color:#1c2434}
-.dropdown-alamat .opsi:last-child{border-bottom:0}
-.dropdown-alamat .opsi:hover{background:var(--rk-blue-soft)}
-.dropdown-alamat .opsi small{color:#8a93a6}
-.dropdown-alamat .opsi-info{padding:.7rem 1rem;color:#8a93a6;text-align:center}
-.section-area{background:var(--rk-blue-soft)}
-.area-item{background:#fff;border:1px solid #eef0f6;border-radius:.6rem;padding:.6rem .9rem;font-size:.92rem}
-.hasil-ikon{font-size:4rem;line-height:1}
-.otp-kotak{width:42px;height:46px;font-weight:700;padding:.25rem}
-.peta-pemasangan{height:320px;border-radius:.75rem;border:1px solid #eef0f6;z-index:1}
-.peta-pemasangan .leaflet-pane,.peta-pemasangan .leaflet-control{z-index:auto}
-
 /* Halaman legal */
 .legal-hero{background:linear-gradient(120deg,var(--rk-blue),var(--rk-blue-dark))}
 
-/* Cek Jangkauan & form */
+/* Form card */
 .kartu-form{background:#fff;border-radius:1.25rem;box-shadow:0 12px 40px rgba(6,37,110,.08)}
 
 /* Header modal (berlangganan & redeem) */

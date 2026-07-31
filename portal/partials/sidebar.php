@@ -5,7 +5,6 @@ $menuAktif = $menuAktif ?? '';
 $menuPortal = [
     'dashboard' => ['Dashboard',        'bi-grid-1x2',        'dashboard.php'],
     'transaksi' => ['Riwayat Transaksi', 'bi-clock-history',   'transaksi.php'],
-    'invoice'   => ['Invoice',           'bi-receipt',         'invoice.php'],
     'paket'     => ['Pilih Paket',       'bi-wifi',            'paket.php'],
     'profil'    => ['Profil',            'bi-person',          'profil.php'],
 ];

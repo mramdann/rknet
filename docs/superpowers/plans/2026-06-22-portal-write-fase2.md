@@ -6,7 +6,7 @@
 
 **Architecture:** Reuse `aksi.php` (CSRF + flash). Form portal mem-POST ke `portal/aksi-profil.php` / `portal/aksi-paket.php` yang `wajibLoginPelanggan()` + `cekCsrf()`, menulis ke DB untuk pelanggan dari sesi, `setFlash()`, lalu redirect (PRG). Flash tampil di `portal/partials/shell-open.php`.
 
-**Tech Stack:** PHP native (PDO prepared statements, session CSRF, password_hash), MySQL `dbstarlite` @ 3382.
+**Tech Stack:** PHP native (PDO prepared statements, session CSRF, password_hash), MySQL `dbrknet` @ 3382.
 
 ## Global Constraints
 
@@ -17,7 +17,7 @@
 - Ganti password: `password_verify` lama → `password_hash` baru (min 6, sama konfirmasi).
 - Prepared statement; output `htmlspecialchars()`. Kode/komentar Bahasa Indonesia. Lint tiap `.php`.
 - Verifikasi: lint + HTTP PowerShell (login pelanggan → POST dgn CSRF → cek DB) + BrowserOS. Commit per task, prefix `feat(portal)`.
-- Kredensial uji: `dwi.anjasmoro@gmail.com` / `pelanggan123` (id `STL-2024-008812`, paket_id awal 2).
+- Kredensial uji: `dwi.anjasmoro@gmail.com` / `pelanggan123` (id `RKNET-2024-008812`, paket_id awal 2).
 
 ---
 
@@ -77,7 +77,7 @@ Expected: "No syntax errors detected".
 - [ ] **Step 4: Verifikasi (PowerShell) — portal tetap render**
 
 ```powershell
-$base="http://localhost:8282/starlite/portal"
+$base="http://localhost:8282/rknet/portal"
 Invoke-WebRequest "$base/login.php" -Method POST -Body @{email='dwi.anjasmoro@gmail.com';kata_sandi='pelanggan123'} -SessionVariable s -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue | Out-Null
 $p=Invoke-WebRequest "$base/paket.php" -WebSession $s -UseBasicParsing
 Write-Output ("PAKET_OK=" + ($p.Content -match 'Pilih Paket Internet'))
@@ -219,12 +219,12 @@ Expected: "No syntax errors detected".
 - [ ] **Step 5: Verifikasi (PowerShell) — ubah hp lalu kembalikan**
 
 ```powershell
-$base="http://localhost:8282/starlite/portal"
+$base="http://localhost:8282/rknet/portal"
 Invoke-WebRequest "$base/login.php" -Method POST -Body @{email='dwi.anjasmoro@gmail.com';kata_sandi='pelanggan123'} -SessionVariable s -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue | Out-Null
 $tok=([regex]'name="csrf" value="([^"]+)"').Match((Invoke-WebRequest "$base/profil.php" -WebSession $s -UseBasicParsing).Content).Groups[1].Value
 Invoke-WebRequest "$base/aksi-profil.php" -Method POST -WebSession $s -Body @{csrf=$tok;aksi='info';nama='Dwi Anjasmoro';email='dwi.anjasmoro@gmail.com';hp='0811-0000-0000';alamat='Jl. Mawar No.12, Roa Malaka, Tambora, Jakarta Barat'} -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue | Out-Null
-& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbstarlite -e "SELECT hp FROM pelanggan WHERE id='STL-2024-008812';"
-& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbstarlite -e "UPDATE pelanggan SET hp='0811-7891-2233' WHERE id='STL-2024-008812';"
+& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbrknet -e "SELECT hp FROM pelanggan WHERE id='RKNET-2024-008812';"
+& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbrknet -e "UPDATE pelanggan SET hp='0811-7891-2233' WHERE id='RKNET-2024-008812';"
 ```
 Expected: hp `0811-0000-0000` (lalu dikembalikan).
 
@@ -362,12 +362,12 @@ Expected: "No syntax errors detected".
 - [ ] **Step 6: Verifikasi (PowerShell) — ubah paket ke 500 Mbps (id 3) lalu kembalikan ke 2**
 
 ```powershell
-$base="http://localhost:8282/starlite/portal"
+$base="http://localhost:8282/rknet/portal"
 Invoke-WebRequest "$base/login.php" -Method POST -Body @{email='dwi.anjasmoro@gmail.com';kata_sandi='pelanggan123'} -SessionVariable s -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue | Out-Null
 $tok=([regex]'name="csrf" value="([^"]+)"').Match((Invoke-WebRequest "$base/paket.php" -WebSession $s -UseBasicParsing).Content).Groups[1].Value
 Invoke-WebRequest "$base/aksi-paket.php" -Method POST -WebSession $s -Body @{csrf=$tok;aksi='pilih';paket_id='3'} -MaximumRedirection 0 -UseBasicParsing -ErrorAction SilentlyContinue | Out-Null
-& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbstarlite -e "SELECT paket_id FROM pelanggan WHERE id='STL-2024-008812';"
-& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbstarlite -e "UPDATE pelanggan SET paket_id=2 WHERE id='STL-2024-008812';"
+& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbrknet -e "SELECT paket_id FROM pelanggan WHERE id='RKNET-2024-008812';"
+& "D:\WebServer\xampp82\mysql\bin\mysql.exe" -h 127.0.0.1 -P 3382 -u root -D dbrknet -e "UPDATE pelanggan SET paket_id=2 WHERE id='RKNET-2024-008812';"
 ```
 Expected: `paket_id` jadi `3` (lalu dikembalikan ke `2`).
 

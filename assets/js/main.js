@@ -17,8 +17,7 @@ if (modalLangganan) {
   });
 }
 
-// Tampilkan pesan sukses pada form (UI only). sembunyikanForm=false untuk menjaga
-// form tetap terlihat (mis. cek jangkauan agar bisa dicek ulang).
+// Tampilkan pesan sukses pada form UI-only.
 function pasangSukses(idForm, idSukses, sembunyikanForm = true) {
   const form = document.getElementById(idForm);
   const sukses = document.getElementById(idSukses);
@@ -31,4 +30,3 @@ function pasangSukses(idForm, idSukses, sembunyikanForm = true) {
 }
 pasangSukses('formLangganan', 'suksesLangganan');
 pasangSukses('formRedeem', 'suksesRedeem');
-pasangSukses('formJangkauan', 'hasilJangkauan', false);

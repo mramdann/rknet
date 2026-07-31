@@ -20,17 +20,10 @@ if (!function_exists('badgeStatus')) {
         return match ($status) {
             'lunas'      => ['kelas' => 'bg-success-subtle text-success',     'label' => 'Telah Dibayar'],
             'menunggu'   => ['kelas' => 'bg-warning-subtle text-warning',     'label' => 'Menunggu Pembayaran'],
+            'verifikasi' => ['kelas' => 'bg-info-subtle text-info',           'label' => 'Menunggu Verifikasi'],
+            'ditolak'    => ['kelas' => 'bg-danger-subtle text-danger',       'label' => 'Bukti Ditolak'],
             'aktif'      => ['kelas' => 'bg-success-subtle text-success',     'label' => 'Aktif'],
             'nonaktif'   => ['kelas' => 'bg-secondary-subtle text-secondary', 'label' => 'Nonaktif'],
-            // Status lead
-            'baru'       => ['kelas' => 'bg-info-subtle text-info',           'label' => 'Baru'],
-            'dihubungi'  => ['kelas' => 'bg-primary-subtle text-primary',     'label' => 'Dihubungi'],
-            'terjadwal'  => ['kelas' => 'bg-warning-subtle text-warning',     'label' => 'Terjadwal'],
-            'selesai'    => ['kelas' => 'bg-success-subtle text-success',     'label' => 'Selesai'],
-            'batal'      => ['kelas' => 'bg-secondary-subtle text-secondary', 'label' => 'Batal'],
-            // Status area
-            'tercakup'   => ['kelas' => 'bg-success-subtle text-success',     'label' => 'Tercakup'],
-            'segera'     => ['kelas' => 'bg-warning-subtle text-warning',     'label' => 'Segera'],
             // Status notifikasi
             'terkirim'   => ['kelas' => 'bg-success-subtle text-success',     'label' => 'Terkirim'],
             'draft'      => ['kelas' => 'bg-secondary-subtle text-secondary', 'label' => 'Draft'],

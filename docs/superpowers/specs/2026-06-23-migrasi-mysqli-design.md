@@ -27,11 +27,10 @@ admin-config.php             # $pdo->... -> kueri/kueriSatu/kueriNilai
 portal-config.php            # idem (+ foreach query -> foreach kueri)
 admin/pelanggan.php          # ambilPaginasi($sqlBase,$sqlCount,$params)  (lepas $pdo)
 admin/transaksi.php          # idem
-admin/lead.php               # idem
 admin/notifikasi.php         # idem
 portal/transaksi.php         # idem
 admin/login.php  portal/login.php               # kueriSatu()
-admin/aksi-*.php (7)  portal/aksi-*.php (2)      # eksekusi()/kueriSatu(); FK catch mysqli
+admin/aksi-*.php (5)  portal/aksi-*.php (2)      # eksekusi()/kueriSatu(); FK catch mysqli
 ```
 
 ## Komponen: db.php (baru)
@@ -41,7 +40,7 @@ const DB_HOST = '127.0.0.1';
 const DB_PORT = 3382;
 const DB_USER = 'root';
 const DB_PASS = '';
-const DB_NAME = 'dbstarlite';
+const DB_NAME = 'dbrknet';
 
 function db(): mysqli
 // singleton; mysqli_report(EXCEPTION+STRICT); new mysqli(HOST,USER,PASS,NAME,PORT);

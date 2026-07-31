@@ -32,12 +32,7 @@ $daftarTagihan = kueri(
      FROM tagihan t
      JOIN pelanggan pl ON pl.id = t.pelanggan_id
      LEFT JOIN paket pk ON pk.id = t.paket_id
-     ORDER BY t.id"
-);
-
-// Daftar area cakupan
-$daftarArea = kueri(
-    "SELECT id, nama, kota, status, jumlah_pelanggan AS jumlahPelanggan FROM area ORDER BY id"
+     ORDER BY t.id DESC"
 );
 
 // Pengaturan situs
@@ -50,5 +45,5 @@ $statistik = [
     'totalPelanggan'  => (int) kueriNilai("SELECT COUNT(*) FROM pelanggan"),
     'pelangganAktif'  => (int) kueriNilai("SELECT COUNT(*) FROM pelanggan WHERE status = 'aktif'"),
     'pendapatanBulan' => (int) kueriNilai("SELECT COALESCE(SUM(harga), 0) FROM tagihan WHERE status = 'lunas'"),
-    'tagihanPending'  => (int) kueriNilai("SELECT COUNT(*) FROM tagihan WHERE status = 'menunggu'"),
+    'tagihanPending'  => (int) kueriNilai("SELECT COUNT(*) FROM tagihan WHERE status <> 'lunas'"),
 ];
