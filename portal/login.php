@@ -84,7 +84,7 @@ $judulHalaman = 'Login';
     </div>
 
     <p class="text-center small text-muted mt-3">
-      PT Integrasi Jaringan Ekosistem &middot; Layanan Pelanggan +62811789111
+      CV. Rizky Win Solution &middot; Layanan Pelanggan 083815256355
     </p>
   </div>
 

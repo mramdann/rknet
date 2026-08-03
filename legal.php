@@ -7,7 +7,7 @@ $dokumenTersedia = [
     'terms' => [
         'judul' => 'Syarat & Ketentuan',
         'isi'   => [
-            'Dengan berlangganan layanan RKnet Indonesia, Anda menyetujui seluruh syarat dan ketentuan yang berlaku. Layanan diberikan oleh PT Integrasi Jaringan Ekosistem.',
+            'Dengan berlangganan layanan RKnet Indonesia, Anda menyetujui seluruh syarat dan ketentuan yang berlaku. Layanan diberikan oleh CV. Rizky Win Solution.',
             'Pelanggan wajib memberikan data yang benar saat pendaftaran. Penyalahgunaan layanan, termasuk pemakaian di luar ketentuan wajar, dapat mengakibatkan penangguhan akun.',
             'Tarif, kecepatan, dan masa berlaku paket mengikuti ketentuan yang tertera pada halaman paket. Perusahaan berhak memperbarui ketentuan sewaktu-waktu dengan pemberitahuan.',
             'Layanan internet bersifat unlimited tanpa FUP sesuai paket yang dipilih. Gangguan jaringan akan ditangani sesuai prosedur layanan pelanggan.',

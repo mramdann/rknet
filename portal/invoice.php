@@ -76,9 +76,9 @@ $daftarRekeningAktif = $dapatMengunggah
       </div>
       <div class="col-sm-6 text-sm-end">
         <div class="text-muted text-uppercase fw-600 mb-2" style="font-size:.72rem">Diterbitkan Oleh</div>
-        <div class="fw-700">PT Integrasi Jaringan Ekosistem</div>
+        <div class="fw-700">CV. Rizky Win Solution</div>
         <div class="small text-muted">Jl. Tiang Bendera V No.20, Jakarta Barat</div>
-        <div class="small text-muted">+62811789111</div>
+        <div class="small text-muted">083815256355</div>
         <div class="small text-muted mt-2">Tanggal: <?= htmlspecialchars($trx['tanggal']) ?></div>
       </div>
     </div>

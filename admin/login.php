@@ -59,7 +59,7 @@ $judulHalaman = 'Login Admin';
         <a href="../portal/login.php" class="text-rk text-decoration-none">&larr; Login Pelanggan</a>
       </p>
     </div>
-    <p class="text-center small text-muted mt-3">PT Integrasi Jaringan Ekosistem</p>
+    <p class="text-center small text-muted mt-3">CV. Rizky Win Solution</p>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

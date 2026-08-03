@@ -69,7 +69,7 @@ $judulHalaman = 'Daftar Akun';
 
       <p class="text-center small text-muted mt-3 mb-0">Sudah punya akun? <a href="login.php" class="text-rk text-decoration-none fw-500">Login</a></p>
     </div>
-    <p class="text-center small text-muted mt-3">PT Integrasi Jaringan Ekosistem &middot; Layanan Pelanggan +62811789111</p>
+    <p class="text-center small text-muted mt-3">CV. Rizky Win Solution &middot; Layanan Pelanggan 083815256355</p>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

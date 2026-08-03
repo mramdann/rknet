@@ -23,7 +23,7 @@ ALTER TABLE tagihan
     ADD CONSTRAINT fk_tagihan_admin_verifikasi FOREIGN KEY (diverifikasi_oleh) REFERENCES admin(id);
 
 INSERT INTO rekening_bank (id, jenis, nama_bank, nomor_rekening, atas_nama, status) VALUES
-    (1, 'bank', 'BCA', '1234567890', 'PT Integrasi Jaringan Ekosistem', 'aktif'),
-    (2, 'bank', 'Mandiri', '9876543210', 'PT Integrasi Jaringan Ekosistem', 'aktif'),
-    (3, 'bank', 'BRI', '112233445566', 'PT Integrasi Jaringan Ekosistem', 'aktif'),
-    (4, 'qris', 'QRIS', 'QRIS', 'PT Integrasi Jaringan Ekosistem', 'aktif');
+    (1, 'bank', 'BCA', '1234567890', 'CV. Rizky Win Solution', 'aktif'),
+    (2, 'bank', 'Mandiri', '9876543210', 'CV. Rizky Win Solution', 'aktif'),
+    (3, 'bank', 'BRI', '112233445566', 'CV. Rizky Win Solution', 'aktif'),
+    (4, 'qris', 'QRIS', 'QRIS', 'CV. Rizky Win Solution', 'aktif');

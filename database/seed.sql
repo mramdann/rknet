@@ -13,10 +13,10 @@ INSERT INTO `pelanggan` (`id`, `nama`, `email`, `hp`, `alamat`, `paket_id`, `sta
 INSERT INTO `pelanggan` (`id`, `nama`, `email`, `hp`, `alamat`, `paket_id`, `status`, `tgl_bergabung`, `kata_sandi`) VALUES ('RKNET-2024-008815','Maya Kusuma','maya.kusuma@gmail.com','0814-1122-3344',NULL,1,'nonaktif','09 Apr 2024','pelanggan123');
 INSERT INTO `pelanggan` (`id`, `nama`, `email`, `hp`, `alamat`, `paket_id`, `status`, `tgl_bergabung`, `kata_sandi`) VALUES ('RKNET-2024-008816','Agus Pratama','agus.pratama@gmail.com','0815-5566-7788',NULL,2,'aktif','17 Mei 2024','pelanggan123');
 INSERT INTO `pelanggan` (`id`, `nama`, `email`, `hp`, `alamat`, `paket_id`, `status`, `tgl_bergabung`, `kata_sandi`) VALUES ('RKNET-2024-008817','Indah Permata','indah.permata@gmail.com','0816-9988-7766',NULL,3,'aktif','28 Mei 2024','pelanggan123');
-INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (1,'bank','BCA','1234567890','PT Integrasi Jaringan Ekosistem','aktif');
-INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (2,'bank','Mandiri','9876543210','PT Integrasi Jaringan Ekosistem','aktif');
-INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (3,'bank','BRI','112233445566','PT Integrasi Jaringan Ekosistem','aktif');
-INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (4,'qris','QRIS','QRIS','PT Integrasi Jaringan Ekosistem','aktif');
+INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (1,'bank','BCA','1234567890','CV. Rizky Win Solution','aktif');
+INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (2,'bank','Mandiri','9876543210','CV. Rizky Win Solution','aktif');
+INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (3,'bank','BRI','112233445566','CV. Rizky Win Solution','aktif');
+INSERT INTO `rekening_bank` (`id`, `jenis`, `nama_bank`, `nomor_rekening`, `atas_nama`, `status`) VALUES (4,'qris','QRIS','QRIS','CV. Rizky Win Solution','aktif');
 INSERT INTO `tagihan` (`id`, `no_invoice`, `pelanggan_id`, `paket_id`, `harga`, `tanggal`, `status`) VALUES (1,'INV/2026/06/008812','RKNET-2024-008812',2,100000,'15 Jun 2026','lunas');
 INSERT INTO `tagihan` (`id`, `no_invoice`, `pelanggan_id`, `paket_id`, `harga`, `tanggal`, `status`) VALUES (2,'INV/2026/06/008813','RKNET-2024-008813',1,199000,'15 Jun 2026','lunas');
 INSERT INTO `tagihan` (`id`, `no_invoice`, `pelanggan_id`, `paket_id`, `harga`, `tanggal`, `status`) VALUES (3,'INV/2026/06/008814','RKNET-2024-008814',3,250000,'15 Jun 2026','menunggu');
@@ -30,6 +30,6 @@ INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) V
 INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) VALUES (3,'Pengingat jatuh tempo tagihan','Tagihan Juni jatuh tempo 15 Jun. Mohon segera lakukan pembayaran.','Pelanggan aktif','14 Jun 2026','terkirim');
 INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) VALUES (4,'Selamat datang pelanggan baru','Draf sambutan untuk pelanggan yang baru bergabung.','Pelanggan baru','12 Jun 2026','draft');
 INSERT INTO `notifikasi` (`id`, `judul`, `isi`, `target`, `tanggal`, `status`) VALUES (5,'Survei kepuasan layanan Q2','Draf undangan mengisi survei kepuasan kuartal 2.','Semua pelanggan','10 Jun 2026','draft');
-INSERT INTO `pengaturan` (`id`, `nama_situs`, `email`, `telepon`, `alamat`) VALUES (1,'RKnet Indonesia','cs@rknet.id','0804-1-555-666','Jl. Fiber Optik No. 1, Jakarta Selatan');
+INSERT INTO `pengaturan` (`id`, `nama_situs`, `email`, `telepon`, `alamat`) VALUES (1,'RKnet Indonesia','cs@rknet.id','083815256355','Jl. Fiber Optik No. 1, Jakarta Selatan');
 
 SET FOREIGN_KEY_CHECKS=1;
