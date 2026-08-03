@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $sandi = $_POST['kata_sandi'] ?? '';
     $row = kueriSatu("SELECT id, kata_sandi FROM admin WHERE email = ?", [$email]);
-    if ($row && password_verify($sandi, $row['kata_sandi'])) {
+    if ($row && $sandi === $row['kata_sandi']) {
         loginAdmin((int) $row['id']);
         header('Location: dashboard.php');
         exit;

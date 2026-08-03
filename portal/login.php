@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = isset($_POST['email']) && is_string($_POST['email']) ? strtolower(trim($_POST['email'])) : '';
     $sandi = isset($_POST['kata_sandi']) && is_string($_POST['kata_sandi']) ? $_POST['kata_sandi'] : '';
     $row = kueriSatu("SELECT id, kata_sandi, status FROM pelanggan WHERE email = ?", [$email]);
-    if ($row && password_verify($sandi, $row['kata_sandi'])) {
+    if ($row && $sandi === $row['kata_sandi']) {
         if ($row['status'] === 'aktif') {
             loginPelanggan($row['id']);
             header('Location: dashboard.php');

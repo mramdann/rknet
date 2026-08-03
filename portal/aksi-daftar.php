@@ -55,7 +55,7 @@ if ($pesan !== '') {
 
 $bulanIndonesia = [1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
 $tanggalDaftar = date('d') . ' ' . $bulanIndonesia[(int) date('n')] . ' ' . date('Y');
-$hash = password_hash($kataSandi, PASSWORD_DEFAULT);
+$hash = $kataSandi;
 $kunciDidapat = false;
 $berhasil = false;
 $pesanGagal = '';

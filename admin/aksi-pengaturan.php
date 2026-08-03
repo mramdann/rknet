@@ -23,12 +23,12 @@ if ($aksi === 'profil') {
     $baru       = $_POST['baru'] ?? '';
     $konfirmasi = $_POST['konfirmasi'] ?? '';
     $row = kueriSatu("SELECT kata_sandi FROM admin WHERE id = ?", [$idAdmin]);
-    if (!$row || !password_verify($lama, $row['kata_sandi'])) {
+    if (!$row || $lama !== $row['kata_sandi']) {
         setFlash('danger', 'Password lama salah.');
     } elseif (strlen($baru) < 6 || $baru !== $konfirmasi) {
         setFlash('danger', 'Password baru minimal 6 karakter & harus sama dengan konfirmasi.');
     } else {
-        eksekusi("UPDATE admin SET kata_sandi = ? WHERE id = ?", [password_hash($baru, PASSWORD_DEFAULT), $idAdmin]);
+        eksekusi("UPDATE admin SET kata_sandi = ? WHERE id = ?", [$baru, $idAdmin]);
         setFlash('success', 'Password berhasil diperbarui.');
     }
 } elseif ($aksi === 'situs') {
